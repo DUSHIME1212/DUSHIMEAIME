@@ -100,6 +100,13 @@ const page = () => {
           power of design.
         </p>
       </div>
+      <h1 className="mb-4 text-5xl font-normal">Resume Viewer</h1>
+      <iframe
+        src="/DUSHIME Aime P_RESUME.pdf"
+        width="100%"
+        height="600px"
+        title="PDF Viewer"
+      />
     </section>
   );
 };

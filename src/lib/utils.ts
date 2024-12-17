@@ -16,7 +16,7 @@ export const links = [
   { title: "Home", href: "/" },
   { title: "Work", href: "/works" },
   { title: "About", href: "/about" },
-  { title: "Resume", href: "/resume" },
+  { title: "gallery", href: "/gallery" },
   { title: "Testimonial", href: "/testimonials" },
   { title: "Contact", href: "/contact" },
 ];

@@ -9,8 +9,12 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
-import { UrlObject } from "url";
 gsap.registerPlugin(ScrollTrigger);
+
+type Project= {
+  id: string;
+  title: string;
+}
 
 const page = async () => {
   const project = {
@@ -27,21 +31,17 @@ const page = async () => {
   const projects = data.data;
   
 
-  const baseurl = "https://portfoliostrapicms.onrender.com";
-
   return (
     <div className="p-8 md:px-16 lg:px-32">
       <div className="flex flex-col gap-2">
         <h1 className="text-blue-700">Work</h1>
         <h3 className="font-indie">Product Design</h3>
-        <h6 className="target1 w-2/3 min-w-96 font-thin tracking-normal">
-          My distinctive and widely acclaimed approach has contributed to
-          impactful projects at companies like Meta, Google, Smoothie King, bru
-          technologies, and Adobe
+        <h6 className="target1 w-2/3 min-w-96 font-normal tracking-normal">
+          I'm humbled to have had the opportunity to contribute to impactful projects at companies like Meta, Google, Smoothie King, bru technologies, and Adobe, where my distinctive approach has been widely acclaimed.
         </h6>
       </div>
       <div className="mt-8 grid grid-cols-1 relative gap-4">
-        {projects.map((item: { projectImg: { formats: { large: { url: any; }; }; }; title: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; slug: any; link: string | UrlObject; }, i: React.Key | null | undefined) => (
+        {projects.slice(0,4).map((item: Project[], i:number) => (
           <div
             key={i}
             className="group flex min-h-[512px] sticky top-12 flex-col gap-2 rounded-3xl duration-500 bg-white hover:bg-blue-100 md:flex-row"
@@ -55,7 +55,7 @@ const page = async () => {
               />
             </div>
             <div className="flex w-full flex-col justify-center gap-4 p-4 max-md:px-16 md:w-1/2">
-              <h2 className="font-thin group-hover:font-indie group-hover:underline">
+              <h2>
                 {item.title}
               </h2>
               <h5 className="font-indie italic duration-500 group-hover:text-blue-700">
@@ -63,6 +63,7 @@ const page = async () => {
               </h5>
               <ReactMarkdown className="target1">
                 {project.description}
+                
               </ReactMarkdown>
               <div className="grid grid-cols-2 gap-8 pr-16">
                 <Button
@@ -90,16 +91,16 @@ const page = async () => {
         ))}
       </div>
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {[1, 2, 3, 4].map((item, i) => (
+        {projects?.slice(4,8).map((item, i) => (
           <div
             key={i}
-            className="flex min-h-96 flex-col items-center gap-2 md:flex-row"
+            className="flex min-h-96 flex-col items-start gap-2 md:flex-row"
           >
             <div className="relative h-56 w-full overflow-clip rounded-xl md:w-1/2">
               <Image src={project.img} alt="" className="object-cover" fill />
             </div>
             <div className="flex w-full flex-col justify-start gap-4 p-4 md:w-1/2">
-              <h2 className="font-indie">{project.title}</h2>
+              <h2 className="">{item.title}</h2>
               <p className="leading-6">
                 I worked on the Monetization Payments team at Meta, specifically
                 optimizing for a brand new WhatsApp Fintech experience. I built

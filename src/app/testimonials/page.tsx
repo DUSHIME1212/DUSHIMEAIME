@@ -1,8 +1,31 @@
+import { Linkedin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import { Button } from "~/components/ui/button";
+import { Card } from "~/components/ui/card";
 import { testimonials } from "~/lib/utils";
 
-const page = () => {
+// interface Projects : {
+//   id:number,
+//   title: string;
+//   description: string;
+//   image: string;
+// }
+
+async function getTestimonials() {
+  const res = await fetch(
+    "https://portfoliostrapicms.onrender.com/api/testimonials?populate=*",
+  );
+  const response = res.json();
+  return response;
+}
+
+const page = async () => {
+  const { data } = await getTestimonials();
+
+  // console.log(data);
+
   const profileimage =
     "https://media.giphy.com/media/10M8Yr4WKJK63e/giphy.gif?cid=ecf05e47e1sxe98n9urf94glnw7lwws0up8egd7d7mei3c6s&ep=v1_gifs_search&rid=giphy.gif&ct=g";
 
@@ -13,47 +36,55 @@ const page = () => {
         <div className="flex w-full flex-col justify-center gap-4 md:w-1/2">
           <h3 className="text-4xl">Testimonials</h3>
           <h1 className="">
-            I ve designed @ a lot of places, seen a lot of faces
+            I've had the pleasure of designing many spaces and meeting
+            incredible people
           </h1>
           <p>
-            Here are some kind testaments to me, my design craft, leadership,
-            dedication, and XFN collaboration.
+            I've had the pleasure of working with numerous individuals and
+            teams, and I'm grateful for the kind words they've shared about my
+            design expertise, leadership abilities, and collaborative approach.
           </p>
         </div>
-        <div className="w-full p-8 md:w-1/2">
+        <div className="w-full md:p-8 md:w-1/2">
           <div className="relative min-h-[512px] w-full scale-90 overflow-clip rounded-[96px] border-4 border-white grayscale">
             <Image src={profileimage} alt="" className="object-cover" fill />
           </div>
         </div>
       </div>
       {/* topsection */}
-      <div className="mt-16 px-8 md:px-16 lg:px-32">
+      <div className="mt-16 px-2 md:px-16 lg:px-32">
         <h2 className="mb-8 text-5xl font-thin">Testimonials</h2>
         <p></p>
-        <div className="grid grid-cols-1 gap-8">
-          {testimonials.map((testimonial) => (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {data.map((testimonial: Projects[]) => (
+            <Card
               key={testimonial.id}
               className="min-h-[512px] overflow-hidden rounded-lg bg-white shadow-lg"
             >
-              <div className="flex p-6">
-                <div className="relative mb-4 min-h-[512px] w-1/2 items-center">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover scale-75 rounded-3xl"
-                  />
+              <div className="flex flex-col p-6">
+                  <div className="relative size-32">
+                    <Image
+                      src={testimonial.Picture.url}
+                      alt={testimonial.Name}
+                      fill
+                      className="rounded-full object-cover"
+                    />
                 </div>
-                <div className="flex w-1/2 flex-col gap-4 p-8">
-                  <h3 className="text-5xl font-bold">{testimonial.name}</h3>
-                  <p className="text-sm text-gray-600">{testimonial.title}</p>
-                  <p className="text-2xl text-gray-700">
+                <div className="flex w-full flex-col gap-4 p-8">
+                  <h3 className="text-5xl font-bold">{testimonial.Name}</h3>
+                  <p className="text-sm text-gray-600">{testimonial.work}</p>
+                  <p className="text-xl text-gray-700">
                     {testimonial.testimonial}
                   </p>
+                  <Button asChild variant={"gooeyLeft"} className="w-fit">
+                    <Link href={testimonial.linkedin} className="flex bg-blue-600 from-blue-800 flex-row gap-2">
+                      <Linkedin size={12} />
+                      Linkedin
+                    </Link>
+                  </Button>
                 </div>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

@@ -3,8 +3,12 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import React from "react";
 
+interface Projects {
+  id: string;
+}
+
 const Works = async () => {
-  const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*");
+  const res = (await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*"));
   const data = await res.json();
   const projects = data.data;
 
@@ -29,6 +33,7 @@ const Works = async () => {
               />
             </div>
             <h3 className="text-3xl font-normal mb-2">{item.title}</h3>
+
           </div>
         )}
       </div>
