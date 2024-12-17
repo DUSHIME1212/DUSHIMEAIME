@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
+import { UrlObject } from "url";
 gsap.registerPlugin(ScrollTrigger);
 
 const page = async () => {
@@ -21,11 +22,12 @@ const page = async () => {
     category: "AI Assistant, Discoverability",
   };
 
-  const res = await fetch("http://localhost:1337/api/projects?populate=*");
+  const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*");
   const data = await res.json();
   const projects = data.data;
+  
 
-  const baseurl = "http://localhost:1337";
+  const baseurl = "https://portfoliostrapicms.onrender.com";
 
   return (
     <div className="p-8 md:px-16 lg:px-32">
@@ -39,14 +41,14 @@ const page = async () => {
         </h6>
       </div>
       <div className="mt-8 grid grid-cols-1 relative gap-4">
-        {projects.map((item, i) => (
+        {projects.map((item: { projectImg: { formats: { large: { url: any; }; }; }; title: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; slug: any; link: string | UrlObject; }, i: React.Key | null | undefined) => (
           <div
             key={i}
             className="group flex min-h-[512px] sticky top-12 flex-col gap-2 rounded-3xl duration-500 bg-white hover:bg-blue-100 md:flex-row"
           >
             <div className="relative z-0 h-[512px] w-full group-hover:skew-x-3 scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 group-hover:md:shadow-[0px_52px_92px_#3300FFA0]">
               <Image
-                src={`${baseurl}${item.projectImg.formats.large.url}`}
+                src={`${item.bannerimage[0].url}`}
                 alt=""
                 className="scale-125 object-cover duration-500 group-hover:scale-100"
                 fill

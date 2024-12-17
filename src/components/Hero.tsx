@@ -35,7 +35,7 @@ const Hero = () => {
 
   return (
     <div className="mt-8 flex flex-col gap-8">
-      <h2 className="leading-10 font-thin group text-gray-700">
+      <h2 className="leading-10 group text-gray-700">
         <span className="cursor-pointer font-indie text-7xl duration-700 group-hover:text-blue-700">
           Dushime Aime
         </span>{" "}

@@ -83,14 +83,15 @@
     @apply bg-background text-foreground;
   }
 }
+
 h1 {
-  @apply scroll-m-20 text-6xl font-bold tracking-tight my-8  lg:text-7xl
+  @apply scroll-m-20 text-6xl font-bold tracking-tight lg:text-7xl
 }
 h2 {
   @apply  scroll-m-20 border-b  text-5xl font-semibold tracking-tight transition-colors first:mt-0
 }
 h3{
-  @apply  scroll-m-20 text-4xl font-semibold my-4 tracking-tight
+  @apply  scroll-m-20 text-4xl font-semibold tracking-tight
 }
 h4{
   @apply  scroll-m-20 text-3xl font-semibold tracking-tight
@@ -109,4 +110,34 @@ ul{
 }
 blockquote{
   @apply mt-6 border-l-2 pl-6 italic
+}
+
+.block{
+  h1 {
+    @apply scroll-m-20 text-6xl font-bold tracking-tight my-8  lg:text-7xl
+  }
+  h2 {
+    @apply  scroll-m-20 border-b  text-5xl font-semibold tracking-tight transition-colors first:mt-0
+  }
+  h3{
+    @apply  scroll-m-20 text-4xl font-semibold my-4 tracking-tight
+  }
+  h4{
+    @apply  scroll-m-20 text-3xl font-semibold tracking-tight
+  }
+  h5{
+    @apply  scroll-m-20 text-2xl font-semibold tracking-tight
+  }
+  h6{
+    @apply  scroll-m-20 text-xl font-semibold tracking-tight
+  }
+  p{
+    @apply leading-7 [&:not(:first-child)]:mt-0
+  }
+  ul{
+    @apply my-6 ml-6 list-disc [&>li]:mt-2
+  }
+  blockquote{
+    @apply mt-6 border-l-2 pl-6 italic
+  }
 }
