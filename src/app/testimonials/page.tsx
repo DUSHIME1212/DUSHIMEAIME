@@ -6,12 +6,64 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { testimonials } from "~/lib/utils";
 
-// interface Projects : {
-//   id:number,
-//   title: string;
-//   description: string;
-//   image: string;
-// }
+interface PictureFormats {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path: string | null;
+  size: number;
+  width: number;
+  height: number;
+  sizeInBytes: number;
+  provider_metadata: {
+    public_id: string;
+    resource_type: string;
+  };
+}
+
+interface Picture {
+  id: number;
+  documentId: string;
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number;
+  height: number;
+  formats: {
+    small: PictureFormats;
+    thumbnail: PictureFormats;
+  };
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: {
+    public_id: string;
+    resource_type: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+interface Testimonial {
+  id: number;
+  documentId: string;
+  Name: string;
+  work: string;
+  testimonial: string;
+  linkedin: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  Picture: Picture;
+}
+
 
 async function getTestimonials() {
   const res = await fetch(
@@ -51,12 +103,11 @@ const page = async () => {
           </div>
         </div>
       </div>
-      {/* topsection */}
       <div className="mt-16 px-2 md:px-16 lg:px-32">
         <h2 className="mb-8 text-5xl font-thin">Testimonials</h2>
         <p></p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {data.map((testimonial: Projects[]) => (
+          {data.map((testimonial: Testimonial) => (
             <Card
               key={testimonial.id}
               className="min-h-[512px] overflow-hidden rounded-lg bg-white shadow-lg"

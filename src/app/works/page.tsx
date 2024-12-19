@@ -11,9 +11,67 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 gsap.registerPlugin(ScrollTrigger);
 
-type Project= {
-  id: string;
+interface Project {
+  id: number;
+  documentId: string;
   title: string;
+  slug: string;
+  content: string;
+  created: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  link: string;
+  githuburl: string;
+  bannerimage?: BannerImage[];
+}
+
+interface BannerImage {
+  id: number;
+  documentId: string;
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number;
+  height: number;
+  formats: ImageFormats;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: ProviderMetadata;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+}
+
+interface ImageFormats {
+  large: ImageFormat;
+  small: ImageFormat;
+  medium: ImageFormat;
+  thumbnail: ImageFormat;
+}
+
+interface ImageFormat {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path: string | null;
+  size: number;
+  width: number;
+  height: number;
+  sizeInBytes: number;
+  provider_metadata: ProviderMetadata;
+}
+
+interface ProviderMetadata {
+  public_id: string;
+  resource_type: string;
 }
 
 const page = async () => {
@@ -41,9 +99,9 @@ const page = async () => {
         </h6>
       </div>
       <div className="mt-8 grid grid-cols-1 relative gap-4">
-        {projects.slice(0,4).map((item: Project[], i:number) => (
+        {projects.slice(0,4).map((item:Project) => (
           <div
-            key={i}
+            key={item.id}
             className="group flex min-h-[512px] sticky top-12 flex-col gap-2 rounded-3xl duration-500 bg-white hover:bg-blue-100 md:flex-row"
           >
             <div className="relative z-0 h-[512px] w-full group-hover:skew-x-3 scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 group-hover:md:shadow-[0px_52px_92px_#3300FFA0]">
@@ -144,3 +202,4 @@ const page = async () => {
 };
 
 export default page;
+

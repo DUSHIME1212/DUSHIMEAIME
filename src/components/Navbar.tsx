@@ -6,6 +6,9 @@ import { Button } from "./ui/button";
 import { links } from "~/lib/utils";
 import { usePathname } from "next/navigation";
 import { AlignJustify, X } from "lucide-react";
+import { motion } from "motion/react";
+import { FlipLink } from "./ui/FlipLink";
+
 
 const Navbar = () => {
   const [open, isopen] = useState(false);
@@ -31,24 +34,22 @@ const Navbar = () => {
         {!open ? <AlignJustify /> : <X />}
       </button>
       <div
-        className={`flex ${!open ? "hidden w-fit z-50" : "block py-12 w-full"} ${pathname === "/testimonials" && "!bg-blue-700"} bg-white top-20 gap-2 md:block z-50 left-0 max-md:absolute max-md:flex-col ${pathname === "/testimonials" && "text-white"}`}
-      >
-        {links.map((it, i) => (
-          <Button
-            key={i}
-            asChild
-            className="h-fit w-fit rounded-none"
-            variant={"link"}
+            className={`flex flex-col md:flex-row ${
+              !open ? "hidden md:flex" : "flex"
+            } ${
+              pathname === "/testimonials" ? "bg-blue-700 text-white" : "bg-white"
+            } left-0 top-20 z-50 w-full gap-4 p-4 md:static md:w-auto md:p-0 absolute`}
           >
-            <Link
-              href={it.href}
-              className={`flex gap-2 ${pathname === "/testimonials" && "text-white"}`}
-            >
-              {it.title}
-            </Link>
-          </Button>
-        ))}
-      </div>
+            {links.map((it, i) => (
+              <FlipLink
+                key={i}
+                href={it.href}
+                className={pathname === "/testimonials" ? "text-white" : ""}
+              >
+                {it.title}
+              </FlipLink>
+            ))}
+          </div>
     </div>
   );
 };

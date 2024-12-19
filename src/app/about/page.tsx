@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "~/components/ui/button";
+import { FlipLink } from "~/components/ui/FlipLink";
 
 const page = () => {
   const profileimage =

@@ -1,49 +1,50 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Typewriter from "typewriter-effect/dist/core";
+import { easeInOut, motion } from "motion/react";
 import { Button } from "./ui/button";
 import { ArrowDownRight, ArrowUpRight } from "@geist-ui/icons";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
 
-  useEffect(() => {
-    const typewriter = new Typewriter(typewriterRef.current, {
-      delay: 75,
-      cursor: "|",
-      loop: true,
-    });
-
-    typewriter
-      .typeString("I design apps, and websites that blow your mind")
-      .pauseFor(1000)
-      .deleteAll()
-      .typeString("I am a UX/UI Designer based in RWANDA")
-      .start()
-      .deleteAll()
-      .typeString("I am a Developer based in RWANDA")
-      .start()
-      .deleteAll()
-      .typeString("My favourite Gerne is Afrobeats")
-      .start();
-
-    return () => {
-      //   typewriter.stop();
-    };
-  }, []);
-
   return (
     <div className="mt-8 flex flex-col gap-8">
       <h2 className="group leading-10 text-gray-700">
-        Dushime Aime is a human-focused designer scaling products and businesses
-        through niche, meaningful, and intuitive experiences.
+        <span className="relative text-blue-800">
+          Dushime Aime
+          <svg
+            className="absolute left-4 top-0 -translate-x-2 -translate-y-2 scale-110"
+            viewBox="0 0 218 56"
+            strokeWidth={2}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <motion.path
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              transition={{
+                duration: 1.25,
+              }}
+              d="M169.288 3.04563C124.768 2.18526 43.3036 5.73111 26.7242 11.9257C5.99996 19.6689 -10.3559 30.8647 11.2266 45.6951C31.6849 59.753 57.1663 54.7011 99.5035 52.2035C176.425 47.6657 211.564 59.1631 216.745 34.2127C221.926 9.26223 164.099 8.41905 126.937 4.96044C86.4382 1.19125 96.911 6.65953 48.6665 0.608398"
+              stroke="#065BD2"
+            />
+          </svg>
+        </span>{" "}
+        is a human-focused designer scaling products and businesses through
+        niche, meaningful, and intuitive experiences.
       </h2>
-      <h1
-        className="cursor-pointer font-indie text-3xl font-thin duration-500"
-        ref={typewriterRef}
-      ></h1>
-      <div className="mt-8">
+      <BlockinText
+        tag={"/support"}
+        examples={[
+          "I design apps, and websites that blow your mind",
+          "I am a UX/UI Designer based in RWANDA",
+          "I am a Developer based in RWANDA",
+          "My favourite Gerne is Afrobeats",
+        ]}
+      />
+      <div className="">
         <p className="text-sm opacity-60">Currently</p>
         <Button variant={"link"} className="px-0">
           <Link href="" className="flex items-center gap-2 text-xl">
@@ -84,3 +85,65 @@ const Hero = () => {
 };
 
 export default Hero;
+
+export function BlockinText({ tag, examples }) {
+  return (
+    <>
+      <Typewrite examples={examples} />
+      <hr />
+    </>
+  );
+}
+
+const letterDelays = 0.025;
+const Box_fade = 0.125;
+const fadedelays = 5;
+const Mainfadedelays = 0.25;
+
+const swapdelayms = 5500;
+
+export function Typewrite({ examples }) {
+  const [exampleindex, setexampleindex] = useState(0);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setexampleindex((pv) => (pv + 1) % examples.length);
+    }, swapdelayms);
+    return () => clearInterval(intervalId);
+  }, [swapdelayms]);
+  return (
+    <h6>
+      {examples[exampleindex].split("").map((l, i) => (
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          key={`${exampleindex}-${i}`}
+          className="relative"
+        >
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              delay: i * letterDelays,
+              duration: Box_fade,
+              ease: easeInOut,
+            }}
+            className="text-3xl font-indie"
+          >
+            {l}
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{
+              times: [0, 0.1, 1],
+              delay: i * letterDelays,
+              duration: Box_fade,
+              ease: easeInOut,
+            }}
+            className="absolute bottom-[3px] left-[1px] right-0 top-[3px] bg-black"
+          />
+        </motion.span>
+      ))}
+    </h6>
+  );
+}

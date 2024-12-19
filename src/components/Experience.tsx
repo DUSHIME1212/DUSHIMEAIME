@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { motion } from "motion/react";
 
 const Experience = () => {
   const experience = {
@@ -19,11 +21,15 @@ const Experience = () => {
       </div>
       <div>
         {[1, 2, 3].map((item, i) => (
-          <div key={i} className="my-4 flex flex-col gap-4 group ">
-            <h2 className="text-lg font-light group-hover:font-indie group-hover:text-xl group-hover:underline">{experience.title}</h2>
+          <div key={i} className="group my-4 flex flex-col gap-4">
+            <h2 className="text-lg font-light group-hover:font-indie group-hover:text-xl group-hover:underline">
+              {experience.title}
+            </h2>
             <h3 className="text-sm font-light">{experience.company}</h3>
-            <div className="grid grid-cols-5 mt-8 justify-items-end">
-              <p className="col-span-4 opacity-70">{experience.description}</p>
+            <div className="mt-8 grid grid-cols-5 justify-items-end">
+              <AnimateTexxt className="col-span-4 opacity-70">
+                {experience.description}
+              </AnimateTexxt>
               <p className="group-hover:underline">{experience.dates}</p>
             </div>
           </div>
@@ -34,3 +40,37 @@ const Experience = () => {
 };
 
 export default Experience;
+
+function AnimateTexxt({
+  children,
+  className,
+}: {
+  children: string;
+  className: string;
+}) {
+  return (
+    <motion.p
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{
+        delay: 1,
+        duration: 1,
+        ease: "easeInOut",
+        staggerChildren: 0.01,
+      }}
+      className={className}
+    >
+      {children.split("").map((l, i) => (
+        <motion.span
+          initial={{ opacity: 0, filter: "blur(5px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ delay: 0.002 * i }}
+          className="inline-bloc"
+          key={i}
+        >
+          {l}
+        </motion.span>
+      ))}
+    </motion.p>
+  );
+}

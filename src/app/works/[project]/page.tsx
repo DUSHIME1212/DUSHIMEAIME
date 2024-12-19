@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
-async function getProjectData(slug: string): Promise<ProjectData> {
+async function getProjectData(slug: string){
   const res = await fetch(
     `https://portfoliostrapicms.onrender.com/api/projects?filters[slug][$eq]=${slug}&populate=*`
   );
@@ -15,7 +15,6 @@ async function getProjectData(slug: string): Promise<ProjectData> {
 
 
 export async function generateStaticParams() {
-  // Fetch a list of all project slugs from your API
   const res = await fetch(
     'https://portfoliostrapicms.onrender.com/api/projects'
   );
@@ -30,6 +29,10 @@ export default async function Page({ params }) {
   const { project } = await params;
 
   const projectData = await getProjectData(project);
+
+  if(!projectData){
+    return<section className='text-7xl grid place-items-center font-indie min-h-[512px]'>404 Page not found</section>
+  }
 
   return (
     <div className="w-full flex flex-col items-center justify-center">

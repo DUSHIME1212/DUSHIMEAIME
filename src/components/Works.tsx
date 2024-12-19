@@ -2,6 +2,8 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import React from "react";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 interface Projects {
   id: string;
@@ -19,7 +21,7 @@ const Works = async () => {
         <p className="col-span-1 w-full md:w-2/3 opacity-70 text-3xl">Bridging the gap between beautiful and bottom-line results.</p>
       </div>
       <div className="mt-8 grid max-md:grid-cols-1 grid-cols-2 content-center gap-4">
-        {projects?.slice(0,4).map((item: { bannerimage: { url: string | StaticImport; }[]; title: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined; },i: React.Key | null | undefined) => 
+        {projects?.slice(0,4).map((item,i) => 
           <div
             key={i}
             className="bg- rounded-lg p-4 group min-h-[512px] border-2 border-black/10 shadow-2xl"
@@ -33,7 +35,9 @@ const Works = async () => {
               />
             </div>
             <h3 className="text-3xl font-normal mb-2">{item.title}</h3>
-
+            <Button asChild>
+              <Link href={"works/"+item.slug}>Read more</Link>
+            </Button>
           </div>
         )}
       </div>
