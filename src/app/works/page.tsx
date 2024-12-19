@@ -1,9 +1,8 @@
-"use client"
 
 import { ArrowUpRight } from "@geist-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import SplitType from "split-type";
 import { Button } from "~/components/ui/button";
 import gsap from "gsap";
@@ -89,9 +88,6 @@ const page = async () => {
   const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*");
   const data = await res.json();
   const projects = data.data;
-  const [dataProjects, setdataProjects] = useState([])
-
-  setdataProjects(projects)
   
 
   return (
@@ -100,11 +96,11 @@ const page = async () => {
         <h1 className="text-blue-700">Work</h1>
         <h3 className="font-indie">Product Design</h3>
         <h6 className="target1 w-2/3 min-w-96 font-normal tracking-normal">
-          I'm humbled to have had the opportunity to contribute to impactful projects at companies like Meta, Google, Smoothie King, bru technologies, and Adobe, where my distinctive approach has been widely acclaimed.
+          I'm excited to collaborate with a talented team at companies where I can apply my skills and knowledge to contribute to impactful projects and learn from experienced professionals.
         </h6>
       </div>
       <div className="mt-8 grid grid-cols-1 relative gap-4">
-        {dataProjects.slice(0,4).map((item:Project) => (
+        {projects.slice(0,4).map((item:Project) => (
           <div
             key={item.id}
             className="group flex min-h-[512px] sticky top-12 flex-col gap-2 rounded-3xl duration-500 bg-white hover:bg-blue-100 md:flex-row"
@@ -121,13 +117,9 @@ const page = async () => {
               <h2>
                 {item.title}
               </h2>
-              <h5 className="font-indie italic duration-500 group-hover:text-blue-700">
-                {project.category}
+              <h5 className=" italic duration-500 group-hover:text-blue-700">
+              UX/UI Design (Figma)
               </h5>
-              <ReactMarkdown className="target1">
-                {project.description}
-                
-              </ReactMarkdown>
               <div className="grid grid-cols-2 gap-8 pr-16">
                 <Button
                   variant={"gooeyLeft"}
@@ -163,16 +155,16 @@ const page = async () => {
               <Image src={project.img} alt="" className="object-cover" priority fill />
             </div>
             <div className="flex w-full flex-col justify-start gap-4 p-0 md:p-4 md:w-1/2">
-              <h2 className="">{item.title}</h2>
-              <p className="leading-6">
+              <h2 className="">UX/UI Design (Figma)</h2>
+              {/* <p className="leading-6">
                 I worked on the Monetization Payments team at Meta, specifically
                 optimizing for a brand new WhatsApp Fintech experience. I built
                 robust interactive prototypes, met with and presented to key
                 stakeholders like Will Cathcart, Alicia Dougherty, and Mark
                 Zuckerberg.
-              </p>
+              </p> */}
               <Button
-                variant={"outline"}
+                variant={"ghost"}
                 size={"lg"}
                 className="group w-fit gap-4 rounded-full"
               >

@@ -1,16 +1,10 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
+import { experience } from "~/lib/utils";
 
 const Experience = () => {
-  const experience = {
-    title: "Software Engineer",
-    company: "ABC Corporation",
-    location: "New York, NY",
-    dates: "2020-2022",
-    description:
-      "I lead a cross-functional team of 20+ people, including design, user experience research (UXR), and product strategy. I oversee the development of our design system and manage both the team and product to ensure alignment with our cloud-based software suite. I leverage APIs, LLMs (OpenAI), and NLP to build interfaces that automate backend business tasks and organization-wide processes. I deploy design strategies throughout the organization, prioritizing user-centricity and business needs in the creation of PRDs to deliver modern enterprise solutions.",
-  };
+  
   return (
     <div className="my-8">
       <div>
@@ -20,14 +14,14 @@ const Experience = () => {
         <p>My experience</p>
       </div>
       <div>
-        {[1, 2, 3].map((item, i) => (
-          <div key={i} className="group my-4 flex flex-col gap-4">
-            <h2 className="text-lg font-light group-hover:font-indie group-hover:text-xl group-hover:underline">
+        {experience.map((experience, i) => (
+          <div key={i} className="group my-4 flex flex-col hover:bg-blue-700 rounded-xl hover:text-white cursor-pointer p-4 gap-4 duration-500">
+            <h4 className="text-4xl font-light group-hover:text-white">
               {experience.title}
-            </h2>
-            <h3 className="text-sm font-light">{experience.company}</h3>
-            <div className="mt-8 grid grid-cols-5 justify-items-end">
-              <p className="col-span-4 opacity-70">
+            </h4>
+            <h3 className="text-3xl font-indie group-hover:text-white duration-500">{experience.company}</h3>
+            <div className="mt-2 grid grid-cols-5 justify-items-start">
+              <p className="col-span-4 w-2/3 opacity-70 font-normal text-xl group-hover:text-white">
                 {experience.description}
               </p>
               <p className="group-hover:underline">{experience.dates}</p>

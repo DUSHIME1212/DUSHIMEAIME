@@ -19,7 +19,7 @@ const Footer = () => {
     { title: "Dribble", href: "/" },
   ];
   return (
-    <div className="min-h-96 bg-black p-16 text-white">
+    <div className="min-h-96 bg-blue-700 p-16 text-white">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="flex min-h-32 w-full md:w-1/3 flex-col justify-between gap-16">
           <div className="relative h-16 w-48">
@@ -33,7 +33,7 @@ const Footer = () => {
           <Button
             size={"lg"}
             variant={"gooeyRight"}
-            className="w-fit rounded-full"
+            className="w-fit bg-blue-700 from-blue-500 rounded-full"
           >
             Let talk
           </Button>
