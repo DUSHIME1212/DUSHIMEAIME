@@ -15,7 +15,7 @@ const Works = async () => {
   const projects = data.data;
 
   return (
-    <div className="py-8">
+    <div className="py-0 md:py-8">
       <div className="grid md:grid-cols-3 max-md:grid-rows-2 gap-32 items-center content-center">
         <h1 className="col-span-2">what I&apos;ve been up to lately</h1>
         <p className="col-span-1 w-full md:w-2/3 opacity-70 text-3xl">Bridging the gap between beautiful and bottom-line results.</p>
@@ -24,7 +24,7 @@ const Works = async () => {
         {projects?.slice(0,4).map((item,i) => 
           <div
             key={i}
-            className="bg- rounded-lg p-4 group min-h-[512px] border-2 border-black/10 shadow-2xl"
+            className="bg- rounded-lg md:p-4 group min-h-[512px] md:border-2 border-black/10 md:shadow-2xl"
           >
             <div className="relative mb-8 h-96 w-full overflow-clip rounded-xl">
               <Image

@@ -1,19 +1,25 @@
-import { motion } from "motion/react"
-import Link from "next/link"
+import { motion } from "motion/react";
+import Link from "next/link";
 
 interface FlipLinkProps {
-  children: string
-  href: string
-  className?: string
+  children: any;
+  href: string;
+  className?: string;
 }
 
-export function FlipLink({ children, href, className = "" }: FlipLinkProps) {
+export function FlipLink({
+  children,
+  href,
+  className = "",
+  ...props
+}: FlipLinkProps) {
   return (
     <Link href={href} passHref legacyBehavior>
       <motion.a
+        {...props}
         initial="initial"
         whileHover="hovered"
-        className={`relative block overflow-hidden font-dmsans text-xl text-black whitespace-nowrap ${className}`}
+        className={`relative block overflow-hidden whitespace-nowrap font-dmsans text-xl text-black ${className}`}
       >
         <motion.div
           variants={{
@@ -34,6 +40,5 @@ export function FlipLink({ children, href, className = "" }: FlipLinkProps) {
         </motion.div>
       </motion.a>
     </Link>
-  )
+  );
 }
-

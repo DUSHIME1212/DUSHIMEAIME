@@ -112,7 +112,7 @@ const page = async () => {
                 fill
               />
             </div>
-            <div className="flex w-full flex-col justify-center gap-4 p-4 max-md:px-16 md:w-1/2">
+            <div className="flex w-full flex-col justify-center gap-4 md:p-4 lg:px-16 max-md:px-0 md:w-1/2">
               <h2>
                 {item.title}
               </h2>
@@ -157,7 +157,7 @@ const page = async () => {
             <div className="relative h-56 w-full overflow-clip rounded-xl md:w-1/2">
               <Image src={project.img} alt="" className="object-cover" priority fill />
             </div>
-            <div className="flex w-full flex-col justify-start gap-4 p-4 md:w-1/2">
+            <div className="flex w-full flex-col justify-start gap-4 p-0 md:p-4 md:w-1/2">
               <h2 className="">{item.title}</h2>
               <p className="leading-6">
                 I worked on the Monetization Payments team at Meta, specifically

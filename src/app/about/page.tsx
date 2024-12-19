@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "~/components/ui/button";
-import { FlipLink } from "~/components/ui/FlipLink";
 
 const page = () => {
   const profileimage =
@@ -23,16 +22,16 @@ const page = () => {
             designer, Ive learned not to assume things.
           </p>
         </div>
-        <div className="w-full p-8 md:w-1/2">
-          <div className="relative min-h-[512px] w-full scale-90 overflow-clip rounded-3xl grayscale">
+        <div className="w-full md:w-1/2 md:p-8">
+          <div className="relative size-full min-h-[512px] scale-100 overflow-clip rounded-3xl grayscale lg:scale-90">
             <Image src={profileimage} alt="" className="object-cover" fill />
           </div>
         </div>
       </div>
       {/* topsection */}
-      <div className="flex flex-col gap-8">
+      <div className="mt-8 flex flex-col gap-8">
         <div className="w-2/3">
-          <h2 className="mb-8 text-5xl font-thin">
+          <h2 className="mb-8 text-5xl font-medium">
             Where empathy meets impact
           </h2>
           <p>
@@ -45,7 +44,9 @@ const page = () => {
           </p>
         </div>
         <div className="">
-          <h2 className="mb-8 text-5xl max-md:font-medium font-thin">Why I prioritize SMBs</h2>
+          <h2 className="mb-8 text-5xl font-thin max-md:font-medium">
+            Why I prioritize SMBs
+          </h2>
           <p className="w-2/3">
             Growing up, I saw the determination of small business owners in my
             community, the way they poured their hearts into their dreams.
@@ -54,9 +55,9 @@ const page = () => {
             access to the things my peers did instilled a deep desire to level
             the playing field.
           </p>
-          <div className="my-4 mt-16 flex flex-col gap-4 md:flex-row text-xl">
-            <h4 className="w-1/3">Me in 3 words</h4>
-            <p className="w-2/3 cursor-pointer font-thin opacity-60">
+          <div className="my-4 mt-16 flex flex-col gap-4 text-xl md:flex-row">
+            <h4 className="w-full md:w-1/3">Me in 3 words</h4>
+            <p className="w-2/3 cursor-pointer font-medium opacity-60">
               Versatile, multidisciplinary,{" "}
               <span className="duration-500 hover:text-blue-700">
                 forever growing
@@ -64,9 +65,9 @@ const page = () => {
               , also a critical thinker Monday-Friday
             </p>
           </div>
-          <div className="my-4 mt-16 flex flex-col gap-4 md:flex-row text-xl">
-            <h4 className="w-1/3">How I stand out as a designer</h4>
-            <p className="w-2/3 cursor-pointer max-md:font-medium font-thin opacity-80">
+          <div className="my-4 mt-16 flex flex-col gap-4 text-xl md:flex-row">
+            <h4 className="w-full md:w-1/3">How I stand out as a designer</h4>
+            <p className="w-full cursor-pointer font-thin opacity-80 max-md:font-medium md:w-2/3">
               What sets me apart is my willingness to adapt and optimize
               solutions for a variety of problems. I ve been told that I have a
               very efficient and unique approach to problem-solving. I love
@@ -78,8 +79,10 @@ const page = () => {
         </div>
       </div>
       <div className="my-4 mt-16 flex w-full flex-col gap-8">
-        <h1 className="font-thin max-md:font-medium">Who are you as a designer?</h1>
-        <p className="w-2/3 text-xl opacity-80">
+        <h1 className="font-thin max-md:font-medium">
+          Who are you as a designer?
+        </h1>
+        <p className="w-full text-xl opacity-80 md:w-2/3">
           I love working cross-functionally. I ve received amazing feedback from
           engineers, PMs, content designers, and other product designers on my
           team. It provides me with a chance to grow, learn new things, and
@@ -93,23 +96,19 @@ const page = () => {
           What people say about me
         </Button>
       </div>
-      <div className="w-2/3 flex flex-col mt-8 gap-2">
-        <h4 className="font-medium text-2xl underline">My process at its core</h4>
-        <p className="text-xl max-md:font-medium font-thin opacity-80">
+      <div className="mt-8 flex w-2/3 flex-col gap-2">
+        <h4 className="text-2xl font-medium underline">
+          My process at its core
+        </h4>
+        <p className="text-xl font-thin opacity-80 max-md:font-medium">
           The eureka moment during the design process is only the start.
           Bringing the solution to life through storytelling – thats the true
           power of design.
         </p>
       </div>
-      <h1 className="mb-4 text-5xl font-normal">Resume Viewer</h1>
-      <iframe
-        src="/DUSHIME Aime P_RESUME.pdf"
-        width="100%"
-        height="600px"
-        title="PDF Viewer"
-      />
     </section>
   );
 };
+
 
 export default page;

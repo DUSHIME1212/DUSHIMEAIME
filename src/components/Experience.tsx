@@ -27,9 +27,9 @@ const Experience = () => {
             </h2>
             <h3 className="text-sm font-light">{experience.company}</h3>
             <div className="mt-8 grid grid-cols-5 justify-items-end">
-              <AnimateTexxt className="col-span-4 opacity-70">
+              <p className="col-span-4 opacity-70">
                 {experience.description}
-              </AnimateTexxt>
+              </p>
               <p className="group-hover:underline">{experience.dates}</p>
             </div>
           </div>

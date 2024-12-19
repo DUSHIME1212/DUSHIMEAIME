@@ -15,7 +15,7 @@ const Hero = () => {
         <span className="relative text-blue-800">
           Dushime Aime
           <svg
-            className="absolute left-4 top-0 -translate-x-2 -translate-y-2 scale-110"
+            className="-bottom-18 absolute left-4 -translate-x-2 scale-110"
             viewBox="0 0 218 56"
             strokeWidth={2}
             fill="none"
@@ -27,8 +27,10 @@ const Hero = () => {
               transition={{
                 duration: 1.25,
               }}
-              d="M169.288 3.04563C124.768 2.18526 43.3036 5.73111 26.7242 11.9257C5.99996 19.6689 -10.3559 30.8647 11.2266 45.6951C31.6849 59.753 57.1663 54.7011 99.5035 52.2035C176.425 47.6657 211.564 59.1631 216.745 34.2127C221.926 9.26223 164.099 8.41905 126.937 4.96044C86.4382 1.19125 96.911 6.65953 48.6665 0.608398"
-              stroke="#065BD2"
+              d="M1.51172 11.0845C23.2893 7.41922 37.3034 6.14753 64.331 4.23815C91.3586 2.32877 146.422 0.190756 211.293 6.631"
+              stroke="#1e40af"
+              stroke-width="9"
+              stroke-linecap="round"
             />
           </svg>
         </span>{" "}
@@ -127,7 +129,7 @@ export function Typewrite({ examples }) {
               duration: Box_fade,
               ease: easeInOut,
             }}
-            className="text-3xl font-indie"
+            className="font-indie text-3xl"
           >
             {l}
           </motion.span>

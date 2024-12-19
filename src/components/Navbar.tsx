@@ -12,7 +12,14 @@ import { FlipLink } from "./ui/FlipLink";
 
 const Navbar = () => {
   const [open, isopen] = useState(false);
+  const [opening, isopening] = useState(false);
   const pathname = usePathname();
+
+  function closeMenu() {
+    if (window.innerWidth < 768) {  
+      isopen(false);
+    }
+  }
 
   return (
     <div
@@ -46,7 +53,7 @@ const Navbar = () => {
                 href={it.href}
                 className={pathname === "/testimonials" ? "text-white" : ""}
               >
-                {it.title}
+                <span onClick={closeMenu}>{it.title}</span>
               </FlipLink>
             ))}
           </div>
