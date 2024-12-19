@@ -41,7 +41,7 @@ export default async function Page({ params }) {
         <h1 className="absolute left-1/2 top-1/2 -translate-y-1/2 text-center -translate-x-1/2 text-white z-20">
           {projectData.title}
         </h1>
-        <Image src={projectData.bannerimage[0].url} alt="" className="object-cover" fill />
+        <Image src={projectData.bannerimage[0].url} alt="" loading="lazy" className="object-cover" fill />
       </div>
       <ReactMarkdown className="w-[512px] prose my-32">{projectData.content}</ReactMarkdown>
       <img src={projectData.bannerimage[0].url} alt="" className="object-cover h-auto w-full"  />

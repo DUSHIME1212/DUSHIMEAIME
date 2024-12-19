@@ -24,6 +24,7 @@ const page = async () => {
               src={item.url}
               alt={"Gallery image"}
               className="object-cover"
+              loading="lazy"
               fill
             />
           </div>

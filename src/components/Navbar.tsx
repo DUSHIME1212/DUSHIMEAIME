@@ -38,7 +38,7 @@ const Navbar = () => {
               !open ? "hidden md:flex" : "flex"
             } ${
               pathname === "/testimonials" ? "bg-blue-700 text-white" : "bg-white"
-            } left-0 top-20 z-50 w-full gap-4 p-4 md:static md:w-auto md:p-0 absolute`}
+            } left-0 top-20 z-30 w-full gap-4 p-4 md:static md:w-auto md:p-0 absolute`}
           >
             {links.map((it, i) => (
               <FlipLink
