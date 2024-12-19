@@ -115,7 +115,7 @@ const page = async () => {
               <div className="flex flex-col p-6">
                   <div className="relative size-32">
                     <Image
-                    loading="lazy"
+                    priority
                       src={testimonial.Picture.url}
                       alt={testimonial.Name}
                       fill

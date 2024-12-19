@@ -155,7 +155,7 @@ const page = async () => {
             className="flex min-h-96 flex-col items-start gap-2 md:flex-row"
           >
             <div className="relative h-56 w-full overflow-clip rounded-xl md:w-1/2">
-              <Image src={project.img} alt="" className="object-cover" loading="lazy" fill />
+              <Image src={project.img} alt="" className="object-cover" priority fill />
             </div>
             <div className="flex w-full flex-col justify-start gap-4 p-4 md:w-1/2">
               <h2 className="">{item.title}</h2>

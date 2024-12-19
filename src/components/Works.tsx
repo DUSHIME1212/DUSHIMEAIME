@@ -32,6 +32,7 @@ const Works = async () => {
                 className="object-cover duration-500 group-hover:scale-125"
                 alt=""
                 fill
+                priority
               />
             </div>
             <h3 className="text-3xl font-normal mb-2">{item.title}</h3>
