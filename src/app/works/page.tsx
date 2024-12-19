@@ -1,7 +1,9 @@
+"use client"
+
 import { ArrowUpRight } from "@geist-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import SplitType from "split-type";
 import { Button } from "~/components/ui/button";
 import gsap from "gsap";
@@ -87,6 +89,9 @@ const page = async () => {
   const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*");
   const data = await res.json();
   const projects = data.data;
+  const [dataProjects, setdataProjects] = useState([])
+
+  setdataProjects(projects)
   
 
   return (
@@ -99,7 +104,7 @@ const page = async () => {
         </h6>
       </div>
       <div className="mt-8 grid grid-cols-1 relative gap-4">
-        {projects.slice(0,4).map((item:Project) => (
+        {dataProjects.slice(0,4).map((item:Project) => (
           <div
             key={item.id}
             className="group flex min-h-[512px] sticky top-12 flex-col gap-2 rounded-3xl duration-500 bg-white hover:bg-blue-100 md:flex-row"
