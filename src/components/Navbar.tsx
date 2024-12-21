@@ -38,14 +38,14 @@ const Navbar = () => {
         />
       </div>
       <button onClick={() => isopen(!open)} className="md:hidden">
-        {!open ? <AlignJustify /> : <X />}
+        {!open ? <AlignJustify size={48} /> : <X size={48} />}
       </button>
       <div
-            className={`flex flex-col md:flex-row ${
+            className={`flex px-8 flex-col justify-center md:flex-row ${
               !open ? "hidden md:flex" : "flex"
             } ${
               pathname === "/testimonials" ? "bg-blue-700 text-white" : "bg-white"
-            } left-0 top-20 z-30 w-full gap-4 p-4 md:static md:w-auto md:p-0 absolute`}
+            } left-0 top-20 z-30 w-full gap-4 p-4 md:static md:w-auto text-5xl md:p-0 h-full duration-700 absolute`}
           >
             {links.map((it, i) => (
               <FlipLink

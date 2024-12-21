@@ -19,7 +19,7 @@ export function FlipLink({
         {...props}
         initial="initial"
         whileHover="hovered"
-        className={`relative block overflow-hidden whitespace-nowrap font-dmsans text-xl text-black ${className}`}
+        className={`relative block overflow-hidden whitespace-nowrap font-dmsans text-xl max-sm:text-5xl capitalize text-black ${className}`}
       >
         <motion.div
           variants={{

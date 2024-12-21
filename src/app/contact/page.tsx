@@ -66,7 +66,7 @@ const ContactPage = () => {
       <div className="mt-16 flex min-h-96 flex-col gap-8">
         <h3>Contact</h3>
         <h1 className="font-indie font-thin capitalize">✉️ call me maybe?</h1>
-        <h4 className="w-2/3 font-thin">
+        <h4 className="w-2/3 font-medium">
           I&apos;d love to hear from you! Okay, but emails work just as good.
         </h4>
         <div className="flex flex-col gap-4">
