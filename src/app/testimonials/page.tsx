@@ -83,7 +83,7 @@ const page = async () => {
   return (
     <section className="mb-32">
       {/* topsection */}
-      <div className="flex min-h-96 flex-col rounded-b-[96px] bg-blue-700 px-8 text-white md:flex-row md:px-16 lg:px-32">
+      <div className="flex min-h-96 flex-col md:rounded-b-[96px] bg-blue-700 px-8 text-white md:flex-row md:px-16 lg:px-32">
         <div className="flex w-full flex-col justify-center gap-4 md:w-1/2">
           <h3 className="text-4xl">Testimonials</h3>
           <h1 className="">
@@ -96,14 +96,14 @@ const page = async () => {
             design expertise, leadership abilities, and collaborative approach.
           </p>
         </div>
-        <div className="w-full md:p-8 md:w-1/2">
-          <div className="relative min-h-[512px] w-full scale-90 overflow-clip rounded-[96px] border-4 border-white grayscale">
+        <div className="w-full p-0 md:p-8 md:w-1/2">
+          <div className="relative min-h-[512px] w-full scale-90 overflow-clip md:rounded-[96px] border-4 border-white grayscale">
             <Image src={profileimage} alt="" className="object-cover" fill />
           </div>
         </div>
       </div>
-      <div className="mt-16 px-2 md:px-16 lg:px-32">
-        <h2 className="mb-8 text-5xl font-thin">Testimonials</h2>
+      <div className="mt-16 px-8 md:px-16 lg:px-32">
+        <h2 className="mb-8 text-5xl font-medium">Testimonials</h2>
         <p></p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {data.map((testimonial: Testimonial) => (
@@ -121,8 +121,8 @@ const page = async () => {
                       className="rounded-full object-cover"
                     />
                 </div>
-                <div className="flex w-full flex-col gap-4 p-8">
-                  <h3 className="text-5xl font-bold">{testimonial.Name}</h3>
+                <div className="flex w-full flex-col gap-4 p-0 md:p-8">
+                  <h3 className="text-3xl md:text-5xl font-bold">{testimonial.Name}</h3>
                   <p className="text-sm text-gray-600">{testimonial.work}</p>
                   <p className="text-xl text-gray-700">
                     {testimonial.testimonial}
