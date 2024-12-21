@@ -68,6 +68,7 @@ interface Testimonial {
 async function getTestimonials() {
   const res = await fetch(
     "https://portfoliostrapicms.onrender.com/api/testimonials?populate=*",
+    {next:{revalidate:60}}
   );
   const response = res.json();
   return response;

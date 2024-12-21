@@ -4,7 +4,8 @@ import ReactMarkdown from 'react-markdown';
 
 async function getProjectData(slug: string){
   const res = await fetch(
-    `https://portfoliostrapicms.onrender.com/api/projects?filters[slug][$eq]=${slug}&populate=*`
+    `https://portfoliostrapicms.onrender.com/api/projects?filters[slug][$eq]=${slug}&populate=*`,
+    {next:{revalidate:60}}
   );
   if (!res.ok) {
     throw new Error('Failed to fetch project data');

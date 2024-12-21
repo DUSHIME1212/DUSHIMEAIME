@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 const page = async () => {
   const res = await fetch(
     "https://portfoliostrapicms.onrender.com/api/galleries?populate=*",
+    {next:{revalidate:60}}
   );
   const galleries = await res.json();
   const { data } = galleries;

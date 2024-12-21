@@ -85,7 +85,9 @@ const page = async () => {
     category: "AI Assistant, Discoverability",
   };
 
-  const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*");
+  const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",
+    {next:{revalidate:60}}
+  );
   const data = await res.json();
   const projects = data.data;
   
