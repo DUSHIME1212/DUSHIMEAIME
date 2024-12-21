@@ -9,9 +9,11 @@ interface Projects {
 }
 
 const Works = async () => {
-  const res = (await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",{next:{revalidate:60}}));
+  const res = (await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",{next:{revalidate:3660}}));
   const data = await res.json();
   const projects = data.data;
+  // console.log(projects);
+  
   return (
     <div className="py-0 md:py-8">
       <div className="grid md:grid-cols-3 max-md:grid-rows-2 gap-32 items-center content-center">
@@ -26,7 +28,7 @@ const Works = async () => {
           >
             <div className="relative mb-8 h-96 w-full overflow-clip rounded-xl">
               <Image
-                src={item.bannerimage[0].url}
+                src={item.bannerimage[0].formats.medium.url}
                 className="object-cover duration-500 group-hover:scale-125"
                 alt=""
                 fill
