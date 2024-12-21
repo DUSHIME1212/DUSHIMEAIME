@@ -76,8 +76,6 @@ async function getTestimonials() {
 const page = async () => {
   const { data } = await getTestimonials();
 
-  // console.log(data);
-
   const profileimage =
     "https://media.giphy.com/media/10M8Yr4WKJK63e/giphy.gif?cid=ecf05e47e1sxe98n9urf94glnw7lwws0up8egd7d7mei3c6s&ep=v1_gifs_search&rid=giphy.gif&ct=g";
 

@@ -13,6 +13,7 @@ export default function LoadingSlider() {
   useEffect(() => {
     const controller = new AbortController()
     let progressInterval: NodeJS.Timeout
+    let finishTimeout: NodeJS.Timeout
 
     const startLoading = () => {
       progressInterval = setInterval(() => {
@@ -24,6 +25,11 @@ export default function LoadingSlider() {
           return prev + 10
         })
       }, 200)
+
+      finishTimeout = setTimeout(() => {
+        clearInterval(progressInterval)
+        setProgress(100)
+      }, 30000) // 30 seconds
     }
 
     const loadData = async () => {
@@ -38,7 +44,7 @@ export default function LoadingSlider() {
         setError(err instanceof Error ? err.message : 'Failed to load data')
         setIsLoading(false)
       } finally {
-        clearInterval(progressInterval)
+        clearTimeout(finishTimeout)
       }
     }
 
@@ -47,6 +53,7 @@ export default function LoadingSlider() {
     return () => {
       controller.abort()
       clearInterval(progressInterval)
+      clearTimeout(finishTimeout)
     }
   }, [])
 
@@ -88,4 +95,3 @@ export default function LoadingSlider() {
     </AnimatePresence>
   )
 }
-

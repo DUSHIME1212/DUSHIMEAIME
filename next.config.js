@@ -12,7 +12,7 @@ const config = {
             },
             {
                 protocol: "http",
-                hostname: "localhost",
+                hostname: "*",
             }
         ]
     }
