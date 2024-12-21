@@ -20,8 +20,8 @@ const Experience = () => {
               {experience.title}
             </h4>
             <h3 className="text-3xl font-indie group-hover:text-white duration-500">{experience.company}</h3>
-            <div className="mt-2 grid grid-cols-5 justify-items-start">
-              <p className="col-span-4 w-2/3 opacity-70 font-normal text-xl group-hover:text-white">
+            <div className="mt-2 grid grid-cols-1 md:grid-cols-5 justify-items-start">
+              <p className="col-span-4 w-2/3 opacity-70 font-normal text-xl line-clamp-6 group-hover:text-white">
                 {experience.description}
               </p>
               <p className="group-hover:underline">{experience.dates}</p>

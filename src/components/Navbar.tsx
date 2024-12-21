@@ -38,7 +38,7 @@ const Navbar = () => {
         />
       </div>
       <button onClick={() => isopen(!open)} className="md:hidden">
-        {!open ? <AlignJustify size={48} /> : <X size={48} />}
+        {!open ? <AlignJustify size={32} /> : <X size={32} />}
       </button>
       <div
             className={`flex px-8 flex-col justify-center md:flex-row ${
