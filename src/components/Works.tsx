@@ -16,9 +16,9 @@ const Works = async () => {
   
   return (
     <div className="py-0 md:py-8">
-      <div className="grid md:grid-cols-3 max-md:grid-rows-2 gap-32 items-center content-center">
-        <h1 className="col-span-2">what I&apos;ve been up to lately</h1>
-        <p className="col-span-1 w-full md:w-2/3 opacity-70 text-3xl">Bridging the gap between beautiful and bottom-line results.</p>
+      <div className="flex flex-col justify-between items-center md:flex-row">
+        <h1 className="w-full md:w-1/3">what I&apos;ve been up to lately</h1>
+        <p className="w-full md:w-1/3 opacity-70 text-3xl">Bridging the gap between beautiful and bottom-line results.</p>
       </div>
       <div className="mt-8 grid max-md:grid-cols-1 grid-cols-2 content-center gap-4">
         {projects?.slice(0,4).map((item,i) => 

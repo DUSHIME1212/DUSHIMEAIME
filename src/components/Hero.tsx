@@ -28,7 +28,7 @@ const Hero = () => {
                 duration: 1.25,
               }}
               d="M1.51172 11.0845C23.2893 7.41922 37.3034 6.14753 64.331 4.23815C91.3586 2.32877 146.422 0.190756 211.293 6.631"
-              stroke="#FFFF00FF"
+              stroke="#1900FFFF"
               stroke-width="9"
               stroke-linecap="round"
             />
@@ -80,7 +80,7 @@ const Hero = () => {
         size={"lg"}
         className="w-fit gap-2 rounded-full"
       >
-        View all my work <ArrowUpRight />
+        <Link href={"works"} className="flex items-center">View all my work <ArrowUpRight /></Link>
       </Button>
     </div>
   );
