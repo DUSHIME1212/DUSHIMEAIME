@@ -4,13 +4,14 @@ import { motion, AnimatePresence } from "motion/react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { fetchProjects } from "~/lib/api"
+import { useGSAP } from "@gsap/react"
 
 export default function LoadingSlider() {
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+  useGSAP(() => {
     const controller = new AbortController()
     let progressInterval: NodeJS.Timeout
     let finishTimeout: NodeJS.Timeout
@@ -29,7 +30,7 @@ export default function LoadingSlider() {
       finishTimeout = setTimeout(() => {
         clearInterval(progressInterval)
         setProgress(100)
-      }, 30000) // 30 seconds
+      }, 30000) 
     }
 
     const loadData = async () => {
@@ -66,19 +67,14 @@ export default function LoadingSlider() {
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
         >
           <div className="mb-8 flex flex-col items-center">
-            {/* <div className="relative h-12 w-12">
-              <Image
-                src="/DUSHIlogopng.png"
-                alt="Logo"
-                fill
-                className="object-contain"
-              />
-            </div> */}
+            <div className="relative h-12 w-12">
+              
+            </div>
             <h1 className="ml-4 text-5xl font-indie text-gray-800">Don Aime</h1>
           </div>
           <div className="relative h-2 overflow-clip w-64 rounded-full bg-gray-200">
             <motion.div
-              className="absolute h-full shadow-2xl shadow-black bg-black"
+              className="absolute h-full shadow-2xl shadow-sky-700 bg-sky-700 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5, ease: "easeInOut" }}

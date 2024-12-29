@@ -8,7 +8,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 // Ensure ScrollTrigger is registered
 gsap.registerPlugin(ScrollTrigger);
 
-export function AnimateParagraph({children, className}: {children: string; className: string}) {
+export function AnimateParagraph({children, className}: {children: string; className?: string}) {
     const ref = useRef<HTMLParagraphElement>(null);
     useGSAP(() => {
 

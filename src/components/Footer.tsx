@@ -18,7 +18,7 @@ const Footer = () => {
     { title: "Dribble", href: "/" },
   ];
   return (
-    <div className="min-h-96 bg-blue-700 p-16 text-white">
+    <div className="min-h-96 bg-sky-700 p-16 text-white">
       <div className="flex flex-col justify-between md:flex-row">
         <div className="flex min-h-32 w-full flex-col justify-between gap-16 md:w-1/3">
           <div className="relative h-16 w-48">

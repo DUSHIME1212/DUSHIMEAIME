@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`font-dmsans`}>
       <body>
-        {/* <LoadingSlider /> */}
+        <LoadingSlider />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

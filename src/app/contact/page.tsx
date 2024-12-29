@@ -66,7 +66,7 @@ const ContactPage = () => {
       <div className="mt-16 flex min-h-96 flex-col gap-8">
         <h3>Contact</h3>
         <h1 className="font-indie font-thin capitalize">✉️ call me maybe?</h1>
-        <h4 className="w-2/3 font-medium">
+        <h4 className="w-2/3 md:text-lg  font-medium">
           I&apos;d love to hear from you! Okay, but emails work just as good.
         </h4>
         <div className="flex flex-col gap-4">
@@ -131,8 +131,8 @@ const ContactPage = () => {
           <Label className="w-full">
             <Textarea
               placeholder="message"
+              className="resize-none"
               rows={8}
-              className="p-6"
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}

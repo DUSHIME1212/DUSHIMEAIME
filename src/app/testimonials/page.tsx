@@ -83,10 +83,10 @@ const page = async () => {
   return (
     <section className="mb-32">
       {/* topsection */}
-      <div className="flex min-h-96 flex-col md:rounded-b-[96px] bg-blue-700 px-8 text-white md:flex-row md:px-16 lg:px-32">
+      <div className="flex min-h-96 flex-col md:rounded-b-[96px] bg-blue-700 sm:px-8 text-white md:flex-row md:px-16 lg:px-32">
         <div className="flex w-full flex-col justify-center gap-4 md:w-1/2">
           <h3 className="text-4xl">Testimonials</h3>
-          <h1 className="">
+          <h1 className="text-xl md:text-3xl lg:text-5xl">
             I've had the pleasure of designing many spaces and meeting
             incredible people
           </h1>
