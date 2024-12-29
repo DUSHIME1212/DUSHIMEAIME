@@ -90,6 +90,9 @@ const page = async () => {
   );
   const data = await res.json();
   const projects = data.data;
+
+  // console.log(projects[0].bannerimage[0].formats.medium.url);
+  
   
 
   return (
@@ -109,7 +112,7 @@ const page = async () => {
           >
             <div className="relative z-0 h-[512px] w-full group-hover:skew-x-3 scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 group-hover:md:shadow-[0px_52px_92px_#3300FFA0]">
               <Image
-                src={`${item.bannerimage[0].url}`}
+                src={`${item.bannerimage[0].formats.medium.url}`}
                 alt=""
                 className="scale-125 object-cover duration-500 group-hover:scale-100"
                 fill

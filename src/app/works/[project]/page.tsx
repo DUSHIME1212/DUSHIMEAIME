@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import { AnimateParagraph } from '~/lib/Animation';
 
 async function getProjectData(slug: string){
   const res = await fetch(
@@ -31,6 +32,8 @@ export default async function Page({ params }) {
 
   const projectData = await getProjectData(project);
 
+
+
   if(!projectData){
     return<section className='text-7xl grid place-items-center font-indie min-h-[512px]'>404 Page not found</section>
   }
@@ -44,7 +47,9 @@ export default async function Page({ params }) {
         </h1>
         <Image src={projectData.bannerimage[0].url} alt="" loading="lazy" className="object-cover" fill />
       </div>
-      <ReactMarkdown className="w-full prose px-4 my-32">{projectData.content}</ReactMarkdown>
+      <ReactMarkdown className="w-full prose px-4 my-32">
+        {projectData.content}
+      </ReactMarkdown>
       <img src={projectData.bannerimage[0].url} alt="" className="object-cover h-auto w-full"  />
     </div>
   );

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "~/components/ui/button";
+import { AnimateParagraph } from "~/lib/Animation";
 
 const page = () => {
   const profileimage =
@@ -13,7 +14,7 @@ const page = () => {
           <h3>About</h3>
           <h1 className="group font-indie">
             Hello world, I am{" "}
-            <span className="duration-500 group-hover:text-blue-700">
+            <span className="duration-500 group-hover:text-sky-700">
               DUSHIME AIME
             </span>
           </h1>
@@ -33,30 +34,30 @@ const page = () => {
       {/* topsection */}
       <div className="mt-8 flex flex-col gap-8">
         <div className="w-2/3">
-          <h2 className="mb-8 text-7xl font-bold">
+          <h2 className="mb-8 text-7xl text-sky-700 font-bold">
             Where empathy meets impact
           </h2>
-          <p>
-            I’m intrigued by how people interact with technology and the small
+          <AnimateParagraph className="w-2/3">
+            Im intrigued by how people interact with technology and the small
             details that shape their experiences. My design process revolves
             around understanding users' needs, motivations, and challenges, and
             translating that understanding into intuitive and impactful
             solutions.
-          </p>
+          </AnimateParagraph>
         </div>
         <div className="">
-          <h2 className="mb-8 text-7xl font-bold max-md:font-medium">
+          <h2 className="mb-8 text-7xl text-sky-700 font-bold max-md:font-medium">
             Why I prioritize SMBs
           </h2>
-          <p className="w-2/3">
+          <AnimateParagraph className="w-2/3">
             Growing up, I saw firsthand the hard work and resilience of small
             business owners in my community. Their struggles with limited
             resources and visibility inspired me to use design as a way to
             empower them. I believe that great design can level the playing
             field and help dreams grow into realities.
-          </p>
+          </AnimateParagraph>
           <div className="my-4 mt-16 flex flex-col gap-4 text-xl md:flex-row">
-            <h4 className="w-full md:w-1/3">Me in 3 words</h4>
+            <h4 className="w-full text-sky-700 md:w-1/3">Me in 3 words</h4>
             <p className="w-2/3 cursor-pointer font-medium">
               Curious, Adaptive, Collaborative,
               <span className="duration-500 hover:text-blue-700">
@@ -66,27 +67,27 @@ const page = () => {
             </p>
           </div>
           <div className="my-4 mt-16 flex flex-col gap-4 text-xl md:flex-row">
-            <h4 className="w-full md:w-1/3">My Approach to Problem-Solving</h4>
-            <p className="w-full cursor-pointer font-thin opacity-80 max-md:font-medium md:w-2/3">
+            <h4 className="w-full text-sky-700 md:w-1/3">My Approach to Problem-Solving</h4>
+            <AnimateParagraph className="w-full cursor-pointer opacity-80 max-md:font-medium md:w-2/3">
               As a junior designer, I focus on being flexible and resourceful
               when tackling challenges. I enjoy collaborating with others to
               find creative, effective solutions that align with both user needs
               and business goals. My goal is to make every project a step toward
               creating meaningful, user-friendly designs.
-            </p>
+            </AnimateParagraph>
           </div>
         </div>
       </div>
       <div className="my-4 mt-16 flex w-full flex-col gap-8">
-        <h1 className="font-bold max-md:font-medium">
+        <h1 className="font-bold text-sky-700 max-md:font-medium">
           Who are you as a designer?
         </h1>
-        <p className="w-full text-xl opacity-80 md:w-2/3">
+        <AnimateParagraph className="w-full text-xl opacity-80 md:w-2/3">
           For me, design isn’t just about solving problems – it’s about telling
           a story. Each project is a chance to create something that resonates
           with users and makes their lives a little easier. Let me know if you'd
           like any adjustments! 😊
-        </p>
+        </AnimateParagraph>
         <Button
           variant={"gooeyRight"}
           size={"lg"}
@@ -96,13 +97,13 @@ const page = () => {
         </Button>
       </div>
       <div className="mt-8 flex w-2/3 flex-col gap-2">
-        <h4 className="mb-4 text-6xl font-bold">Teamwork Makes the Difference</h4>
-        <p className="text-xl font-thin opacity-80 max-md:font-medium">
+        <h4 className="mb-4 text-6xl text-sky-700 font-bold">Teamwork Makes the Difference</h4>
+        <AnimateParagraph className="text-xl opacity-80 max-md:font-medium">
           I thrive in cross-functional teams where I can learn from engineers,
           product managers, and other designers. I value feedback and see every
           project as an opportunity to grow, improve, and contribute to
           something impactful.
-        </p>
+        </AnimateParagraph>
       </div>
     </section>
   );

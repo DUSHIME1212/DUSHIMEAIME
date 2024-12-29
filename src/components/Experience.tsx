@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { experience } from "~/lib/utils";
+import { AnimateParagraph } from "~/lib/Animation";
 
 const Experience = () => {
   
@@ -21,9 +22,9 @@ const Experience = () => {
             </h4>
             <h3 className="text-3xl font-indie group-hover:text-white duration-500">{experience.company}</h3>
             <div className="mt-2 grid grid-cols-1 md:grid-cols-5 justify-items-start">
-              <p className="col-span-4 w-2/3 opacity-70 font-normal text-xl line-clamp-6 group-hover:text-white">
+              <AnimateParagraph className="col-span-4 w-2/3 opacity-70 font-normal text-xl line-clamp-6 group-hover:text-white">
                 {experience.description}
-              </p>
+              </AnimateParagraph>
               <p className="group-hover:underline">{experience.dates}</p>
             </div>
           </div>
