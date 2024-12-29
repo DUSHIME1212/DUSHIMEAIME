@@ -32,7 +32,7 @@ export function FlipLink({
         <motion.div
           className="absolute inset-0 text-sky-700 font-bold font-indie"
           variants={{
-            initial: { y: "100%" },
+            initial: { y: "120%" },
             hovered: { y: 0 },
           }}
         >

@@ -9,7 +9,7 @@ const Experience = () => {
   return (
     <div className="my-8">
       <div>
-        <h1 className="mb-4 w-1/3 max-md:text-3xl font-bold">
+        <h1 className="mb-4 w-full text-3xl md:text-5xl md:w-1/3 text-sky-700 font-bold">
           I understand designing at scale.
         </h1>
         <p>My experience</p>
