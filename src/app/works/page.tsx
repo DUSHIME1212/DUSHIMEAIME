@@ -104,7 +104,6 @@ const Page = () => {
             end: "+=500",
             pin: true,
             scrub: 1,
-            markers: true,
             snap:{
               snapTo: 1/(sections.length - 1),
               duration: {min: 0.1, max: 0.1}

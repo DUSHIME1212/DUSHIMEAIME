@@ -50,7 +50,6 @@ export default async function Page({ params }) {
       <ReactMarkdown className="w-full prose px-4 my-32">
         {projectData.content}
       </ReactMarkdown>
-      <img src={projectData.bannerimage[0].url} alt="" className="object-cover h-auto w-full"  />
     </div>
   );
 }
