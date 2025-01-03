@@ -1,15 +1,13 @@
+"use client"
 
 import { ArrowUpRight } from "@geist-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import SplitType from "split-type";
+import React, { useRef, useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ReactMarkdown from "react-markdown";
-import axios from "axios";
 gsap.registerPlugin(ScrollTrigger);
 
 interface Project {
@@ -75,23 +73,49 @@ interface ProviderMetadata {
   resource_type: string;
 }
 
-const page = async () => {
-  const project = {
-    title: "Project Title",
-    description:
-      "Enhanced the discoverability of AI capabilities within Adobe Experience Platform, making it easier for users to understand and utilize the full potential of the AI assistant, ultimately driving greater efficiency and innovation for leading brands like Coca-Cola, Hilton, BMW, and ServiceNow.",
-    img: "https://cdn.dribbble.com/userupload/17615473/file/original-ee26568cc4e76795a16f70aed8ab3320.png?resize=1200x900&vertical=center",
-    link: "https://www.adobe.com/experience-platform/ai.html",
-    category: "AI Assistant, Discoverability",
-  };
+const Page = () => {
+  const containerRef = useRef(null);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
 
-  const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",
-    {next:{revalidate:60}}
-  );
-  const data = await res.json();
-  const projects = data.data;
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",
+        { next: { revalidate: 60 } }
+      );
+      const data = await res.json();
+      setProjects(data.data);
+    };
 
-  // console.log(projects[0].bannerimage[0].formats.medium.url);
+    fetchData();
+  }, []);useGSAP(() => {
+    if (containerRef.current && sectionRefs.current.length > 0 ) {
+      const sections = sectionRefs.current.filter((ref) => ref !== null); 
+      gsap.fromTo(
+        sections,
+        { xPercent: 0 },
+        {
+          xPercent: -100 * (sections.length - 1),
+          ease: "none",
+          scrollTrigger: {
+
+            trigger: containerRef.current,
+            start: '0% 0%',
+            end: "+=500",
+            pin: true,
+            scrub: 1,
+            markers: true,
+            snap:{
+              snapTo: 1/(sections.length - 1),
+              duration: {min: 0.1, max: 0.1}
+            }
+          },
+        }
+      );
+    } else {
+      console.error("containerRef or sections are invalid");
+    }
+  }, [projects]);
   
   
 
@@ -104,13 +128,14 @@ const page = async () => {
           I'm excited to collaborate with a talented team at companies where I can apply my skills and knowledge to contribute to impactful projects and learn from experienced professionals.
         </h6>
       </div>
-      <div className="mt-8 grid grid-cols-1 relative gap-4">
-        {projects.slice(0,4).map((item:Project) => (
+      <div ref={containerRef} className="mt-8 flex flex-row  relative overflow-hidden h-screen w-full-container  gap-4">
+        {projects.slice(0, 4).map((item: Project, i: number) => (
           <div
+            ref={el => { sectionRefs.current[i] = el; }}
             key={item.id}
-            className="group flex min-h-[512px] sticky top-12 flex-col gap-2 rounded-3xl duration-500 bg-white hover:bg-blue-100 md:flex-row"
+            className="group flex-shrink-0 w-full h-full flex min-h-[512px] sticky top-12 flex-col gap-2 justify-center items-center rounded-3xl duration-500  md:flex-row"
           >
-            <div className="relative z-0 h-[512px] w-full group-hover:skew-x-3 scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 group-hover:md:shadow-[0px_52px_92px_#3300FFA0]">
+            <div className="relative z-0 h-[512px] w-full scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 group-hover:md:shadow-[0px_52px_92px_#3300FFA0]">
               <Image
                 src={`${item.bannerimage[0].formats.medium.url}`}
                 alt=""
@@ -123,7 +148,7 @@ const page = async () => {
                 {item.title}
               </h2>
               <h5 className=" italic duration-500 group-hover:text-blue-700">
-              UX/UI Design (Figma)
+                UX/UI Design (Figma)
               </h5>
               <div className="grid grid-cols-2 gap-8 pr-16">
                 <Button
@@ -151,23 +176,16 @@ const page = async () => {
         ))}
       </div>
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {projects?.slice(4,8).map((item, i) => (
+        {projects?.slice(4, 8).map((item, i) => (
           <div
             key={i}
             className="flex min-h-96 flex-col items-start gap-2 md:flex-row"
           >
             <div className="relative h-56 w-full overflow-clip rounded-xl md:w-1/2">
-              <Image src={project.img} alt="" className="object-cover" priority fill />
+              {/* <Image src={project.img} alt="" className="object-cover" priority fill /> */}
             </div>
             <div className="flex w-full flex-col justify-start gap-4 p-0 md:p-4 md:w-1/2">
               <h2 className="">UX/UI Design (Figma)</h2>
-              {/* <p className="leading-6">
-                I worked on the Monetization Payments team at Meta, specifically
-                optimizing for a brand new WhatsApp Fintech experience. I built
-                robust interactive prototypes, met with and presented to key
-                stakeholders like Will Cathcart, Alicia Dougherty, and Mark
-                Zuckerberg.
-              </p> */}
               <Button
                 variant={"ghost"}
                 size={"lg"}
@@ -203,5 +221,4 @@ const page = async () => {
   );
 };
 
-export default page;
-
+export default Page;
