@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "motion/react"
+import { ArrowRight } from "lucide-react";
 
 interface Projects {
   id: string;
@@ -24,7 +25,7 @@ const Works = async () => {
         {projects?.slice(0,4).map((item,i) => 
           <div
             key={i}
-            className="bg- rounded-lg md:p-4 group min-h-[512px] md:border-2 border-black/10 md:shadow-2xl"
+            className="bg- rounded-lg md:p-4 relative group min-h-[512px] md:border-2 flex flex-col justify-between border-black/10 md:shadow-2xl"
           >
             <div className="relative mb-8 h-96 w-full overflow-clip rounded-xl">
               <Image
@@ -35,9 +36,12 @@ const Works = async () => {
                 priority
               />
             </div>
-            <h3 className="text-3xl font-normal line-clamp-1 w-2/3 mb-2">{item.title}</h3>
-            <Button asChild className="w-full bg-blue-700 mt-4 text-xl" size={"lg"} variant="gooeyRight">
-              <Link href={"works/"+item.slug} className="text-3xl">Case study</Link>
+            <h3 className="text-3xl font-normal line-clamp-2 w-2/3 mb-2">{item.title}</h3>
+            <Button asChild className="w-full absolute bottom-4 right-4 size-fit p-4 bg-sky-700/10 rounded-2xl mt-4  gap-2 text-base" size={"lg"} variant="outline">
+              <Link href={"works/"+item.slug} className=" text-black">
+              View Case Study
+              <ArrowRight/>
+              </Link>
             </Button>
           </div>
         )}

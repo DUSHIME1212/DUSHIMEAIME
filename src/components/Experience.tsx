@@ -16,13 +16,13 @@ const Experience = () => {
       </div>
       <div>
         {experience.map((experience, i) => (
-          <div key={i} className="group my-4 flex flex-col hover:bg-blue-700 rounded-xl hover:text-white cursor-pointer p-4 gap-4 duration-500">
-            <h4 className="text-4xl font-light group-hover:text-white">
+          <div key={i} className="group my-4 flex flex-col cursor-pointer gap-4 duration-500">
+            <h4 className="text-4xl text-sky-700 font-medium duration-500">
               {experience.title}
             </h4>
-            <h3 className="text-3xl font-indie group-hover:text-white duration-500">{experience.company}</h3>
+            <h3 className="text-3xl font-medium duration-500">{experience.company}</h3>
             <div className="mt-2 grid grid-cols-1 md:grid-cols-5 justify-items-start">
-              <AnimateParagraph className="col-span-4 w-2/3 opacity-70 font-normal text-xl line-clamp-6 group-hover:text-white">
+              <AnimateParagraph className="col-span-4 w-2/3 opacity-70 font-normal text-xl line-clamp-6 ">
                 {experience.description}
               </AnimateParagraph>
               <p className="group-hover:underline">{experience.dates}</p>
