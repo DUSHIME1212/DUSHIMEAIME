@@ -81,7 +81,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",
-        { next: { revalidate: 60 } }
+        { next: { revalidate: 3600 } }
       );
       const data = await res.json();
       setProjects(data.data);
