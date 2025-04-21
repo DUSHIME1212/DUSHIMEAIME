@@ -8,6 +8,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Safari } from "~/components/Safari";
 import { Badge } from "~/components/ui/badge";
+import { SmoothCursor } from "~/components/ui/smooth-cursor";
 import { AnimateParagraph } from "~/lib/Animation";
 import { filterproject } from "~/lib/projects";
 
@@ -55,7 +56,7 @@ export default function Page({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-3">
         <Safari
           imageSrc={projectData.image}
-          className="col-span-2 mx-auto size-full object-cover"
+          className="col-span-2 mx-auto shadow-2xl shadow-black size-full object-cover"
         />
       </div>
       <div>
@@ -65,7 +66,7 @@ export default function Page({ params }) {
         </div>
       </div>
       <div className="py-8 leading-tight">
-        <div className="grid size-fit w-2/3 grid-cols-4">
+        <div className="grid  w-full grid-cols-4">
           <div className="space-y-2 p-4">
             <p>Category</p>
             <h2 className="text-2xl font-bold">{projectData.category}</h2>
@@ -73,7 +74,16 @@ export default function Page({ params }) {
           <div className="space-y-2 p-4">
             <p>Client</p>
             <h2 className="text-2xl font-bold">
-              {projectData.ClientTestimonial.name}
+              {
+                projectData.ClientTestimonial ? (
+                  <p
+                  >
+                    {projectData.ClientTestimonial.name}
+                  </p>
+                ) : (
+                  "N/A"
+                )
+              }
             </h2>
           </div>
           <div className="space-y-2 p-4">
@@ -98,30 +108,35 @@ export default function Page({ params }) {
           </ul>
         </div>
         <div className="space-y-6 p-8">
-          <h2 className="text-2xl font-bold">Challenges</h2>
-          {/* <p className="py-4">{projectData.Challenge}</p> */}
+          Hele
         </div>
       </div>
-      <div className="size-fit">
+      <div className="size-fit my-8">
         <h2 className="text-2xl font-bold mb-4">How I Grew</h2>
         <ReactMarkdown className="prose w-full">
           {projectData.Howigrown}
         </ReactMarkdown>
       </div>
-      <div className="size-fit">
+      <div className="size-fit my-8">
         <h2 className="text-2xl font-bold mb-4">Challenges</h2>
         <ReactMarkdown className="prose w-full">
           {projectData.Challenge}
         </ReactMarkdown>
 
       </div>
-      <div className="size-fit">
+      <div className="size-fit my-8">
         <h2 className="text-2xl font-bold mb-4">Solution</h2>
         <ReactMarkdown className="prose w-full">
           {projectData.Solution}
         </ReactMarkdown>
-        
       </div>
+      <div className="size-fit my-8">
+        <h2 className="text-2xl font-bold mb-4">Results</h2>
+        <ReactMarkdown className="prose w-full">
+          {projectData.Results}
+        </ReactMarkdown>
+      </div>
+      <SmoothCursor/> 
     </div>
   );
 }

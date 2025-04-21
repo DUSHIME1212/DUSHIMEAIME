@@ -89,7 +89,7 @@ export const projects = [
     theme: {
       background: "bg-red-700",
     },
-    title: "AutoSphere - Next-Gen Automotive Marketplace",
+    title: "AutoSphere - NextGen Automotive Marketplace in rwanda",
     category: "E-Commerce Platform",
     description: "A comprehensive vehicle marketplace featuring advanced search, 360° view technology, and AI-powered pricing recommendations for both dealers and private sellers.",
     image: "/assets/cars.png",
