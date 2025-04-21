@@ -5,13 +5,15 @@ import Typewriter from "typewriter-effect/dist/core";
 import { easeInOut, motion } from "motion/react";
 import { Button } from "./ui/button";
 import { ArrowDownRight, ArrowUpRight } from "@geist-ui/icons";
+import { TextAnimate } from "./magicui/text-animate";
+import { jobs } from "~/lib/projects";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
 
   return (
     <div className="mt-8 flex flex-col gap-8">
-      <h2 className="group leading-10 text-gray-700">
+      <h2 className="group text-gray-700">
         <span className="relative text-blue-800">
           Dushime Aime
           <svg
@@ -34,8 +36,10 @@ const Hero = () => {
             />
           </svg>
         </span>{" "}
-        is a human-focused designer scaling products and businesses through
-        niche, meaningful, and intuitive experiences.
+        <TextAnimate className="leading-none">
+          is a human-focused designer scaling products and businesses through
+          niche, meaningful, and intuitive experiences.
+        </TextAnimate>
       </h2>
       <BlockinText
         tag={"/support"}
@@ -47,31 +51,33 @@ const Hero = () => {
         ]}
       />
       <div className="flex flex-col gap-2">
-        <p className="text-sm opacity-60 m-0">Currently</p>
-        <div className="px-0 h-fit group m-0 w-fit no-underline">
-          <Link href="https://www.linkedin.com/company/code-empowerment-progress/posts/?feedView=all" className="flex items-center gap-2 text-xl">
-          <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFgkXwXcNwcQA/company-logo_200_200/company-logo_200_200/0/1711536557698/code_empowerment_progress_logo?e=1743033600&v=beta&t=1RPKS-3jCFNojfz4eP6iz4PJti2O9I7ksZ987EebXPA" alt="" className="size-16 object-cover" />
-            Product Designer at{" "}
-            <span className="font-indie group-hover:underline">Code empowerment</span>
-            <ArrowUpRight />
-          </Link>
-        </div>
-        <div className="group h-fit m-0 w-fit px-0">
-          <Link href="https://www.linkedin.com/company/founders-society-alu/posts/?feedView=all" className="flex items-center px-0 gap-2 text-xl">
-          <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHg3Lx5bwSVeg/img-crop_100/img-crop_100/0/1727089063618?e=1743033600&v=beta&t=NwNKNSxjxRaAm-RzyOMxcB5Uc8oZgVTo9Tauf8xfc6Q" alt="" className="size-16 object-cover" />
-
-            Creative Director at{" "}
-            <span className="font-indie group-hover:underline">
-              Founders Society
-            </span>
-            <ArrowUpRight />
-          </Link>
+        <p className="m-0 text-sm opacity-60">Currently</p>
+        <div className="group m-0 h-fit w-fit px-0 no-underline">
+          {jobs.map((item, index) => (
+            <div key={index} className="group flex flex-col gap-2">
+              <Link
+                href={item.link}
+                className="flex items-cente capitalizer gap-2 text-xl"
+              >
+                <img
+                  src={item.img}
+                  alt=""
+                  className="size-16 object-cover"
+                />
+                {item.title}{" "}
+                <span className="font-indie group-hover:underline">
+                  {item.company}
+                </span>
+                <ArrowUpRight />
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
-      
+
       <div className="flex flex-col items-start">
         <p className="text-sm opacity-60">previous roles</p>
-        
+
         <h1 className="group px-0 no-underline">
           <Link href="" className="flex items-center gap-2 text-xl">
             Digital Marketing intern at{" "}
@@ -85,7 +91,9 @@ const Hero = () => {
         size={"lg"}
         className="w-fit gap-2 rounded-full bg-blue-700 from-blue-400"
       >
-        <Link href={"works"} className="flex items-center">View all my work <ArrowUpRight /></Link>
+        <Link href={"works"} className="flex items-center">
+          View all my work <ArrowUpRight />
+        </Link>
       </Button>
     </div>
   );

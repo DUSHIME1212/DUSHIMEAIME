@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import LoadingSlider from "~/components/ui/LoadingAnimation";
+import { SmoothCursor } from "~/components/ui/smooth-cursor";
 
 export const metadata: Metadata = {
   title: "Don Aime Portfolio",
@@ -21,6 +22,8 @@ export default function RootLayout({
         {/* <LoadingSlider /> */}
         <Navbar />
         <main className="min-h-screen">{children}</main>
+        
+        <SmoothCursor/>
         <Footer />
       </body>
     </html>

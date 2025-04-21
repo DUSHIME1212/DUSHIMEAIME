@@ -8,7 +8,7 @@ const page = () => {
     <div className='px-8 md:px-16 flex flex-col gap-4 lg:px-32'>
       <Hero/>
       <Works/>
-      <Experience/>
+      {/* <Experience/> */}
     </div>
   )
 }

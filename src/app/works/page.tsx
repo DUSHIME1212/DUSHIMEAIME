@@ -8,6 +8,8 @@ import { Button } from "~/components/ui/button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Safari } from "~/components/Safari";
+import { projects } from "~/lib/projects";
 gsap.registerPlugin(ScrollTrigger);
 
 interface Project {
@@ -76,15 +78,16 @@ interface ProviderMetadata {
 const Page = () => {
   const containerRef = useRef(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [Projects, setProjects] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      setProjects(projects)
       const res = await fetch("https://portfoliostrapicms.onrender.com/api/projects?populate=*",
         { next: { revalidate: 3600 } }
       );
       const data = await res.json();
-      setProjects(data.data);
+      // setProjects(data.data);
     };
 
     fetchData();
@@ -128,26 +131,24 @@ const Page = () => {
         </h6>
       </div>
       <div ref={containerRef} className="mt-8 flex flex-row  relative overflow-hidden h-screen w-full-container  gap-4">
-        {projects.slice(0, 4).map((item: Project, i: number) => (
+        {projects.slice(0, 4).map((item, i: number) => (
           <div
             ref={el => { sectionRefs.current[i] = el; }}
             key={item.id}
-            className="group flex-shrink-0 w-full h-full flex min-h-[512px] sticky top-12 flex-col gap-2 justify-center items-center rounded-3xl duration-500  md:flex-row"
+            className="group cursor-pointer flex-shrink-0 w-full h-full flex min-h-[512px] sticky top-12 flex-col gap-2 justify-center items-center rounded-3xl duration-500  md:flex-row"
           >
-            <div className="relative z-0 h-[512px] w-full scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 group-hover:md:shadow-[0px_52px_92px_#3300FFA0]">
-              <Image
-                src={`${item.bannerimage[0].formats.medium.url}`}
-                alt=""
-                className="scale-125 object-cover duration-500 group-hover:scale-100"
-                fill
+            <div className="relative z-0 size-fit group-hover:md:shadow-[0px_52px_92px_#3300FFA0] w-full scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 ">
+              <Safari
+                imageSrc={`${item.image}`}
+                className="size-full object-cover duration-500  group-hover:scale-100"
               />
             </div>
             <div className="flex w-full flex-col justify-center gap-4 md:p-4 lg:px-16 max-md:px-0 md:w-1/2">
-              <h2>
+              <h2 className="text-6xl uppercase line-clamp-1 font-indie">
                 {item.title}
               </h2>
-              <h5 className=" italic duration-500 group-hover:text-blue-700">
-                UX/UI Design (Figma)
+              <h5 className="capitalize duration-500 group-hover:text-blue-700">
+                {item.type}
               </h5>
               <div className="grid grid-cols-2 gap-8 pr-16">
                 <Button
@@ -156,7 +157,7 @@ const Page = () => {
                   className="group gap-4 py-6 rounded-full from-blue-300 group-hover:bg-blue-800"
                   asChild
                 >
-                  <Link href={`/works/${item.slug}`} className="flex items-center gap-2">
+                  <Link href={`/works/${item.id}`} className="flex items-center gap-2">
                     Case study
                     <ArrowUpRight className="duration-300 group-hover:rotate-45" />
                   </Link>
@@ -181,10 +182,10 @@ const Page = () => {
             className="flex min-h-96 flex-col items-start gap-2 md:flex-row"
           >
             <div className="relative h-56 w-full overflow-clip rounded-xl md:w-1/2">
-              {/* <Image src={project.img} alt="" className="object-cover" priority fill /> */}
+              <Image src={item.image} alt="" className="object-cover" priority fill />
             </div>
             <div className="flex w-full flex-col justify-start gap-4 p-0 md:p-4 md:w-1/2">
-              <h2 className="">UX/UI Design (Figma)</h2>
+              <h2 className="">{item.title}</h2>
               <Button
                 variant={"ghost"}
                 size={"lg"}

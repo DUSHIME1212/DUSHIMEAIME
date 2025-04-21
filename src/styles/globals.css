@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -85,22 +86,22 @@
 }
 
 h1 {
-  @apply scroll-m-20 text-6xl font-bold tracking-tight lg:text-7xl
+  @apply scroll-m-20 text-6xl font-bold  lg:text-7xl
 }
 h2 {
-  @apply  scroll-m-20 border-b  text-5xl font-semibold tracking-tight transition-colors first:mt-0
+  @apply  scroll-m-20  text-5xl font-semibold  transition-colors first:mt-0
 }
 h3{
-  @apply  scroll-m-20 text-4xl font-semibold tracking-tight
+  @apply  scroll-m-20 text-4xl font-semibold 
 }
 h4{
-  @apply  scroll-m-20 text-3xl font-semibold tracking-tight
+  @apply  scroll-m-20 text-3xl font-semibold 
 }
 h5{
-  @apply  scroll-m-20 text-2xl font-semibold tracking-tight
+  @apply  scroll-m-20 text-2xl font-semibold 
 }
 h6{
-  @apply  scroll-m-20 text-xl font-semibold tracking-tight
+  @apply  scroll-m-20 text-xl font-semibold 
 }
 p{
   @apply leading-7 [&:not(:first-child)]:mt-0
@@ -114,22 +115,22 @@ blockquote{
 
 .block{
   h1 {
-    @apply scroll-m-20 text-6xl font-bold tracking-tight my-8  lg:text-7xl
+    @apply scroll-m-20 text-6xl font-bold  my-8  lg:text-7xl
   }
   h2 {
-    @apply  scroll-m-20 border-b  text-5xl font-semibold tracking-tight transition-colors first:mt-0
+    @apply  scroll-m-20   text-5xl font-semibold  transition-colors first:mt-0
   }
   h3{
-    @apply  scroll-m-20 text-4xl font-semibold my-4 tracking-tight
+    @apply  scroll-m-20 text-4xl font-semibold my-4 
   }
   h4{
-    @apply  scroll-m-20 text-3xl font-semibold tracking-tight
+    @apply  scroll-m-20 text-3xl font-semibold 
   }
   h5{
-    @apply  scroll-m-20 text-2xl font-semibold tracking-tight
+    @apply  scroll-m-20 text-2xl font-semibold 
   }
   h6{
-    @apply  scroll-m-20 text-xl font-semibold tracking-tight
+    @apply  scroll-m-20 text-xl font-semibold 
   }
   p{
     @apply leading-7 [&:not(:first-child)]:mt-0
