@@ -132,47 +132,47 @@ const Page = () => {
       </div>
       <div ref={containerRef} className="mt-8 flex flex-row  relative overflow-hidden h-screen w-full-container  gap-4">
         {projects.slice(0, 4).map((item, i: number) => (
-          <div
-            ref={el => { sectionRefs.current[i] = el; }}
-            key={item.id}
-            className="group cursor-pointer flex-shrink-0 w-full h-full flex min-h-[512px] sticky top-12 flex-col gap-2 justify-center items-center rounded-3xl duration-500  md:flex-row"
-          >
-            <div className="relative z-0 size-fit group-hover:md:shadow-[0px_52px_92px_#3300FFA0] w-full scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 ">
-              <Safari
-                imageSrc={`${item.image}`}
-                className="size-full object-cover duration-500  group-hover:scale-100"
-              />
-            </div>
-            <div className="flex w-full flex-col justify-center gap-4 md:p-4 lg:px-16 max-md:px-0 md:w-1/2">
-              <h2 className="text-6xl uppercase line-clamp-1 font-indie">
-                {item.title}
-              </h2>
-              <h5 className="capitalize duration-500 group-hover:text-blue-700">
-                {item.type}
-              </h5>
-              <div className="grid grid-cols-2 gap-8 pr-16">
-                <Button
-                  variant={"gooeyLeft"}
-                  size={"lg"}
-                  className="group gap-4 py-6 rounded-full from-blue-300 group-hover:bg-blue-800"
-                  asChild
-                >
-                  <Link href={`/works/${item.id}`} className="flex items-center gap-2">
-                    Case study
-                    <ArrowUpRight className="duration-300 group-hover:rotate-45" />
-                  </Link>
-                </Button>
-                <Button
-                  variant={"ghost"}
-                  size={"lg"}
-                  className="group-hover:bg-black-800 py-6 group gap-4 rounded-full from-blue-300"
-                  asChild
-                >
-                  <Link href={item.link}>View project</Link>
-                </Button>
-              </div>
+          item.image && <div
+          ref={el => { sectionRefs.current[i] = el; }}
+          key={item.id}
+          className="group cursor-pointer flex-shrink-0 w-full h-full flex min-h-[512px] sticky top-12 flex-col gap-2 justify-center items-center rounded-3xl duration-500  md:flex-row"
+        >
+          <div className="relative z-0 size-fit group-hover:md:shadow-[0px_52px_92px_#3300FFA0] w-full scale-90 overflow-clip rounded-xl duration-500 max-md:scale-100 max-md:shadow-none md:w-1/2 ">
+            <Safari
+              imageSrc={`${item.image}`}
+              className="size-full object-cover duration-500  group-hover:scale-100"
+            />
+          </div>
+          <div className="flex w-full flex-col justify-center gap-4 md:p-4 lg:px-16 max-md:px-0 md:w-1/2">
+            <h2 className="text-6xl uppercase line-clamp-1 font-indie">
+              {item.title}
+            </h2>
+            <h5 className="capitalize duration-500 group-hover:text-blue-700">
+              {item.type}
+            </h5>
+            <div className="grid grid-cols-2 gap-8 pr-16">
+              <Button
+                variant={"gooeyLeft"}
+                size={"lg"}
+                className="group gap-4 py-6 rounded-full from-blue-300 group-hover:bg-blue-800"
+                asChild
+              >
+                <Link href={`/works/${item.id}`} className="flex items-center gap-2">
+                  Case study
+                  <ArrowUpRight className="duration-300 group-hover:rotate-45" />
+                </Link>
+              </Button>
+              <Button
+                variant={"ghost"}
+                size={"lg"}
+                className="group-hover:bg-black-800 py-6 group gap-4 rounded-full from-blue-300"
+                asChild
+              >
+                <Link href={item.link}>View project</Link>
+              </Button>
             </div>
           </div>
+        </div>
         ))}
       </div>
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">

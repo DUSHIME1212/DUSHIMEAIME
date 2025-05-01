@@ -7,9 +7,26 @@ import { Button } from "./ui/button";
 import { ArrowDownRight, ArrowUpRight } from "@geist-ui/icons";
 import { TextAnimate } from "./magicui/text-animate";
 import { jobs } from "~/lib/projects";
+import { BlurFade } from "./magicui/blur-fade";
+import { Badge } from "./ui/badge";
 
 const Hero = () => {
   const typewriterRef = useRef(null);
+  const BLUR_FADE_DELAY = 0.04;
+
+  const skills = [
+    "React",
+    "Next.js",
+    "Typescript",
+    "Node.js",
+    "Python",
+    "Go",
+    "Postgres",
+    "Docker",
+    "Kubernetes",
+    "Java",
+    "C++",
+  ];
 
   return (
     <div className="mt-8 flex flex-col gap-8">
@@ -50,6 +67,20 @@ const Hero = () => {
           "My favourite Gerne is Afrobeats",
         ]}
       />
+      <section id="skills">
+        <div className="flex min-h-0 flex-col gap-y-3">
+          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+            <h2 className="text-xl font-bold">Skills</h2>
+          </BlurFade>
+          <div className="flex flex-wrap gap-1">
+            {skills.map((skill, id) => (
+              <BlurFade key={skill}  delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                <Badge className="hover:bg-blue-700 duration-500" key={skill}>{skill}</Badge>
+              </BlurFade>
+            ))}
+          </div>
+        </div>
+      </section>
       <div className="flex flex-col gap-2">
         <p className="m-0 text-sm opacity-60">Currently</p>
         <div className="group m-0 h-fit w-fit px-0 no-underline">
@@ -57,13 +88,9 @@ const Hero = () => {
             <div key={index} className="group flex flex-col gap-2">
               <Link
                 href={item.link}
-                className="flex items-cente capitalizer gap-2 text-xl"
+                className="items-cente capitalizer flex gap-2 text-xl"
               >
-                <img
-                  src={item.img}
-                  alt=""
-                  className="size-16 object-cover"
-                />
+                <img src={item.img} alt="" className="size-16 object-cover" />
                 {item.title}{" "}
                 <span className="font-indie group-hover:underline">
                   {item.company}

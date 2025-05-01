@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`flex flex-row items-center justify-between ${pathname === "/testimonials" && "!bg-blue-700 !text-white"} px-8 py-4 md:px-16 lg:px-32`}
+      className={`flex flex-row items-center justify-between ${pathname === "/testimonials" && "!bg-blue-700 !text-white"} px-8 py-4 md:px-32 lg:px-72`}
     >
       <div className="relative h-12 w-32">
         <Image

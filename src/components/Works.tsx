@@ -1,13 +1,14 @@
-import Image from "next/image";
 import React from "react";
+
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ArrowRight, Eye, Github } from "lucide-react";
+import { ArrowRight, Eye, Github, Link2 } from "lucide-react";
 import { Safari } from "./Safari";
 import { projects } from "~/lib/projects";
 import { TextAnimate } from "./magicui/text-animate";
 import { SmoothCursor } from "./ui/smooth-cursor";
+import { ProjectCard } from "./ProjectCard";
 
 interface Projects {
   id: string;
@@ -24,47 +25,30 @@ const Works = async () => {
 
   return (
     <div className="py-0 md:py-8">
-      <div className="flex my-8 gap-4 flex-col ">
-        <TextAnimate className=" w-full text-3xl font-bold capitalize text-sky-700 md:w-2/3 md:text-5xl">
+      <div className="my-8 flex flex-col gap-4">
+        <TextAnimate className="w-full text-3xl font-bold capitalize text-sky-700 md:w-2/3 md:text-5xl">
           what I have been up to lately
         </TextAnimate>
-        <TextAnimate delay={0.4} className="w-full mt-8 text-3xl opacity-70 md:w-2/3">
+        <TextAnimate
+          delay={0.4}
+          className="mt-8 w-full text-3xl opacity-70 md:w-2/3"
+        >
           Bridging the gap between beautiful and bottom-line results.
         </TextAnimate>
       </div>
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid gap-8 lg:grid-cols-2">
         {projects?.map((item, i) => (
-          <div
+          <ProjectCard
             key={i}
-            className="group relative min-h-96 space-y-4 flex flex-col justify-between items-start"
-          >
-            <Safari
-              imageSrc={item.image}
-              className="size-full  object-cover duration-500"
-            />
-            <div className="my-4">
-            <TextAnimate className="text-3xl uppercase font-bold min-h-12 size-fit">{item.title}</TextAnimate>
-            <TextAnimate className="line-clamp-2 tracking-tight" delay={0.4}>{item.description}</TextAnimate>
-            <div className="mt-4 inline-flex gap-4">
-              {
-                item.githublink && 
-                <Button>
-                  <Github />
-                  View codes
-                </Button>
-              }
-              <Button asChild variant="outline" className="gap-2">
-                <Link href={`${item.link}`}>
-                <Eye/>
-                View demo
-                </Link>
-              </Button>
-              <Button asChild variant="ghost">
-                <Link href={`/works/${item.id}`}>Case study</Link>
-              </Button>
-            </div>
-            </div>
-          </div>
+            href={item.link}
+            title={item.title}
+            video={item.video}
+            image={item.image}
+            tags={item.technologies}
+            link={"https://www.instagram.com"}
+            description={item.description}
+            links={item.links?.map(link => ({ ...link, icon: <Link2 className="size-4" /> }))}
+          />
         ))}
       </div>
     </div>

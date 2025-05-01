@@ -8,7 +8,7 @@ const page = () => {
   const profileimage =
     "https://media.licdn.com/dms/image/v2/D4D03AQG_xHTiI0XdOg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1730247106432?e=1750291200&v=beta&t=mt_rYq4IYdlys3f-BE0tmSkH4toOPX14OjbN14Wq054";
   return (
-    <section className="mb-32 px-8 md:px-16 lg:px-32">
+    <section className="mb-32 px-8 md:px-36 lg:px-72">
       {/* topsection */}
       <div className="flex min-h-96 flex-col gap-16 md:flex-row">
         <div className="flex w-full flex-col justify-center gap-4 md:w-1/2">

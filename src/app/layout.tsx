@@ -24,6 +24,7 @@ export default function RootLayout({
         <main className="min-h-screen">{children}</main>
         
         <SmoothCursor/>
+        
         <Footer />
       </body>
     </html>

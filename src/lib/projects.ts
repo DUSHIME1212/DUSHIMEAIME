@@ -1,3 +1,7 @@
+
+import { Icons } from "./../components/Icons";
+import { HomeIcon, NotebookIcon } from "lucide-react";
+
 // Sample project data
 export const jobs = [
   {
@@ -35,6 +39,25 @@ export const projects = [
     theme: {
       background: "bg-blue-700",
     },
+    links: [
+      {
+        type: "Website",
+        href: "https://bookstoretech.vercel.app/",
+        icon: Icons.globe,
+      },
+      {
+        type: "Source Code",
+        href: "https://github.com/DUSHIME1212/Bookstore",
+        icon: Icons.github,
+      },
+    ],
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Magic UI",
+    ],
     title: "Literary Haven - Modern Bookstore Platform",
     category: "E-Commerce Development",
     description: "A full-featured online bookstore with personalized recommendations, seamless checkout, and an admin dashboard for inventory management. Built with React, Node.js, and MongoDB.",
@@ -89,10 +112,34 @@ export const projects = [
     theme: {
       background: "bg-red-700",
     },
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "TailwindCSS",
+      "Stripe",
+      "Shadcn UI",
+      "Magic UI",
+      "Three js",
+    ],
+    video: "/assets/Macbook-Air-imigogomotors.vercel.app-3s_pkv6gxz_xb8.webm",
+    links: [
+      {
+        type: "Website",
+        href: "https://imigogomotors.vercel.app/",
+        icon: Icons.globe,
+      },
+      {
+        type: "Source Code",
+        href: "https://github.com/DUSHIME1212/Imigogo-cars-rental",
+        icon: Icons.github,
+      },
+    ],
     title: "AutoSphere - NextGen Automotive Marketplace in rwanda",
     category: "E-Commerce Platform",
     description: "A comprehensive vehicle marketplace featuring advanced search, 360° view technology, and AI-powered pricing recommendations for both dealers and private sellers.",
-    image: "/assets/cars.png",
+    // image: "/assets/cars.png",
     link: "https://imigogomotors.vercel.app/",
     tags: ["React", "Node.js", "Three.js", "TensorFlow.js", "AWS"],
     mobile: true,
@@ -143,10 +190,263 @@ export const projects = [
     theme: {
       background: "bg-lime-700",
     },
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Magic UI",
+    ],
     title: "AgriNext - Digital Transformation for Agriculture",
     category: "Brand Identity & Digital Design",
     description: "Complete brand system and digital platform for a agtech startup, including logo, marketing materials, and a responsive web portal connecting farmers with precision agriculture tools.",
     image: "/assets/agrinextgen.png",
+    link: "https://www.behance.net/tech-branding",
+    tags: ["Brand Identity", "Design System", "UI/UX", "Illustration"],
+    mobile: false,
+    mobileimgs: [],
+    Timeframe: "Q1 2023 - Q3 2023",
+    Goals: [
+      "Create distinctive brand identity in competitive sector",
+      "Develop design language scalable across digital and print",
+      "Design intuitive interface for non-technical users"
+    ],
+    desktop: true,
+    githublink: "",
+    Completed: "September 2023",
+    Challenge: `Agricultural technology faces unique adoption barriers:
+    - Need to appeal to both tech-savvy investors and traditional farmers
+    - Complex data visualization requirements
+    - Accessibility challenges in rural areas with poor connectivity
+    Existing solutions either looked too corporate or failed to communicate technical value simply.`,
+    Howigrown: `This project expanded my design capabilities:
+    - Developed skills in creating accessible interfaces for low-bandwidth environments
+    - Mastered data visualization techniques for agricultural metrics
+    - Learned to balance brand personality with technical credibility
+    - Gained experience designing for extreme environmental conditions (sunlight readability)`,
+    Solution: `
+    - Created a vibrant brand identity combining organic and tech elements
+    - Developed a comprehensive design system with agricultural-specific components
+    - Designed offline-first interfaces for field use
+    - Implemented high-contrast modes for outdoor visibility
+    - Produced illustrated educational materials to ease technology adoption`,
+    Results: `
+    - 92% of farmers reported the interface was "easy to understand"
+    - Company recognized with "Best Brand Launch 2023" by AgTech Weekly
+    - Investor presentations credited with helping secure $4.2M Series A
+    - Design system reduced new feature development time by 45%`,
+    ClientTestimonial: {
+      testimonial: `Our brand transformation exceeded all expectations. The design team's ability to bridge the gap between cutting-edge technology and practical farm applications was remarkable. They've created assets that resonate equally with our investors, agronomists, and farming communities.`,
+      name: "Dr. Sarah Chen",
+      position: "CEO, AgriNext Technologies",
+    },
+  },
+  {
+    id: 3,
+    role: "UX/UI Lead",
+    type: ProjectType.GRAPHIC_DESIGN,
+    theme: {
+      background: "bg-lime-700",
+    },
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Magic UI",
+    ],
+    video:"/assets/Macbook-Air-codeempowementtech.vercel.app-thwlgla-zbx0mg.webm",
+    title: "Code Empowerment progress - Digital Transformation for Edtech",
+    category: "Brand Identity & Digital Design",
+    description: "Complete brand system and digital platform for a agtech startup, including logo, marketing materials, and a responsive web portal connecting farmers with precision agriculture tools.",
+    // image: "/assets/agrinextgen.png",
+    link: "https://www.behance.net/tech-branding",
+    tags: ["Brand Identity", "Design System", "UI/UX", "Illustration"],
+    mobile: false,
+    mobileimgs: [],
+    Timeframe: "Q1 2023 - Q3 2023",
+    Goals: [
+      "Create distinctive brand identity in competitive sector",
+      "Develop design language scalable across digital and print",
+      "Design intuitive interface for non-technical users"
+    ],
+    desktop: true,
+    githublink: "",
+    Completed: "September 2023",
+    Challenge: `Agricultural technology faces unique adoption barriers:
+    - Need to appeal to both tech-savvy investors and traditional farmers
+    - Complex data visualization requirements
+    - Accessibility challenges in rural areas with poor connectivity
+    Existing solutions either looked too corporate or failed to communicate technical value simply.`,
+    Howigrown: `This project expanded my design capabilities:
+    - Developed skills in creating accessible interfaces for low-bandwidth environments
+    - Mastered data visualization techniques for agricultural metrics
+    - Learned to balance brand personality with technical credibility
+    - Gained experience designing for extreme environmental conditions (sunlight readability)`,
+    Solution: `
+    - Created a vibrant brand identity combining organic and tech elements
+    - Developed a comprehensive design system with agricultural-specific components
+    - Designed offline-first interfaces for field use
+    - Implemented high-contrast modes for outdoor visibility
+    - Produced illustrated educational materials to ease technology adoption`,
+    Results: `
+    - 92% of farmers reported the interface was "easy to understand"
+    - Company recognized with "Best Brand Launch 2023" by AgTech Weekly
+    - Investor presentations credited with helping secure $4.2M Series A
+    - Design system reduced new feature development time by 45%`,
+    ClientTestimonial: {
+      testimonial: `Our brand transformation exceeded all expectations. The design team's ability to bridge the gap between cutting-edge technology and practical farm applications was remarkable. They've created assets that resonate equally with our investors, agronomists, and farming communities.`,
+      name: "Dr. Sarah Chen",
+      position: "CEO, AgriNext Technologies",
+    },
+  },
+  {
+    id: 3,
+    role: "UX/UI Lead",
+    type: ProjectType.WEBSITE,
+    theme: {
+      background: "bg-lime-700",
+    },
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Magic UI",
+    ],
+    video:"/assets/Macbook-Air-iphone13-orpin.vercel.app-4okyi94k8v8whu.webm",
+    title: "Iphone 13 - showcase website clone",
+    category: "Brand Identity & Digital Design",
+    description: "Complete brand system and digital platform for a agtech startup, including logo, marketing materials, and a responsive web portal connecting farmers with precision agriculture tools.",
+    // image: "/assets/agrinextgen.png",
+    link: "https://www.behance.net/tech-branding",
+    tags: ["Brand Identity", "Design System", "UI/UX", "Illustration"],
+    mobile: false,
+    mobileimgs: [],
+    Timeframe: "Q1 2023 - Q3 2023",
+    Goals: [
+      "Create distinctive brand identity in competitive sector",
+      "Develop design language scalable across digital and print",
+      "Design intuitive interface for non-technical users"
+    ],
+    desktop: true,
+    githublink: "",
+    Completed: "September 2023",
+    Challenge: `Agricultural technology faces unique adoption barriers:
+    - Need to appeal to both tech-savvy investors and traditional farmers
+    - Complex data visualization requirements
+    - Accessibility challenges in rural areas with poor connectivity
+    Existing solutions either looked too corporate or failed to communicate technical value simply.`,
+    Howigrown: `This project expanded my design capabilities:
+    - Developed skills in creating accessible interfaces for low-bandwidth environments
+    - Mastered data visualization techniques for agricultural metrics
+    - Learned to balance brand personality with technical credibility
+    - Gained experience designing for extreme environmental conditions (sunlight readability)`,
+    Solution: `
+    - Created a vibrant brand identity combining organic and tech elements
+    - Developed a comprehensive design system with agricultural-specific components
+    - Designed offline-first interfaces for field use
+    - Implemented high-contrast modes for outdoor visibility
+    - Produced illustrated educational materials to ease technology adoption`,
+    Results: `
+    - 92% of farmers reported the interface was "easy to understand"
+    - Company recognized with "Best Brand Launch 2023" by AgTech Weekly
+    - Investor presentations credited with helping secure $4.2M Series A
+    - Design system reduced new feature development time by 45%`,
+    ClientTestimonial: {
+      testimonial: `Our brand transformation exceeded all expectations. The design team's ability to bridge the gap between cutting-edge technology and practical farm applications was remarkable. They've created assets that resonate equally with our investors, agronomists, and farming communities.`,
+      name: "Dr. Sarah Chen",
+      position: "CEO, AgriNext Technologies",
+    },
+  },
+  {
+    id: 3,
+    role: "UX/UI Lead",
+    type: ProjectType.WEBSITE,
+    theme: {
+      background: "bg-lime-700",
+    },
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Magic UI",
+    ],
+    image:"/assets/Macbook-Air-weather-five-ashy-69.vercel.app (1).png",
+    title: "Weather App - showcase website",
+    category: "Brand Identity & Digital Design",
+    description: "Complete brand system and digital platform for a agtech startup, including logo, marketing materials, and a responsive web portal connecting farmers with precision agriculture tools.",
+    // image: "/assets/agrinextgen.png",
+    link: "https://www.behance.net/tech-branding",
+    tags: ["Brand Identity", "Design System", "UI/UX", "Illustration"],
+    mobile: false,
+    mobileimgs: [],
+    Timeframe: "Q1 2023 - Q3 2023",
+    Goals: [
+      "Create distinctive brand identity in competitive sector",
+      "Develop design language scalable across digital and print",
+      "Design intuitive interface for non-technical users"
+    ],
+    desktop: true,
+    githublink: "",
+    Completed: "September 2023",
+    Challenge: `Agricultural technology faces unique adoption barriers:
+    - Need to appeal to both tech-savvy investors and traditional farmers
+    - Complex data visualization requirements
+    - Accessibility challenges in rural areas with poor connectivity
+    Existing solutions either looked too corporate or failed to communicate technical value simply.`,
+    Howigrown: `This project expanded my design capabilities:
+    - Developed skills in creating accessible interfaces for low-bandwidth environments
+    - Mastered data visualization techniques for agricultural metrics
+    - Learned to balance brand personality with technical credibility
+    - Gained experience designing for extreme environmental conditions (sunlight readability)`,
+    Solution: `
+    - Created a vibrant brand identity combining organic and tech elements
+    - Developed a comprehensive design system with agricultural-specific components
+    - Designed offline-first interfaces for field use
+    - Implemented high-contrast modes for outdoor visibility
+    - Produced illustrated educational materials to ease technology adoption`,
+    Results: `
+    - 92% of farmers reported the interface was "easy to understand"
+    - Company recognized with "Best Brand Launch 2023" by AgTech Weekly
+    - Investor presentations credited with helping secure $4.2M Series A
+    - Design system reduced new feature development time by 45%`,
+    ClientTestimonial: {
+      testimonial: `Our brand transformation exceeded all expectations. The design team's ability to bridge the gap between cutting-edge technology and practical farm applications was remarkable. They've created assets that resonate equally with our investors, agronomists, and farming communities.`,
+      name: "Dr. Sarah Chen",
+      position: "CEO, AgriNext Technologies",
+    },
+  },
+  {
+    id: 3,
+    role: "UX/UI Lead",
+    type: ProjectType.WEBSITE,
+    theme: {
+      background: "bg-lime-700",
+    },
+    technologies: [
+      "Next.js",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "TailwindCSS",
+      "Shadcn UI",
+      "Magic UI",
+    ],
+    video:"/assets/Macbook-Air-hotelaccomodation.vercel.app-17p1rnpikn8r3b.webm",
+    title: "Weather App - showcase website",
+    category: "Brand Identity & Digital Design",
+    description: "Complete brand system and digital platform for a agtech startup, including logo, marketing materials, and a responsive web portal connecting farmers with precision agriculture tools.",
+    // image: "/assets/agrinextgen.png",
     link: "https://www.behance.net/tech-branding",
     tags: ["Brand Identity", "Design System", "UI/UX", "Illustration"],
     mobile: false,

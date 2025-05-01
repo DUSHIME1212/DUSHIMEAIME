@@ -3,8 +3,10 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ArrowUpRight } from "@geist-ui/icons";
+import { BlurFade } from "./magicui/blur-fade";
 
 const Footer = () => {
+  const BLUR_FADE_DELAY = 0.04;
   const links1 = [
     { title: "Home", href: "/" },
     { title: "Work", href: "/" },
@@ -18,63 +20,89 @@ const Footer = () => {
     { title: "Dribble", href: "/" },
   ];
   return (
-    <div className="min-h-96 bg-sky-700 p-16 text-white">
-      <div className="flex flex-col justify-between md:flex-row">
-        <div className="flex min-h-32 w-full flex-col justify-between gap-16 md:w-1/3">
-          <div className="relative h-16 w-48">
-            <Image
-              src={"/DUSHIME Aime.png"}
-              alt=""
-              className="object-contain"
-              fill
-            />
+    // <div className="min-h-96 bg-sky-700 p-16 md:px-36 lg:px-72 text-white">
+    //   <div className="flex flex-col justify-between md:flex-row">
+    //     <div className="flex min-h-32 w-full flex-col justify-between gap-16 md:w-1/3">
+    //       <div className="relative h-16 w-48">
+    //         <Image
+    //           src={"/DUSHIME Aime.png"}
+    //           alt=""
+    //           className="object-contain"
+    //           fill
+    //         />
+    //       </div>
+    //       <Button
+    //         asChild
+    //         size={"lg"}
+    //         variant={"gooeyRight"}
+    //         className="mb-4 w-fit rounded-full bg-blue-700 from-blue-500"
+    //       >
+    //         <Link href={"contact"}>Let talk</Link>
+    //       </Button>
+    //     </div>
+    //     <div className="flex min-h-32 w-2/3 flex-col justify-end gap-16 md:flex-row">
+    //       <div className="flex min-w-56 flex-col gap-2">
+    //         {links1.map((item, i) => (
+    //           <Button
+    //             key={i}
+    //             variant={"link"}
+    //             className="w-fit text-white"
+    //             asChild
+    //           >
+    //             <Link href={item.href}>{item.title}</Link>
+    //           </Button>
+    //         ))}
+    //       </div>
+    //       <div className="flex min-w-56 flex-col gap-2">
+    //         {links2.map((item, i) => (
+    //           <Button
+    //             key={i}
+    //             variant={"link"}
+    //             className="group w-full justify-between text-white"
+    //             asChild
+    //           >
+    //             <Link href={item.href}>
+    //               {item.title}
+    //               <ArrowUpRight className="duration-300 group-hover:rotate-45" />
+    //             </Link>
+    //           </Button>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="my-8 tracking-tight opacity-50">
+    //     <span>
+    //       © 2024. All Rights Reserved to Dushime aime. Built with Nextjs and Me{" "}
+    //       <span className="opacity-100">😉</span> in Kigali, Rwanda.
+    //     </span>
+    //   </div>
+    // </div>
+    <section id="contact">
+    <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
+      <BlurFade delay={BLUR_FADE_DELAY * 16}>
+        <div className="space-y-3">
+          <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+            Contact
           </div>
-          <Button
-            asChild
-            size={"lg"}
-            variant={"gooeyRight"}
-            className="mb-4 w-fit rounded-full bg-blue-700 from-blue-500"
-          >
-            <Link href={"contact"}>Let talk</Link>
-          </Button>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+            Get in Touch
+          </h2>
+          <p className="mx-auto max-w-[600px] text-muted-foreground text-smd">
+            Want to chat? Just shoot me a dm{" "}
+            <Link
+              href={"https://twitter.com/dushimeaime"}
+              className="text-blue-500 hover:underline"
+            >
+              with a direct question on twitter
+            </Link>{" "}
+            and I&apos;ll respond whenever I can. I will ignore all
+            soliciting.
+          </p>
+
         </div>
-        <div className="flex min-h-32 w-2/3 flex-col justify-end gap-16 md:flex-row">
-          <div className="flex min-w-56 flex-col gap-2">
-            {links1.map((item, i) => (
-              <Button
-                key={i}
-                variant={"link"}
-                className="w-fit text-white"
-                asChild
-              >
-                <Link href={item.href}>{item.title}</Link>
-              </Button>
-            ))}
-          </div>
-          <div className="flex min-w-56 flex-col gap-2">
-            {links2.map((item, i) => (
-              <Button
-                key={i}
-                variant={"link"}
-                className="group w-full justify-between text-white"
-                asChild
-              >
-                <Link href={item.href}>
-                  {item.title}
-                  <ArrowUpRight className="duration-300 group-hover:rotate-45" />
-                </Link>
-              </Button>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="my-8 tracking-tight opacity-50">
-        <span>
-          © 2024. All Rights Reserved to Dushime aime. Built with Nextjs and Me{" "}
-          <span className="opacity-100">😉</span> in Kigali, Rwanda.
-        </span>
-      </div>
+      </BlurFade>
     </div>
+  </section>
   );
 };
 
