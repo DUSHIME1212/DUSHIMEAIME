@@ -24,14 +24,14 @@ const Works = async () => {
   // console.log(projects);
 
   return (
-    <div className="py-0 md:py-8">
+    <div className="py-0 font-dmsans md:py-8">
       <div className="my-8 flex flex-col gap-4">
-        <TextAnimate className="w-full text-3xl font-bold capitalize text-sky-700 md:w-2/3 md:text-5xl">
+        <TextAnimate className="w-full text-2xl font-bold capitalize text-sky-700 md:w-2/3 md:text-5xl">
           what I have been up to lately
         </TextAnimate>
         <TextAnimate
           delay={0.4}
-          className="mt-8 w-full text-3xl opacity-70 md:w-2/3"
+          className="mt-8 w-full text-xl opacity-70 md:w-2/3"
         >
           Bridging the gap between beautiful and bottom-line results.
         </TextAnimate>

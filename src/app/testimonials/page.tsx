@@ -98,7 +98,7 @@ const page = () => {
   return (
     <section className="mb-32">
       {/* topsection */}
-      <div className="flex min-h-96 flex-col bg-blue-700 text-white sm:px-8 md:flex-row md:rounded-b-[96px] md:px-16 lg:px-32">
+      <div className="flex min-h-96 flex-col bg-blue-700 text-white sm:px-8 md:flex-row md:rounded-b-[96px] md:px-16 lg:px-72">
         <div className="flex w-full flex-col justify-center gap-4 md:w-1/2">
           <h3 className="text-4xl">Testimonials</h3>
           <h1 className="text-xl md:text-3xl lg:text-5xl">
@@ -117,7 +117,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="mt-16 min-h-screen bg-blue-100 -z-0 w-screen px-8 md:px-16 lg:px-32">
+      <div className="mt-16 min-h-screen -z-0 w-screen px-8 md:px-16 lg:px-32">
         <h2 className="mb-8 text-5xl font-medium">Testimonials</h2>
         <p></p>
         <div className="min-h-[512px] grid grid-cols-1 md:grid-cols-3 bound">

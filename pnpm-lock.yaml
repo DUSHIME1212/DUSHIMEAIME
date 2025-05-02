@@ -104,6 +104,9 @@ importers:
       '@react-pdf/renderer':
         specifier: ^4.1.5
         version: 4.1.5(react@18.3.1)
+      '@remixicon/react':
+        specifier: ^4.6.0
+        version: 4.6.0(react@18.3.1)
       '@sanity/client':
         specifier: ^6.22.5
         version: 6.22.5(debug@4.3.7)
@@ -191,6 +194,9 @@ importers:
       recharts:
         specifier: ^2.14.1
         version: 2.14.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      remixicon:
+        specifier: ^4.6.0
+        version: 4.6.0
       sanity:
         specifier: ^3.64.2
         version: 3.64.2(@types/node@20.17.6)(@types/react@18.3.12)(canvas@2.11.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -2390,6 +2396,11 @@ packages:
 
   '@react-pdf/types@2.7.0':
     resolution: {integrity: sha512-7KrPPCpgRPKR+g+T127PE4bpw9Q84ZiY07EYRwXKVtTEVW9wJ5BZiF9smT9IvH19s+MQaDLmYRgjESsnqlyH0Q==}
+
+  '@remixicon/react@4.6.0':
+    resolution: {integrity: sha512-bY56maEgT5IYUSRotqy9h03IAKJC85vlKtWFg2FKzfs8JPrkdBAYSa9dxoUSKFwGzup8Ux6vjShs9Aec3jvr2w==}
+    peerDependencies:
+      react: '>=18.2.0'
 
   '@rexxars/react-json-inspector@8.0.1':
     resolution: {integrity: sha512-XAsgQwqG8fbDGpWnsvOesRMgPfvwuU7Cx3/cUf/fNIRmGP8lj2YYIf5La/4ayvZLWlSw4tTb4BPCKdmK9D8RuQ==}
@@ -5950,6 +5961,9 @@ packages:
   remark-rehype@10.1.0:
     resolution: {integrity: sha512-EFmR5zppdBp0WQeDVZ/b66CWJipB2q2VLNFMabzDSGR66Z2fQii83G5gTBbgGEnEEA0QRussvrFHxk1HWGJskw==}
 
+  remixicon@4.6.0:
+    resolution: {integrity: sha512-bKM5odjqE1yzVxEZGJE7F79WHhNrJFIKHXR+GG+P1IWXn8AnJZhl8SbIRDJsNAvIqx4VPkNwjuHfc42tutMDpQ==}
+
   require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -9204,6 +9218,10 @@ snapshots:
       unicode-properties: 1.4.1
 
   '@react-pdf/types@2.7.0': {}
+
+  '@remixicon/react@4.6.0(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
 
   '@rexxars/react-json-inspector@8.0.1(react@18.3.1)':
     dependencies:
@@ -13375,6 +13393,8 @@ snapshots:
       '@types/mdast': 3.0.15
       mdast-util-to-hast: 12.3.0
       unified: 10.1.2
+
+  remixicon@4.6.0: {}
 
   require-directory@2.1.1: {}
 

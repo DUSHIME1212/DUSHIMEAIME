@@ -11,9 +11,9 @@ const page = async () => {
   const gallery = data[0].gallery;
 
   return (
-    <div className="container mx-auto p-4 md:px-16">
-      <h1 className="mb-4 w-2/3 max-md:text-2xl text-blue-600 font-bold">
-        My recent works as Graphic Designer
+    <div className="mx-auto p-4 font-dmsans md:px-16 lg:px-72">
+      <h1 className="mb-4 w-1/3 md:text-5xl text-blue-600 font-bold">
+        My recent works as <span className="text-yellow-500">Graphic Designer</span>
       </h1>
       <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {gallery.map((item) => (

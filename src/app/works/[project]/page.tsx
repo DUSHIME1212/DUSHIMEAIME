@@ -38,9 +38,9 @@ export default function Page({ params }) {
   }
 
   return (
-    <div className="flex w-full flex-col justify-center overflow-hidden px-8 font-dmsans tracking-tighter md:px-16 lg:px-32">
+    <div className="flex w-full flex-col justify-center overflow-hidden px-8 font-dmsans tracking-tighter md:px-36 lg:px-72">
       <div>
-        <h1 className="text-4xl font-bold">{projectData.title}</h1>
+        <h1 className="text-4xl font-bold lg:w-2/3">{projectData.title}</h1>
         <div className="flex flex-wrap gap-2 py-4">
           {projectData.tags.map((tag, index) => (
             <Badge
@@ -53,20 +53,33 @@ export default function Page({ params }) {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3">
-        <Safari
-          imageSrc={projectData.image}
-          className="col-span-2 mx-auto shadow-2xl shadow-black size-full object-cover"
-        />
+      <div className="l">
+        {projectData.video && (
+          <video
+            src={projectData.video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="pointer-events-none h-[512px] w-full object-cover object-top" // needed because random black line at bottom of video
+          />
+        )}
+        {projectData.image && (
+          <img
+            src={projectData.image}
+            alt={projectData.title}
+            className="h-[512px] w-full overflow-hidden object-cover object-top"
+          />
+        )}
       </div>
       <div>
-        <h2 className="py-4 text-2xl font-bold">Project Overview</h2>
+        <h2 className="py-4 text-5xl font-bold">Project Overview</h2>
         <div className="flex flex-wrap gap-2 py-4 lg:w-2/3">
           {projectData.description}
         </div>
       </div>
       <div className="py-8 leading-tight">
-        <div className="grid  w-full grid-cols-4">
+        <div className="grid w-full grid-cols-1 lg:grid-cols-4">
           <div className="space-y-2 p-4">
             <p>Category</p>
             <h2 className="text-2xl font-bold">{projectData.category}</h2>
@@ -74,16 +87,11 @@ export default function Page({ params }) {
           <div className="space-y-2 p-4">
             <p>Client</p>
             <h2 className="text-2xl font-bold">
-              {
-                projectData.ClientTestimonial ? (
-                  <p
-                  >
-                    {projectData.ClientTestimonial.name}
-                  </p>
-                ) : (
-                  "N/A"
-                )
-              }
+              {projectData.ClientTestimonial ? (
+                <p>{projectData.ClientTestimonial.name}</p>
+              ) : (
+                "N/A"
+              )}
             </h2>
           </div>
           <div className="space-y-2 p-4">
@@ -96,7 +104,7 @@ export default function Page({ params }) {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="p-8">
           <h2 className="text-2xl font-bold">Goals</h2>
           <ul className="space-y-2">
@@ -107,36 +115,27 @@ export default function Page({ params }) {
             ))}
           </ul>
         </div>
-        <div className="space-y-6 p-8">
-          Hele
-        </div>
+        <div className="space-y-6 bg-blue-700 p-8">Hele</div>
       </div>
-      <div className="size-fit my-8">
-        <h2 className="text-2xl font-bold mb-4">How I Grew</h2>
-        <ReactMarkdown className="prose w-full">
-          {projectData.Howigrown}
-        </ReactMarkdown>
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="p-8 bg-blue-700 text-white size-full">
+        <h2 className="mb-4 text-2xl  font-bold">How I Grew</h2>
+        <p className=" w-full">{projectData.Howigrown}</p>
       </div>
-      <div className="size-fit my-8">
-        <h2 className="text-2xl font-bold mb-4">Challenges</h2>
-        <ReactMarkdown className="prose w-full">
-          {projectData.Challenge}
-        </ReactMarkdown>
-
+      <div className="p-8 size-full">
+        <h2 className="mb-4 text-2xl font-bold">Challenges</h2>
+        <p className="prose w-full">{projectData.Challenge}</p>
       </div>
-      <div className="size-fit my-8">
-        <h2 className="text-2xl font-bold mb-4">Solution</h2>
-        <ReactMarkdown className="prose w-full">
-          {projectData.Solution}
-        </ReactMarkdown>
+      <div className="p-8 size-full">
+        <h2 className="mb-4 text-2xl font-bold">Solution</h2>
+        <p className=" w-full">{projectData.Solution}</p>
       </div>
-      <div className="size-fit my-8">
-        <h2 className="text-2xl font-bold mb-4">Results</h2>
-        <ReactMarkdown className="prose w-full">
-          {projectData.Results}
-        </ReactMarkdown>
+      <div className="p-8 bg-blue-700 text-white size-full">
+        <h2 className="mb-4 text-2xl font-bold">Results</h2>
+        <p className=" w-full">{projectData.Results}</p>
       </div>
-      <SmoothCursor/> 
+      </div>
+      <SmoothCursor />
     </div>
   );
 }

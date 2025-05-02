@@ -24,8 +24,8 @@ export const links = [
     href: "https://docs.google.com/document/d/1x5Tt1xOyvsUtmal1Ba1ZVVL0qlDbttVsVh4CAYvwpgo/edit?usp=sharing",
   },
   { title: "gallery", href: "/gallery" },
-  { title: "Testimonial", href: "/testimonials" },
-  { title: "Contact", href: "/contact" },
+  // { title: "Testimonial", href: "/testimonials" },
+  // { title: "Contact", href: "/contact" },
 ];
 
 export const testimonials: Testimonial[] = [

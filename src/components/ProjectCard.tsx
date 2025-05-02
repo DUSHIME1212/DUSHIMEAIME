@@ -1,8 +1,13 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { cn } from "~/lib/utils";
 import { Badge } from "./ui/badge";
 
@@ -38,7 +43,7 @@ export function ProjectCard({
   return (
     <Card
       className={
-        "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
+        "flex h-full flex-col overflow-hidden border transition-all duration-300 ease-out hover:shadow-lg"
       }
     >
       <Link
@@ -67,7 +72,9 @@ export function ProjectCard({
       </Link>
       <CardHeader className="px-2 md:px-4 lg:px-8">
         <div className="space-y-1">
-          <CardTitle className="mt-1 text-base">{title}</CardTitle>
+          <CardTitle className="mt-1 text-xl text-blue-700 lg:w-2/3">
+            {title}
+          </CardTitle>
           <time className="font-sans text-xs">{dates}</time>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
@@ -77,7 +84,7 @@ export function ProjectCard({
           </Markdown>
         </div>
       </CardHeader>
-      <CardContent className="mt-auto x-2 md:px-4 lg:px-8 flex flex-col px-2">
+      <CardContent className="x-2 mt-auto flex flex-col px-2 md:px-4 lg:w-2/3 lg:px-8">
         {tags && tags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
             {tags?.map((tag) => (
@@ -92,7 +99,7 @@ export function ProjectCard({
           </div>
         )}
       </CardContent>
-      <CardFooter className="px-2 md:px-4 lg:px-8 pb-2">
+      <CardFooter className="px-2 pb-2 md:px-4 lg:px-8">
         {links && links.length > 0 && (
           <div className="flex flex-row flex-wrap items-start gap-1">
             {links?.map((link, idx) => (

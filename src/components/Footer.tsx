@@ -2,8 +2,10 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { ArrowUpRight } from "@geist-ui/icons";
+import { ArrowUpRight, Github } from "@geist-ui/icons";
 import { BlurFade } from "./magicui/blur-fade";
+import { Dribbble, Figma } from "lucide-react";
+import { RiBehanceLine, RiDribbbleLine, RiFigmaLine, RiGithubLine, RiHeartFill, RiInstagramLine } from "@remixicon/react";
 
 const Footer = () => {
   const BLUR_FADE_DELAY = 0.04;
@@ -77,32 +79,64 @@ const Footer = () => {
     //     </span>
     //   </div>
     // </div>
-    <section id="contact">
-    <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
-      <BlurFade delay={BLUR_FADE_DELAY * 16}>
-        <div className="space-y-3">
-          <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-            Contact
-          </div>
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            Get in Touch
-          </h2>
-          <p className="mx-auto max-w-[600px] text-muted-foreground text-smd">
-            Want to chat? Just shoot me a dm{" "}
-            <Link
-              href={"https://twitter.com/dushimeaime"}
-              className="text-blue-500 hover:underline"
-            >
-              with a direct question on twitter
-            </Link>{" "}
-            and I&apos;ll respond whenever I can. I will ignore all
-            soliciting.
-          </p>
-
-        </div>
-      </BlurFade>
+<footer className="bg-background border-t border-muted py-8 w-full">
+  <div className=" mx-auto px-8 md:px-36 lg:px-72">
+    <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:justify-between">
+      {/* Social Links */}
+      <div className="flex gap-6">
+        <a
+          href="https://github.com/DUSHIME1212"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+          aria-label="GitHub Profile"
+        >
+          <RiGithubLine/>
+        </a>
+        <a
+          href="https://dribbble.com/DMATT250__"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+          aria-label="Dribbble Profile"
+        >
+          <RiDribbbleLine/>
+        </a>
+        <a
+          href="https://behance.net/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+          aria-label="Behance Profile"
+        >
+          <RiBehanceLine/>
+        </a>
+        <a
+          href="https://www.figma.com/@deejaymatttunez"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+          aria-label="Figma Profile"
+        >
+          <RiFigmaLine/>
+        </a>
+        <a
+          href="https://www.instagram.com/__matt360/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+          aria-label="Figma Profile"
+        >
+          <RiInstagramLine/>
+        </a>
+      </div>
+      {/* Copyright */}
+      <p className="text-muted-foreground text-sm">
+        &copy; {new Date().getFullYear()} DUshime Aime. All rights reserved.
+      </p>
     </div>
-  </section>
+  </div>
+</footer>
   );
 };
 
