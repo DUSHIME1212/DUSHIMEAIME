@@ -77,7 +77,7 @@ const Hero = () => {
             {skills.map((skill, id) => (
               <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
                 <Badge
-                  className="bg-yellow-500 duration-500 hover:bg-blue-700"
+                  className="bg-blue-700 duration-500 hover:bg-blue-500"
                   key={skill}
                 >
                   {skill}
