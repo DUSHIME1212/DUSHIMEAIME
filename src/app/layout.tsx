@@ -23,8 +23,6 @@ export default function RootLayout({
         <Navbar />
         <main className="min-h-screen">{children}</main>
         
-        <SmoothCursor/>
-        
         <Footer />
       </body>
     </html>

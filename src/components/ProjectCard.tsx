@@ -41,13 +41,14 @@ export function ProjectCard({
   className,
 }: Props) {
   return (
-    <Card
+    <Link
+      href={href || "#"}
       className={
-        "flex h-full flex-col overflow-hidden border transition-all duration-300 ease-out hover:shadow-lg"
+        "relative flex rounded-2xl h-full min-h-96 flex-col overflow-hidden border bg-none transition-all duration-300 ease-out hover:shadow-lg"
       }
     >
-      <Link
-        href={href || "#"}
+      <div className="absolute size-full bg-gradient-to-b from-transparent to-blue-700/50 to-50%" />
+      <div
         className={cn("block cursor-pointer", className)}
       >
         {video && (
@@ -57,33 +58,32 @@ export function ProjectCard({
             loop
             muted
             playsInline
-            className="pointer-events-none mx-auto h-56 w-full object-cover object-top" // needed because random black line at bottom of video
+            className="pointer-events-none mx-auto h-72 w-full object-cover object-top" // needed because random black line at bottom of video
           />
         )}
         {image && (
           <Image
             src={image}
             alt={title}
-            width={500}
-            height={300}
-            className="h-56 w-full overflow-hidden object-cover object-top"
+            fill
+            className="-z-10 h-72 w-full overflow-hidden object-cover object-top"
           />
         )}
-      </Link>
-      <CardHeader className="px-2 md:px-4 lg:px-8">
+      </div>
+      <div className="absolute bottom-0 left-4 right-4 p-2 md:p-4 lg:p-8">
         <div className="space-y-1">
-          <CardTitle className="mt-1 text-xl text-blue-700 lg:w-2/3">
+          <CardTitle className="mt-1 text-xl text-muted lg:w-2/3">
             {title}
           </CardTitle>
           <time className="font-sans text-xs">{dates}</time>
           <div className="hidden font-sans text-xs underline print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
-          <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
+          <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted dark:prose-invert">
             {description}
           </Markdown>
         </div>
-      </CardHeader>
+      </div>
       <CardContent className="x-2 mt-auto flex flex-col px-2 md:px-4 lg:w-2/3 lg:px-8">
         {tags && tags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
@@ -113,6 +113,6 @@ export function ProjectCard({
           </div>
         )}
       </CardFooter>
-    </Card>
+    </Link>
   );
 }

@@ -2,13 +2,24 @@ import Image from "next/image";
 import { motion } from "motion/react";
 
 const page = async () => {
-  const res = await fetch(
-    "https://portfoliostrapicms.onrender.com/api/galleries?populate=*",
-    {next:{revalidate:60}}
-  );
-  const galleries = await res.json();
-  const { data } = galleries;
-  const gallery = data[0].gallery;
+  let gallery = [];
+  try {
+    const res = await fetch(
+      "https://portfoliostrapicms.onrender.com/api/galleries?populate=*",
+      { next: { revalidate: 60 } }
+    );
+    if (res.ok) {
+      const galleries = await res.json();
+      const { data } = galleries;
+      if (data && data.length > 0) {
+        gallery = data[0].gallery || [];
+      }
+    } else {
+      console.error(`Failed to fetch galleries: ${res.status} ${res.statusText}`);
+    }
+  } catch (error) {
+    console.error('Error fetching galleries:', error);
+  }
 
   return (
     <div className="mx-auto p-4 font-dmsans md:px-16 lg:px-72">

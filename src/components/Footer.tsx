@@ -80,7 +80,7 @@ const Footer = () => {
     //   </div>
     // </div>
 <footer className="bg-background border-t border-muted py-8 w-full">
-  <div className=" mx-auto px-8 md:px-36 lg:px-72">
+  <div className=" mx-auto px-8 md:px-36 ">
     <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:justify-between">
       {/* Social Links */}
       <div className="flex gap-6">

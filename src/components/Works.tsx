@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 
 import { Button } from "./ui/button";
@@ -9,19 +11,27 @@ import { projects } from "~/lib/projects";
 import { TextAnimate } from "./magicui/text-animate";
 import { SmoothCursor } from "./ui/smooth-cursor";
 import { ProjectCard } from "./ProjectCard";
+import { fetchWorks, Project } from "~/lib/sanity/work";
 
-interface Projects {
-  id: string;
-}
 
-const Works = async () => {
-  const res = await fetch(
-    "https://portfoliostrapicms.onrender.com/api/projects?populate=*",
-    { next: { revalidate: 3660 } },
-  );
-  const data = await res.json();
-  // const projects = data.data;
-  // console.log(projects);
+
+function Works () {
+  const [projects, setProjects] = React.useState<Project[]>([]);
+
+  React.useEffect(() => {}, []);
+
+  React.useEffect(() => {
+    const getProjects = async () => {
+      try {
+        const data = await fetchWorks();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+    getProjects();
+  }, [])
+  
 
   return (
     <div className="py-0 font-dmsans md:py-8">
@@ -42,12 +52,12 @@ const Works = async () => {
             key={i}
             href={item.link}
             title={item.title}
-            video={item.video}
-            image={item.image}
+            video={item.video?.asset?.url}
+            image={item.projectImage?.url}
             tags={item.technologies}
-            link={"https://www.instagram.com"}
+            link={item.link}
             description={item.description}
-            links={item.links?.map(link => ({ ...link, icon: <Link2 className="size-4" /> }))}
+           
           />
         ))}
       </div>

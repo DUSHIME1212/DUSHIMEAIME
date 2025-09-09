@@ -5,7 +5,7 @@ import Works from '~/components/Works'
 
 const page = () => {
   return (
-    <div className='px-8 md:px-32 flex flex-col gap-4 lg:px-72'>
+    <div className='px-8 mt-16 md:px-32 flex flex-col gap-4 '>
       <Hero/>
       <Works/>
       {/* <Experience/> */}
