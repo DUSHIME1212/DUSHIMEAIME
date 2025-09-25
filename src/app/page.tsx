@@ -1,18 +1,88 @@
-import React from 'react'
-import Experience from '~/components/Experience'
-import Hero from '~/components/Hero'
-import Posters from '~/components/Posters'
-import Works from '~/components/Works'
+import React from "react";
+import {
+  HoverSlider,
+  HoverSliderImage,
+  HoverSliderImageWrap,
+  TextStaggerHover,
+} from "~/components/animated-slideshow";
+import Experience from "~/components/Experience";
+import Hero from "~/components/Hero";
+import Posters from "~/components/Posters";
+import Works from "~/components/Works";
+
+const SLIDES = [
+  {
+    id: "slide-1",
+    title: "frontend dev",
+    imageUrl:
+      "https://images.unsplash.com/photo-1654618977232-a6c6dea9d1e8?q=80&w=2486&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "slide-2",
+    title: "backend dev",
+    imageUrl:
+      "https://images.unsplash.com/photo-1624996752380-8ec242e0f85d?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "slide-6",
+    title: "UI UX design",
+    imageUrl:
+      "https://images.unsplash.com/photo-1688733720228-4f7a18681c4f?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "slide-3",
+    title: "video editing",
+    imageUrl:
+      "https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "slide-4",
+    title: "SEO optimization",
+    imageUrl:
+      "https://images.unsplash.com/photo-1726066012698-bb7a3abce786?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
 
 const page = () => {
   return (
-    <div className='px-8 mt-16 md:px-32 flex flex-col gap-4 '>
-      <Hero/>
-      <Works/>
+    <div className="mt-16 flex flex-col gap-4 px-8 md:px-32">
+      <Hero />
+      <div>
+        <HoverSlider className="place-content-center bg-[#faf9f5] p-6 text-[#3d3929]">
+          <div className="flex flex-wrap items-center justify-evenly gap-6">
+            <div className="flex flex-col space-y-2 md:space-y-4">
+              {SLIDES.map((slide, index) => (
+                <TextStaggerHover
+                  key={slide.title}
+                  index={index}
+                  className="cursor-pointer text-4xl font-bold uppercase tracking-tighter"
+                  text={slide.title}
+                />
+              ))}
+            </div>
+            <HoverSliderImageWrap>
+              {SLIDES.map((slide, index) => (
+                <div key={slide.id} className=" ">
+                  <HoverSliderImage
+                    index={index}
+                    imageUrl={slide.imageUrl}
+                    src={slide.imageUrl}
+                    alt={slide.title}
+                    className="size-full max-h-96 object-cover"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              ))}
+            </HoverSliderImageWrap>
+          </div>
+        </HoverSlider>
+      </div>
+      <Works />
       {/* <Experience/> */}
-      <Posters/>
+      <Posters />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

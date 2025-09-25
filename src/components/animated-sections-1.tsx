@@ -5,18 +5,22 @@ import { gsap } from 'gsap';
 import { Observer } from 'gsap/Observer';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 gsap.registerPlugin(Observer, SplitText);
 
 interface SectionData {
   text: string;
   img: string;
+  slug?: string;
 }
 
 interface AnimatedSectionsProps {
   sections?: SectionData[];
   className?: string;
   headerTitle?: string;
+  
 }
 
 const defaultSections: SectionData[] = [
@@ -56,6 +60,8 @@ const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const router = usePathname();
+
 useEffect(() => {
   let loaded = 0;
   sections.forEach((section) => {
@@ -83,6 +89,8 @@ useEffect(() => {
     const images = imagesRefs.current as Element[];
     const outerWrappers = outerRefs.current as Element[];
     const innerWrappers = innerRefs.current as Element[];
+
+
 
     const wrap = gsap.utils.wrap(0, sectionsElements.length);
     index = wrap(index);
@@ -326,7 +334,8 @@ useEffect(() => {
       </div>
 
       {sections.map((section, i) => (
-        <section 
+        <Link
+          href={"gallery/"+section.slug || "/gallery"}
           key={`section-${i}`} 
           className="fixed top-0 h-full w-full invisible"
           ref={(el) => { if (el) sectionsRefs.current[i] = el; }}
@@ -340,13 +349,13 @@ useEffect(() => {
                   backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%), url("${section.img}")`
                 }}
               >
-                <h2 className="section-heading text-white text-center font-semibold w-[90vw] max-w-[1200px] text-[clamp(1rem,4vw,9rem)] normal-case leading-none z-10" ref={(el) => { if (el) headingRefs.current[i] = el; }}>
+                <h2 className="section-heading z-20 text-white text-center font-semibold w-[90vw] max-w-[1200px] text-[clamp(1rem,4vw,9rem)] normal-case leading-none " ref={(el) => { if (el) headingRefs.current[i] = el; }}>
                   {section.text}
                 </h2>
               </div>
             </div>
           </div>
-        </section>
+        </Link>
       ))}
     </div>
   );
