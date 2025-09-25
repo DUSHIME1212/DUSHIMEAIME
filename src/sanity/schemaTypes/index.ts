@@ -6,7 +6,8 @@ import {postType} from './postType'
 import {authorType} from './authorType'
 import { WorkExperience } from './Experience'
 import { WorkProjects } from './Work'
+import { galleryimages } from './Gallery'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blockContentType, categoryType, postType, authorType, WorkExperience, WorkProjects],
+  types: [blockContentType, categoryType, postType, authorType, WorkExperience, WorkProjects,galleryimages],
 }

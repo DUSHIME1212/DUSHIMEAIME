@@ -11,6 +11,8 @@ import { BlurFade } from "./magicui/blur-fade";
 import { Badge } from "./ui/badge";
 import { fetchExperience } from "~/lib/sanity/experience";
 import Imigongo from "./Imigongo";
+import Posters from "./Posters";
+import { LinkPreview } from "./ui/link-preview";
 
 const Hero = () => {
   const [experience, setExperience] = useState([]);
@@ -45,7 +47,7 @@ const Hero = () => {
 
   return (
     <div className="mt-8 flex flex-col gap-8 overflow-clip">
-      <div className="relative w-full flex flex-col gap-4 overflow-hidden">
+      <div className="relative flex w-full flex-col gap-4 overflow-hidden">
         {/* <div className="absolute top-0 right-0 opacity-30 -z-10  ">
           <Imigongo className="rotate-90" color="black" />
         </div> */}
@@ -78,19 +80,25 @@ const Hero = () => {
             />
           </svg>
         </span>{" "} */}
-          <TextAnimate
-            animation="blurInUp"
-            once
-            duration={2}
-            className="leading-none max-md:text-xl md:w-2/3"
-          >
-            I am a Designer enthusiast based in Rwanda, I craft human centered
-            experiences and scalable systems where design meets logic, and
-            emotion meets code. From pixel to product, I merge aesthetics with
-            functionality to grow brands and simplify lives.I am enthusiastic
-            about joining a dynamic team to learn UX best practices, collaborate
-            cross-functionally, and contribute to innovative tech projects
-          </TextAnimate>
+          <h4 className="text-gray-900/60">
+            I am a{" "}
+            <LinkPreview
+              url="/"
+              imageSrc="/image.png"
+              isStatic
+              className="font-bold"
+            >
+              Designer enthusiast based in Rwanda
+            </LinkPreview>
+            , I craft human centered experiences and scalable systems where
+            design meets logic, and emotion meets code. From pixel to product, I
+            merge aesthetics with functionality to grow brands and simplify
+            lives.I am enthusiastic about joining a dynamic team to{" "}
+            <LinkPreview
+              url="https://coursera.org/share/45d02afe3a482586006b893d291be290"
+              className="font-bold">learn UX best practices</LinkPreview>, collaborate cross-functionally, and
+            contribute to innovative tech projects
+          </h4>
         </h2>
       </div>
       <BlockinText
@@ -98,7 +106,7 @@ const Hero = () => {
         examples={[
           "I design apps, and websites that blow your mind",
           "I am a UX/UI Designer based in RWANDA",
-          "I am a Developer based in RWANDA 🇷🇼",
+          "I am a Developer based in RWANDA",
           "My favourite Gerne is Afrobeats",
         ]}
       />

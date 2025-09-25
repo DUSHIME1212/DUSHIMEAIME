@@ -47,6 +47,7 @@ const Navbar = () => {
           y: 0,
           duration: 0.3,
           ease: "power2.out",
+          
         });
       } else if (currentScrollY > lastScrollY.current) {
         gsap.to(nav, {
@@ -59,6 +60,7 @@ const Navbar = () => {
           y: 0,
           duration: 0.3,
           ease: "power2.out",
+          backgroundColor: "white",
         });
       }
       lastScrollY.current = currentScrollY;

@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import React from "react";
+import gsap from "gsap";
 
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -12,11 +13,12 @@ import { TextAnimate } from "./magicui/text-animate";
 import { SmoothCursor } from "./ui/smooth-cursor";
 import { ProjectCard } from "./ProjectCard";
 import { fetchWorks, Project } from "~/lib/sanity/work";
+import Image from "next/image";
+import { useGSAP } from "@gsap/react";
 
-
-
-function Works () {
+function Works() {
   const [projects, setProjects] = React.useState<Project[]>([]);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {}, []);
 
@@ -30,8 +32,32 @@ function Works () {
       }
     };
     getProjects();
-  }, [])
-  
+  }, []);
+
+  useGSAP(() => {
+    console.log("Projects updated:", projects);
+  });
+
+  function Hovercard(containerDivRef: React.RefObject<HTMLDivElement>) {
+    if (containerDivRef.current) {
+      gsap.to(containerDivRef.current, {
+        rotate: 5,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    }
+  }
+
+  function ResetHovercard(containerDivRef: React.RefObject<HTMLDivElement>) {
+    if (containerDivRef.current) {
+      gsap.to(containerDivRef.current, {
+        skewY: 0,
+        rotate: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    }
+  }
 
   return (
     <div className="py-0 font-dmsans md:py-8">
@@ -47,22 +73,56 @@ function Works () {
         </TextAnimate>
       </div>
       <div className="grid gap-8 lg:grid-cols-2">
-        {projects?.map((item, i) => (
-          <ProjectCard
-            key={i}
-            href={item.link}
-            title={item.title}
-            video={item.video?.asset?.url}
-            image={item.projectImage?.url}
-            tags={item.technologies}
-            link={item.link}
-            description={item.description}
-           
-          />
-        ))}
+        {projects?.map((item, i) => {
+          const containerDivRef = React.createRef<HTMLDivElement>();
+          return (
+            <Link href={"/works/"+item.slug} key={i} className="relative flex min-h-96 w-full flex-col gap-2">
+              {item.video ? (
+                <video
+                  src={item.video?.url || item.video?.asset?.url}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="pointer-events-none mx-auto h-full w-full object-contain object-top" // needed because random black line at bottom of video
+                />
+              ) : (
+                <div
+                  ref={containerDivRef}
+                  className="shadow-gray-600 relative h-96 scale-75 w-full overflow- rounded-xl p-2 shadow-2xl"
+                  onMouseEnter={() => Hovercard(containerDivRef)}
+                  onMouseLeave={() => ResetHovercard(containerDivRef)}
+                >
+                  <Image
+                    src={item.projectImage?.url}
+                    alt={item.title}
+                    width={500}
+                    height={100}
+                    className="h-full w-full overflow-hidden rounded-xl object-cover object-center"
+                  />
+                </div>
+              )}
+              <div className="absolute bottom-0 left-0 flex w-full flex-col justify-start gap-2 bg-white p-0 md:p-4">
+                <h2 className="text-lg">{item.title}</h2>
+                <p className="line-clamp-3">
+                  {item.advancedDescription.services.map(
+                    (service: string, n: number) => (
+                      <span key={n}>
+                        {service}
+                        {n < item.advancedDescription.services.length - 1
+                          ? ", "
+                          : ""}
+                      </span>
+                    ),
+                  )}
+                </p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
-};
+}
 
 export default Works;

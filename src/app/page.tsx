@@ -1,6 +1,7 @@
 import React from 'react'
 import Experience from '~/components/Experience'
 import Hero from '~/components/Hero'
+import Posters from '~/components/Posters'
 import Works from '~/components/Works'
 
 const page = () => {
@@ -9,6 +10,7 @@ const page = () => {
       <Hero/>
       <Works/>
       {/* <Experience/> */}
+      <Posters/>
     </div>
   )
 }
