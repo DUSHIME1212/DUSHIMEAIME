@@ -14,8 +14,8 @@ export function FlipLink({
   ...props
 }: FlipLinkProps) {
   return (
-    <Link href={href} passHref legacyBehavior>
-      <motion.a
+    <Link href={href}>
+      <motion.div
         {...props}
         initial="initial"
         whileHover="hovered"
@@ -38,7 +38,7 @@ export function FlipLink({
         >
           {children}
         </motion.div>
-      </motion.a>
+      </motion.div>
     </Link>
   );
 }

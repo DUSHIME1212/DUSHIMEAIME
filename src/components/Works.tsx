@@ -102,7 +102,7 @@ function Works() {
                   />
                 </div>
               )}
-              <div className="absolute bottom-0 left-0 flex w-full flex-col justify-start gap-2 bg-white p-0 md:p-4">
+              <div className="absolute bottom-0 left-0 flex w-full flex-col items-center justify-center gap-2 bg-white p-0 md:p-4">
                 <h2 className="text-lg">{item.title}</h2>
                 <p className="line-clamp-3">
                   {item.advancedDescription.services.map(

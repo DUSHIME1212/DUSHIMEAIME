@@ -337,7 +337,7 @@ useEffect(() => {
         <Link
           href={"gallery/"+section.slug || "/gallery"}
           key={`section-${i}`} 
-          className="fixed top-0 h-full w-full invisible"
+          className="absolute top-0 h-full w-full invisible"
           ref={(el) => { if (el) sectionsRefs.current[i] = el; }}
         >
           <div className="outer w-full h-full overflow-hidden" ref={(el) => { if (el) outerRefs.current[i] = el; }}>

@@ -21,6 +21,7 @@ const Hero = () => {
       try {
         const response = await fetchExperience();
         setExperience(response);
+        console.log("Experience data fetched:", response);
       } catch (error) {
         console.error("Error fetching experience data:", error);
       }
@@ -80,7 +81,7 @@ const Hero = () => {
             />
           </svg>
         </span>{" "} */}
-          <h4 className="text-gray-900/60">
+          <span className="text-gray-900/60">
             I am a{" "}
             <LinkPreview
               url="/"
@@ -88,7 +89,7 @@ const Hero = () => {
               isStatic
               className="font-bold"
             >
-              Designer enthusiast based in Rwanda
+            designer enthusiast based in RWANDA 
             </LinkPreview>
             , I craft human centered experiences and scalable systems where
             design meets logic, and emotion meets code. From pixel to product, I
@@ -96,9 +97,13 @@ const Hero = () => {
             lives.I am enthusiastic about joining a dynamic team to{" "}
             <LinkPreview
               url="https://coursera.org/share/45d02afe3a482586006b893d291be290"
-              className="font-bold">learn UX best practices</LinkPreview>, collaborate cross-functionally, and
-            contribute to innovative tech projects
-          </h4>
+              className="font-bold"
+            >
+              learn UX best practices
+            </LinkPreview>
+            , collaborate cross-functionally, and contribute to innovative tech
+            projects
+          </span>
         </h2>
       </div>
       <BlockinText
@@ -130,63 +135,69 @@ const Hero = () => {
         </div>
       </section>
       <div className="flex flex-col gap-2">
-        <p className="m-0 text-sm opacity-60">Currently</p>
-        <div className="group m-0 h-fit w-fit px-0 no-underline">
-          {experience.map((item, index) => (
-            <div
-              key={index}
-              className="group flex w-full flex-col justify-between gap-2"
-            >
-              {item.isCurrentlyWorkingHere == true && (
-                <Link
-                  href={""}
-                  className="capitalizer flex w-full items-center justify-between gap-2 text-xl"
+        <p className="m-0 mb-4 text-sm opacity-60">Currently</p>
+        <div className="group m-0 grid h-fit w-full grid-cols-1 gap-x-8 px-0 no-underline lg:grid-cols-2">
+          {experience.map(
+            (item, index) =>
+              item.isCurrentlyWorkingHere === true && (
+                <div
+                  key={index}
+                  className="group flex w-full flex-col justify-between gap-2"
                 >
-                  <img
-                    src={item.companyLogo.url}
-                    alt=""
-                    className="size-16 object-cover"
-                  />
-                  {item.title}{" "}
-                  <span className="font-indie group-hover:text-blue-700 group-hover:underline">
-                    {item.company}
-                  </span>
-                  <ArrowUpRight />
-                </Link>
-              )}
-            </div>
-          ))}
+                  <Link
+                    href={""}
+                    className="uppercase flex w-full items-center justify-between gap-2 text-xl"
+                  >
+                    <div className="flex items-center gap-8">
+                      <img
+                        src={item.companyLogo.url}
+                        alt=""
+                        className="size-16 rounded-2xl overflow-clip  object-cover"
+                      />
+                      {item.title}{" "}
+                    </div>
+                    <span className="font-indie group-hover:text-blue-700 group-hover:underline">
+                      {item.company}
+                    </span>
+                    <ArrowUpRight />
+                  </Link>
+                </div>
+              ),
+          )}
         </div>
       </div>
 
       <div className="flex flex-col items-start">
-        <p className="text-sm opacity-60">previous roles</p>
+        <p className="mb-4 text-sm opacity-60">previous roles</p>
 
-        <div className="group m-0 h-fit w-fit px-0 no-underline">
-          {experience.map((item, index) => (
-            <div
-              key={index}
-              className="group flex w-full flex-col justify-between gap-2"
-            >
-              {item.isCurrentlyWorkingHere == false && (
-                <Link
-                  href={""}
-                  className="capitalizer flex w-full items-center justify-between gap-2 text-xl"
+        <div className="group m-0 grid h-fit w-full grid-cols-1 gap-8 px-0 no-underline lg:grid-cols-2">
+          {experience.map(
+            (item, index) =>
+              item.isCurrentlyWorkingHere == false && (
+                <div
+                  key={index}
+                  className="group w-full flex-col justify-between gap-2"
                 >
-                  <img
-                    src={item.companyLogo.url}
-                    alt=""
-                    className="size-16 object-cover"
-                  />
-                  {item.title}{" "}
-                  <span className="font-indie group-hover:text-blue-700 group-hover:underline">
-                    {item.company}
-                  </span>
-                  <ArrowUpRight />
-                </Link>
-              )}
-            </div>
-          ))}
+                  <Link
+                    href={""}
+                    className="uppercase flex w-full items-center justify-between gap-2 text-xl"
+                  >
+                    <div className="flex items-center gap-8">
+                      <img
+                        src={item.companyLogo.url}
+                        alt=""
+                        className="size-16 rounded-2xl overflow-clip object-cover"
+                      />
+                      {item.title}{" "}
+                    </div>
+                    <span className="font-indie group-hover:text-blue-700 group-hover:underline">
+                      {item.company}
+                    </span>
+                    <ArrowUpRight />
+                  </Link>
+                </div>
+              ),
+          )}
         </div>
       </div>
       <Button

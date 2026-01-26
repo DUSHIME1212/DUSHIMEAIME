@@ -6,7 +6,7 @@ export default function Layout({
   return (
     <html lang="en" className={`font-dmsans`}>
       <body>
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen mt-16">{children}</main>
       </body>
     </html>
   );

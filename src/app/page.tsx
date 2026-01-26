@@ -7,7 +7,9 @@ import {
 } from "~/components/animated-slideshow";
 import Experience from "~/components/Experience";
 import Hero from "~/components/Hero";
+import HeroSection from "~/components/hero-section";
 import Posters from "~/components/Posters";
+import { StaggerTestimonials } from "~/components/stagger-testimonial";
 import Works from "~/components/Works";
 
 const SLIDES = [
@@ -45,43 +47,44 @@ const SLIDES = [
 
 const page = () => {
   return (
-    <div className="mt-16 flex flex-col gap-4 px-8 md:px-32">
-      <Hero />
-      <div>
-        <HoverSlider className="place-content-center bg-[#faf9f5] p-6 text-[#3d3929]">
-          <div className="flex flex-wrap items-center justify-evenly gap-6">
-            <div className="flex flex-col space-y-2 md:space-y-4">
-              {SLIDES.map((slide, index) => (
-                <TextStaggerHover
-                  key={slide.title}
-                  index={index}
-                  className="cursor-pointer text-4xl font-bold uppercase tracking-tighter"
-                  text={slide.title}
-                />
-              ))}
-            </div>
-            <HoverSliderImageWrap>
-              {SLIDES.map((slide, index) => (
-                <div key={slide.id} className=" ">
-                  <HoverSliderImage
+    <>
+      <div className="flex mt-16 flex-col gap-4 px-8 md:px-32">
+        <Hero />
+        <div>
+          <HoverSlider className="text-[#3d3929]">
+            <div className="flex h-fit flex-col lg:flex-row lg:items-center justify-evenly gap-6">
+              <div className="flex lg:w-1/2 flex-col space-y-2 md:space-y-4">
+                {SLIDES.map((slide, index) => (
+                  <TextStaggerHover
+                    key={slide.title}
                     index={index}
-                    imageUrl={slide.imageUrl}
-                    src={slide.imageUrl}
-                    alt={slide.title}
-                    className="size-full max-h-96 object-cover"
-                    loading="eager"
-                    decoding="async"
+                    className="cursor-pointer text-4xl font-bold uppercase tracking-tighter"
+                    text={slide.title}
                   />
-                </div>
-              ))}
-            </HoverSliderImageWrap>
-          </div>
-        </HoverSlider>
+                ))}
+              </div>
+              <HoverSliderImageWrap>
+                {SLIDES.map((slide, index) => (
+                  <div key={slide.id} className=" w-full ">
+                    <HoverSliderImage
+                      index={index}
+                      imageUrl={slide.imageUrl}
+                      src={slide.imageUrl}
+                      alt={slide.title}
+                      className="size-full max-h-96 object-cover"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                ))}
+              </HoverSliderImageWrap>
+            </div>
+          </HoverSlider>
+        </div>
+        <Works />
       </div>
-      <Works />
-      {/* <Experience/> */}
-      <Posters />
-    </div>
+      <StaggerTestimonials/>
+    </>
   );
 };
 
