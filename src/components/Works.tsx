@@ -38,7 +38,7 @@ function Works() {
     console.log("Projects updated:", projects);
   });
 
-  function Hovercard(containerDivRef: React.RefObject<HTMLDivElement>) {
+  function Hovercard(containerDivRef: React.RefObject<HTMLDivElement | null>) {
     if (containerDivRef.current) {
       gsap.to(containerDivRef.current, {
         rotate: 5,
@@ -48,7 +48,7 @@ function Works() {
     }
   }
 
-  function ResetHovercard(containerDivRef: React.RefObject<HTMLDivElement>) {
+  function ResetHovercard(containerDivRef: React.RefObject<HTMLDivElement | null>) {
     if (containerDivRef.current) {
       gsap.to(containerDivRef.current, {
         skewY: 0,
