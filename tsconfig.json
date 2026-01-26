@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     /* Base Options: */
+    "ignoreDeprecations": "5.0",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "ES2017",
