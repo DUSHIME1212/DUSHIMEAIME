@@ -81,7 +81,7 @@ const Page = () => {
       </section>
 
       {/* HORIZONTAL WORK SECTION */}
-      <div ref={containerRef} className="overflow-hidden bg-black py-20">
+      <div ref={containerRef} className="overflow-hidden bg-white py-20">
         <div 
           ref={scrollRef} 
           className="flex flex-row items-center h-[70vh] gap-0 px-[10vw]"
@@ -98,7 +98,7 @@ const Page = () => {
                     <video
                       src={item.video?.url}
                       autoPlay loop muted playsInline
-                      className="h-full w-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700"
+                      className="h-full w-full object-cover  transition-all duration-700"
                     />
                   ) : (
                     <img
@@ -121,7 +121,7 @@ const Page = () => {
               </div>
 
               {/* Card Footer Info */}
-              <div className="mt-8 flex justify-between items-start text-white">
+              <div className="mt-8 flex justify-between items-start text-black">
                 <div>
                   <h2 className="text-3xl font-medium tracking-tight uppercase">{item.title}</h2>
                   <p className="text-xs text-neutral-500 mt-2 uppercase tracking-widest">{item.projectType}</p>
