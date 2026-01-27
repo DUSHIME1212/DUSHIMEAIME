@@ -49,7 +49,7 @@ const Hero = () => {
   return (
     <div className="mt-8 flex flex-col gap-8 overflow-clip">
       <div className="relative flex w-full flex-col gap-4 overflow-hidden">
-        <h1 className="text-[10rem]">DON Aime</h1>
+        <h1 className="text-7xl lg:text-[10rem]">DON AIME</h1>
         <h2 className="group text-gray-700">
           <span className="text-gray-900/60 text-2xl ">
             I am a{" "}
@@ -82,7 +82,7 @@ const Hero = () => {
           "I design apps, and websites that blow your mind",
           "I am a ux/ui designer based in RWANDA",
           "I am a developer based in RWANDA",
-          "My favourite Gerne is afrobeats",
+          "My favourite gerne is afrobeats",
         ]}
       />
       <section id="skills">
@@ -226,7 +226,7 @@ export function Typewrite({ examples }) {
               duration: Box_fade,
               ease: easeInOut,
             }}
-            className="font-dmsans -z-10 text-3xl text-yellow-500"
+            className="font-dmsans -z-10 text-3xl text-blue-700"
           >
             {l}
           </motion.span>

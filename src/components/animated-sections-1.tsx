@@ -1,362 +1,174 @@
 'use client';
 
-import { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Observer } from 'gsap/Observer';
-import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
-gsap.registerPlugin(Observer, SplitText);
+gsap.registerPlugin(Observer);
 
-interface SectionData {
-  text: string;
-  img: string;
-  slug?: string;
-}
-
-interface AnimatedSectionsProps {
-  sections?: SectionData[];
-  className?: string;
-  headerTitle?: string;
-  
-}
-
-const defaultSections: SectionData[] = [
-  {
-    text: "Whispers of Radiance",
-    img: "https://raw.githubusercontent.com/66HEX/free-photos/main/img1.jpeg"
-  },
-  {
-    text: "Ethereal Moments",
-    img: "https://raw.githubusercontent.com/66HEX/free-photos/main/img3.jpeg"
-  },
-  {
-    text: "Silent Beauty",
-    img: "https://raw.githubusercontent.com/66HEX/free-photos/main/img5.jpeg"
-  }
-];
-
-const AnimatedSections: React.FC<AnimatedSectionsProps> = ({
-  sections = defaultSections,
-  className = "",
-}) => {
+const AnimatedSections = ({ sections = [], className = "" }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const observerRef = useRef<any>(null);
-  const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const splitHeadingsRef = useRef<SplitText[]>([]);
-  const currentIndexRef = useRef<number>(-1);
-  const animatingRef = useRef<boolean>(false);
-  const sectionsRefs = useRef<HTMLElement[]>([]);
-  const imagesRefs = useRef<HTMLDivElement[]>([]);
-  const outerRefs = useRef<HTMLDivElement[]>([]);
-  const innerRefs = useRef<HTMLDivElement[]>([]);
-  const headingRefs = useRef<HTMLHeadingElement[]>([]);
-  const counterCurrentRef = useRef<HTMLSpanElement | null>(null);
-  const counterNextRef = useRef<HTMLSpanElement | null>(null);
-  const counterCurrentSplitRef = useRef<SplitText | null>(null);
-  const counterNextSplitRef = useRef<SplitText | null>(null);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [indexState, setIndexState] = useState(0); // For UI/Dots
+  const currentIndexRef = useRef(0); // For Logic/Animation
+  const animatingRef = useRef(false);
+  
+  const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const bgRefs = useRef<HTMLDivElement[]>([]);
+  const insetRefs = useRef<HTMLDivElement[]>([]);
+  const contentRefs = useRef<HTMLDivElement[]>([]);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
-  const router = usePathname();
-
-useEffect(() => {
-  let loaded = 0;
-  sections.forEach((section) => {
-    const img = new Image();
-    img.src = section.img;
-    img.onload = () => {
-      loaded++;
-      if (loaded === sections.length) {
-        setImagesLoaded(true);
-      }
+  // 1. MAGNETIC CURSOR
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      gsap.to(cursorRef.current, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.8,
+        ease: "power3.out"
+      });
     };
-    img.onerror = () => {
-      loaded++;
-      if (loaded === sections.length) {
-        setImagesLoaded(true);
-      }
-    };
-  });
-}, [sections]);
+    window.addEventListener('mousemove', moveCursor);
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
 
-  const gotoSection = useCallback((index: number, direction: number) => {
-    if (!containerRef.current || animatingRef.current) return;
+  // 2. CORE NAVIGATION LOGIC
+  const gotoSection = (index: number, direction: number) => {
+    if (animatingRef.current) return;
 
-    const sectionsElements = sectionsRefs.current as Element[];
-    const images = imagesRefs.current as Element[];
-    const outerWrappers = outerRefs.current as Element[];
-    const innerWrappers = innerRefs.current as Element[];
+    const total = sections.length;
+    const wrap = gsap.utils.wrap(0, total);
+    const nextIndex = wrap(index);
+    
+    // Prevent animating to the same section
+    if (nextIndex === currentIndexRef.current) return;
 
-
-
-    const wrap = gsap.utils.wrap(0, sectionsElements.length);
-    index = wrap(index);
     animatingRef.current = true;
+    const isDown = direction > 0;
+    const prevIndex = currentIndexRef.current;
 
-    const fromTop = direction === -1;
-    const dFactor = fromTop ? -1 : 1;
+    // Update Refs and State
+    currentIndexRef.current = nextIndex;
+    setIndexState(nextIndex);
 
     const tl = gsap.timeline({
-      defaults: { duration: 1.25, ease: 'power1.inOut' },
+      defaults: { duration: 1.2, ease: "expo.inOut" },
       onComplete: () => {
         animatingRef.current = false;
+        // Hide previous section completely after transition
+        gsap.set(sectionRefs.current[prevIndex], { autoAlpha: 0 });
       }
     });
 
-    timelineRef.current = tl;
+    const currentSlide = sectionRefs.current[prevIndex];
+    const nextSlide = sectionRefs.current[nextIndex];
 
-    if (currentIndexRef.current >= 0) {
-      gsap.set(sectionsElements[currentIndexRef.current], { zIndex: 0 });
-      tl.to(images[currentIndexRef.current], { xPercent: -15 * dFactor })
-        .set(sectionsElements[currentIndexRef.current], { autoAlpha: 0 });
-    }
+    // Prepare Next Slide
+    gsap.set(nextSlide, { autoAlpha: 1, zIndex: 2 });
+    gsap.set(currentSlide, { zIndex: 1 });
 
-    gsap.set(sectionsElements[index], { autoAlpha: 1, zIndex: 1 });
-
-    tl.fromTo(
-      [outerWrappers[index], innerWrappers[index]],
-      {
-        xPercent: (i: number) => (i ? -100 * dFactor : 100 * dFactor)
-      },
-      { xPercent: 0 },
+    tl.fromTo(nextSlide, 
+      { clipPath: isDown ? "inset(100% 0% 0% 0%)" : "inset(0% 0% 100% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4 }, 
       0
     )
-      .fromTo(
-        images[index],
-        { xPercent: 15 * dFactor },
-        { xPercent: 0 },
-        0
-      );
-
-    if (splitHeadingsRef.current[index] && splitHeadingsRef.current[index].lines) {
-      const lines = splitHeadingsRef.current[index].lines;
-
-      gsap.set(lines, {
-        opacity: 0,
-        yPercent: 100
-      });
-
-      tl.to(
-        lines,
-        {
-          opacity: 1,
-          yPercent: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-          stagger: {
-            each: 0.1,
-            from: 'start'
-          }
-        },
-        0.4
-      );
-    }
-
-    if (counterCurrentRef.current && counterNextRef.current) {
-      if (!counterCurrentSplitRef.current) {
-        counterCurrentSplitRef.current = new SplitText(counterCurrentRef.current, {
-          type: 'lines',
-          linesClass: 'line',
-          mask: 'lines'
-        });
-      }
-
-      counterNextRef.current.textContent = String(index + 1);
-      gsap.set(counterNextRef.current, { opacity: 1 });
-
-      if (counterNextSplitRef.current) {
-        counterNextSplitRef.current.revert();
-        counterNextSplitRef.current = null;
-      }
-      counterNextSplitRef.current = new SplitText(counterNextRef.current, {
-        type: 'lines',
-        linesClass: 'line',
-        mask: 'lines'
-      });
-
-      const currentLines = counterCurrentSplitRef.current?.lines || [];
-      const nextLines = counterNextSplitRef.current?.lines || [];
-
-      gsap.set(currentLines, { opacity: 1, yPercent: 0 });
-      gsap.set(nextLines, { opacity: 1, yPercent: 100 * dFactor });
-
-      tl.to(
-        currentLines,
-        {
-          yPercent: -100 * dFactor,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          stagger: { each: 0.1, from: 'start' }
-        },
-        0.4
-      );
-      tl.to(
-        nextLines,
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          stagger: { each: 0.1, from: 'start' }
-        },
-        0.4
-      ).add(() => {
-        if (counterCurrentSplitRef.current) {
-          counterCurrentSplitRef.current.revert();
-          counterCurrentSplitRef.current = null;
-        }
-        if (counterNextSplitRef.current) {
-          counterNextSplitRef.current.revert();
-          counterNextSplitRef.current = null;
-        }
-        if (counterCurrentRef.current && counterNextRef.current) {
-          counterCurrentRef.current.textContent = counterNextRef.current.textContent;
-        }
-        gsap.set(counterNextRef.current, { opacity: 0, clearProps: 'all' });
-      });
-    }
-
-    currentIndexRef.current = index;
-    setCurrentIndex(index);
-  }, []);
-
-  useGSAP(() => {
-  if (!containerRef.current || !imagesLoaded) return;
-
-    gsap.registerPlugin(Observer, SplitText);
-
-    const headings = headingRefs.current as HTMLElement[];
-    const outerWrappers = outerRefs.current as Element[];
-    const innerWrappers = innerRefs.current as Element[];
-
-    splitHeadingsRef.current = headings.map(
-      (heading) =>
-        new SplitText(heading, {
-          type: 'lines',
-          linesClass: 'line',
-          mask: 'lines'
-        })
+    .fromTo(bgRefs.current[nextIndex], 
+      { y: isDown ? "20%" : "-20%", scale: 1.3 },
+      { y: "0%", scale: 1.1, duration: 1.6 }, 
+      0
+    )
+    .fromTo(insetRefs.current[nextIndex],
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1.4, ease: "power4.out" },
+      0.2
+    )
+    .fromTo(contentRefs.current[nextIndex],
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8 },
+      0.7
     );
+  };
 
-    gsap.set(outerWrappers, { xPercent: 100 });
-    gsap.set(innerWrappers, { xPercent: -100 });
-
-    observerRef.current = Observer.create({
-      type: 'wheel,touch,pointer',
-      wheelSpeed: -1,
-      onDown: () => {
-        if (!animatingRef.current) {
-          gotoSection(currentIndexRef.current - 1, -1);
-        }
-      },
-      onUp: () => {
-        if (!animatingRef.current) {
-          gotoSection(currentIndexRef.current + 1, 1);
-        }
-      },
+  // 3. SCROLL OBSERVER
+  useGSAP(() => {
+    const obs = Observer.create({
+      target: window,
+      type: "wheel,touch,pointer",
+      onUp: () => gotoSection(currentIndexRef.current + 1, 1),
+      onDown: () => gotoSection(currentIndexRef.current - 1, -1),
       tolerance: 10,
       preventDefault: true
     });
-
-    gotoSection(0, 1);
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.kill();
-        observerRef.current = null;
-      }
-      if (timelineRef.current) {
-        timelineRef.current.kill();
-        timelineRef.current = null;
-      }
-      splitHeadingsRef.current.forEach((split) => {
-        if (split && typeof split.revert === 'function') {
-          split.revert();
-        }
-      });
-      splitHeadingsRef.current = [];
-      if (counterCurrentSplitRef.current && typeof counterCurrentSplitRef.current.revert === 'function') {
-        counterCurrentSplitRef.current.revert();
-        counterCurrentSplitRef.current = null;
-      }
-      if (counterNextSplitRef.current && typeof counterNextSplitRef.current.revert === 'function') {
-        counterNextSplitRef.current.revert();
-        counterNextSplitRef.current = null;
-      }
-    };
-  }, { scope: containerRef, dependencies: [sections.length, imagesLoaded] });
+    
+    // Set initial state
+    gsap.set(sectionRefs.current[0], { autoAlpha: 1, zIndex: 2 });
+    
+    return () => obs.kill();
+  }, [sections]); // Only re-run if sections change
 
   return (
-    <div 
-      ref={containerRef}
-      className={`h-screen w-screen overflow-hidden bg-black text-white uppercase font-sans ${className}`}
-    >
-      {/* Section preview thumbnails */}
-      <div className="fixed bottom-4 right-6 z-30 flex items-center gap-4">
-        <div className="flex gap-2">
-          {sections.map((section, i) => (
-            <div
-              key={`thumb-${i}`}
-              className="w-12 h-8 rounded overflow-hidden relative cursor-pointer transition-transform duration-300"
-              onClick={() => {
-                if (currentIndex !== i && !animatingRef.current) {
-                  const direction = i > currentIndex ? 1 : -1;
-                  gotoSection(i, direction);
-                }
-              }}
-            >
-              <img
-                src={section.img}
-                alt={`Section ${i + 1}`}
-                className="w-full h-full object-cover"
-              />
-              <div 
-                 className={`absolute inset-0 bg-black transition-opacity duration-1000 ease-in-out ${
-                   currentIndex !== i ? 'opacity-50' : 'opacity-0'
-                 }`} 
-               />
-            </div>
-          ))}
-        </div>
-        
-        {/* Counter */}
-        <div className="text-xs md:text-sm tracking-wider flex items-center gap-1">
-          <div className="relative overflow-hidden h-[1em] leading-[1em] min-w-[0.8em]">
-            <span ref={counterCurrentRef} className="block">1</span>
-            <span ref={counterNextRef} className="block absolute left-0 top-0 opacity-0">2</span>
-          </div>
-          <span className="opacity-70">/ {sections.length}</span>
-        </div>
+    <div ref={containerRef} className={`relative h-screen w-screen overflow-hidden bg-[#0a0a0a] cursor-none ${className}`}>
+      
+      {/* CUSTOM CURSOR */}
+      <div ref={cursorRef} className="pointer-events-none fixed left-0 top-0 z-[100] flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-md transition-transform active:scale-90">
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">View</span>
       </div>
 
       {sections.map((section, i) => (
-        <Link
-          href={"gallery/"+section.slug || "/gallery"}
-          key={`section-${i}`} 
-          className="absolute top-0 h-full w-full invisible"
-          ref={(el) => { if (el) sectionsRefs.current[i] = el; }}
+        <div
+          key={i}
+          ref={(el) => { if (el) sectionRefs.current[i] = el; }}
+          className="invisible absolute inset-0 h-full w-full overflow-hidden"
         >
-          <div className="outer w-full h-full overflow-hidden" ref={(el) => { if (el) outerRefs.current[i] = el; }}>
-            <div className="inner w-full h-full overflow-hidden" ref={(el) => { if (el) innerRefs.current[i] = el; }}>
-              <div
-                className="bg flex items-center justify-center absolute top-0 h-full w-full bg-cover bg-center"
-                ref={(el) => { if (el) imagesRefs.current[i] = el; }}
-                style={{
-                  backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%), url("${section.img}")`
-                }}
-              >
-                <h2 className="section-heading z-20 text-white text-center font-semibold w-[90vw] max-w-[1200px] text-[clamp(1rem,4vw,9rem)] normal-case leading-none " ref={(el) => { if (el) headingRefs.current[i] = el; }}>
-                  {section.text}
-                </h2>
-              </div>
+          {/* BLURRED BACKGROUND */}
+          <div 
+            ref={(el) => { if (el) bgRefs.current[i] = el; }}
+            className="absolute inset-0 h-full w-full bg-cover bg-center"
+            style={{ 
+              backgroundImage: `url("${section.img}")`,
+              filter: 'brightness(0.9) blur(1px)',
+            }}
+          />
+
+          {/* MAIN CONTENT */}
+          <div className="relative flex h-full w-full items-center justify-center p-20">
+            
+            {/* CENTRAL IMAGE BOX */}
+            <div 
+              ref={(el) => { if (el) insetRefs.current[i] = el; }}
+              className="relative z-10 aspect-[4/5] h-[60vh] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)]"
+            >
+               <img src={section.img} alt={section.title} className="h-full w-full object-cover" />
+            </div>
+
+            {/* TEXT CONTENT */}
+            <div 
+              ref={(el) => { if (el) contentRefs.current[i] = el; }}
+              className="absolute bottom-20 left-20 z-20"
+            >
+              <h2 className="text-[8vw] font-medium leading-[0.8] tracking-tighter text-white">
+                {section.title}
+              </h2>
+              <p className="mt-6 text-[10px] uppercase tracking-[0.5em] text-white/40">
+                {section.subtitle || "Seamless Photographic Journey"}
+              </p>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
+
+      {/* PAGINATION */}
+      <div className="fixed right-12 top-1/2 z-50 flex -translate-y-1/2 flex-col items-end gap-8">
+        {sections.map((_, i) => (
+          <div key={i} className="flex items-center gap-4">
+            <span className={`text-[10px] font-mono transition-opacity duration-500 ${indexState === i ? 'text-white' : 'text-white/20'}`}>
+              {(i + 1).toString().padStart(2, '0')}
+            </span>
+            <div className={`h-[1px] transition-all duration-700 ${indexState === i ? 'w-12 bg-white' : 'w-4 bg-white/20'}`} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

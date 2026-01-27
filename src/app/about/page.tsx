@@ -22,7 +22,7 @@ const page = () => {
               <span className="relative text-blue-700">
                 DUSHIME AIME
                 <svg
-                  className="absolute -bottom-6 left-0 w-full"
+                  className="absolute hidden -bottom-6 left-0 w-full"
                   viewBox="0 0 906 80"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ const page = () => {
         {/* topsection */}
         <div className="mt-8 flex flex-col gap-8">
           <div className="w-2/3">
-            <h2 className="mb-8 font-bold tracking-tighter text-foreground">
+            <h2 className="mb-8 tracking-tighter text-foreground">
               Where empathy meets impact
             </h2>
             <TextAnimate className="w-2/3">
@@ -67,7 +67,7 @@ const page = () => {
             </TextAnimate>
           </div>
           <div className="">
-            <h2 className="mb-8 font-bold tracking-tighter text-foreground max-md:font-medium">
+            <h2 className="mb-8  tracking-tighter text-foreground max-md:font-medium">
               Why I prioritize SMBs
             </h2>
             <TextAnimate className="w-2/3">
@@ -78,20 +78,20 @@ const page = () => {
               field and help dreams grow into realities.
             </TextAnimate>
             <div className="my-4 mt-16 flex flex-col gap-4 text-xl md:flex-row">
-              <h4 className="w-full text-foreground md:w-1/3">Me in 3 words</h4>
+              <h4 className="w-full md:w-1/3">Me in 3 words</h4>
               <p className="w-2/3 cursor-pointer font-medium">
                 Curious, Adaptive, Collaborative,
                 <span className="duration-500 hover:text-blue-700">
                   forever growing
                 </span>
-                , also a critical thinker Monday-Friday
+                 also a critical thinker Monday-Friday
               </p>
             </div>
             <div className="my-4 mt-16 flex flex-col gap-4 text-xl md:flex-row">
               <h4 className="w-full text-foreground md:w-1/3">
                 My Approach to Problem-Solving
               </h4>
-              <TextAnimate className="w-full cursor-pointer opacity-80 max-md:font-medium md:w-2/3">
+              <TextAnimate className="w-full cursor-pointer md:w-2/3">
                 As a junior designer, I focus on being flexible and resourceful
                 when tackling challenges. I enjoy collaborating with others to
                 find creative, effective solutions that align with both user
@@ -120,7 +120,7 @@ const page = () => {
           </Button>
         </div>
         <div className="mt-8 flex w-2/3 flex-col gap-2">
-          <h4 className="mb-4 text-6xl font-bold tracking-tighter text-foreground">
+          <h4 className="mb-4  tracking-tighter text-foreground">
             Teamwork Makes the Difference
           </h4>
           <p className="text-xl opacity-80 max-md:font-medium">

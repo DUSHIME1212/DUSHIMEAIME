@@ -1,12 +1,9 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
-import { Button } from "./ui/button";
 import { links } from "~/lib/utils";
 import { usePathname } from "next/navigation";
 import { AlignJustify, X } from "lucide-react";
-import { motion } from "motion/react";
 import { FlipLink } from "./ui/FlipLink";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -74,9 +71,9 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className={`flex fixed z-50 top-0 w-full flex-row items-center justify-between ${pathname === "/testimonials" && "!bg-blue-700 !text-white"} px-8 py-4 md:px-32`}
+      className={`flex fixed z-50 top-0 w-full flex-row items-center justify-between bg-white transition-colors ${pathname === "/testimonials" && "!bg-blue-700 !text-white"} px-4 py-4 md:px-32 shadow-sm`}
     >
-      <div className="relative h-12 w-32">
+      <div className="relative h-10 w-24 md:h-12 md:w-32">
         <Image
           src={
             pathname === "/testimonials"
@@ -84,26 +81,32 @@ const Navbar = () => {
               : "/DUSHIlogopng.png"
           }
           className="object-contain"
-          alt=""
+          alt="Logo"
           fill
         />
       </div>
-      <button onClick={handleOpen} className="md:hidden">
-        {!open ? <AlignJustify size={32} /> : <X size={32} />}
+      <button onClick={handleOpen} className="md:hidden z-40">
+        {!open ? <AlignJustify size={24} /> : <X size={24} />}
       </button>
       <div
-        className={`links flex px-8 flex-col justify-center md:flex-row
+        className={`links flex flex-col justify-start md:flex-row
           ${open ? "flex" : "hidden"} md:flex
-          ${pathname === "/about" ? " text-white" : ""}
-          left-0 top-20 z-30 w-full gap-4 p-4 md:static md:w-auto text-5xl md:p-0 h-full duration-700
-          ${open ? "absolute" : "md:static"}
+          ${pathname === "/about" ? "md:text-black" : ""}
+          fixed md:static  top-16 left-0 w-full md:w-auto
+          bg-white md:bg-transparent
+          gap-6 md:gap-4 p-6 md:p-0 
+          max-h-[calc(100vh-64px)] md:max-h-none
+          overflow-y-auto md:overflow-visible
+          text-lg md:text-base
+          shadow-lg md:shadow-none
+          ${pathname === "/testimonials" && "md:!bg-transparent"}
         `}
       >
         {links.map((it, i) => (
           <FlipLink
             key={i}
             href={it.href}
-            className={pathname === "/testimonials" ? "text-white" : ""}
+            className={pathname === "/testimonials" ? "text-blue-700 md:text-white" : ""}
           >
             <span onClick={closeMenu}>{it.title}</span>
           </FlipLink>

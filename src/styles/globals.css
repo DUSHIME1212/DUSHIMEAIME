@@ -88,25 +88,25 @@
 
 
 h1 {
-  @apply scroll-m-20 text-6xl tracking-tighter font-bold lg:text-7xl;
+  @apply scroll-m-20 text-6xl tracking-tighter font-normal lg:text-7xl;
 }
 h2 {
-  @apply scroll-m-20 text-5xl tracking-tight font-semibold transition-colors first:mt-0;
+  @apply scroll-m-20 text-5xl tracking-tight font-medium transition-colors first:mt-0;
 }
 h3 {
-  @apply scroll-m-20 text-4xl tracking-tight font-semibold;
+  @apply scroll-m-20 text-4xl tracking-tight font-medium;
 }
 h4 {
-  @apply scroll-m-20 text-3xl tracking-tight font-semibold;
+  @apply scroll-m-20 text-3xl tracking-tight font-medium;
 }
 h5 {
-  @apply scroll-m-20 text-2xl tracking-tight font-semibold;
+  @apply scroll-m-20 text-2xl  tracking-tight font-medium;
 }
 h6 {
-  @apply scroll-m-20 text-xl tracking-tight font-semibold;
+  @apply scroll-m-20 text-xl tracking-tight font-medium;
 }
 p {
-  @apply leading-7 tracking-tight [&:not(:first-child)]:mt-0;
+  @apply leading-7 opacity-60 tracking-tight [&:not(:first-child)]:mt-0;
 }
 ul {
   @apply my-2 ml-2 list-disc [&>li]:mt-2;
@@ -115,32 +115,4 @@ blockquote {
   @apply mt-6 border-l-2 pl-6 italic;
 }
 
-.block {
-  h1 {
-    @apply my-8 scroll-m-20 text-6xl font-bold lg:text-7xl;
-  }
-  h2 {
-    @apply scroll-m-20 text-5xl font-semibold transition-colors first:mt-0;
-  }
-  h3 {
-    @apply my-4 scroll-m-20 text-4xl font-semibold;
-  }
-  h4 {
-    @apply scroll-m-20 text-3xl font-semibold;
-  }
-  h5 {
-    @apply scroll-m-20 text-2xl font-semibold;
-  }
-  h6 {
-    @apply scroll-m-20 text-xl font-semibold;
-  }
-  p {
-    @apply leading-7 [&:not(:first-child)]:mt-0;
-  }
-  ul {
-    @apply my-6 ml-6 list-disc [&>li]:mt-2;
-  }
-  blockquote {
-    @apply mt-6 border-l-2 pl-6 italic;
-  }
-}
+

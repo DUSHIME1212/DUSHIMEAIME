@@ -62,8 +62,8 @@ function Works() {
   return (
     <div className="py-0 font-dmsans md:py-8">
       <div className="my-8 flex flex-col gap-4">
-        <TextAnimate className="w-full text-2xl font-bold capitalize text-sky-700 md:w-2/3 md:text-5xl">
-          what I have been up to lately
+        <TextAnimate className="w-full text-2xl font-bold  text-blue-700 md:w-2/3 md:text-5xl">
+          What I have been up to lately
         </TextAnimate>
         <TextAnimate
           delay={0.4}
@@ -76,7 +76,7 @@ function Works() {
         {projects?.map((item, i) => {
           const containerDivRef = React.createRef<HTMLDivElement>();
           return (
-            <Link href={"/works/"+item.slug} key={i} className="relative flex min-h-96 w-full flex-col gap-2">
+            <Link href={"/works/"+item.slug} key={i} className="relative group flex min-h-96 w-full flex-col gap-2">
               {item.video ? (
                 <video
                   src={item.video?.url || item.video?.asset?.url}
@@ -103,7 +103,7 @@ function Works() {
                 </div>
               )}
               <div className="absolute bottom-0 left-0 flex w-full flex-col items-center justify-center gap-2 bg-white p-0 md:p-4">
-                <h2 className="text-lg">{item.title}</h2>
+                <h2 className="text-3xl group-hover:text-blue-700 duration-500">{item.title}</h2>
                 <p className="line-clamp-3">
                   {item.advancedDescription.services.map(
                     (service: string, n: number) => (
