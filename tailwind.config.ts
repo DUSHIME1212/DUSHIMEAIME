@@ -9,7 +9,7 @@ export default {
   		fontFamily: {
   			sans: ["var(--font-geist-sans)", ...fontFamily.sans],
   			indie: ["Indie Flower", 'cursive'],
-  			dmsans: ["DM Sans", "serif"]
+  			dmsans: ["DM Sans", "sans-serif"]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
