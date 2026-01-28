@@ -18,6 +18,7 @@ if (typeof window !== "undefined") {
 export default function ProjectPage() {
   const { project } = useParams();
   const [projectData, setProjectData] = useState<Project | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -25,11 +26,14 @@ export default function ProjectPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const slug = Array.isArray(project) ? project[0] : project;
         const data = await fetchWorkBySlug(slug);
         setProjectData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -93,16 +97,46 @@ export default function ProjectPage() {
   const components = {
     types: {
       image: ({ value }: any) => {
-        return (
-          <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
-            <Image
-              fill
-              alt={value.alt || "Project Visual"}
-              src={urlForImage(value.asset).url()}
-              className="object-cover"
-            />
-          </div>
-        );
+        // Check if the asset exists and has the correct structure
+        if (!value?.asset?._ref) {
+          console.warn("Image asset is missing or has invalid structure:", value);
+          return (
+            <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
+              <div className="flex h-full items-center justify-center">
+                <p className="text-neutral-500">Image not available</p>
+              </div>
+            </div>
+          );
+        }
+
+        try {
+          const imageUrl = urlForImage(value.asset).url();
+          
+          if (!imageUrl) {
+            throw new Error("Could not generate image URL");
+          }
+
+          return (
+            <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
+              <Image
+                fill
+                alt={value.alt || "Project Visual"}
+                src={imageUrl}
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 80vw"
+              />
+            </div>
+          );
+        } catch (error) {
+          console.error("Error rendering image:", error);
+          return (
+            <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
+              <div className="flex h-full items-center justify-center">
+                <p className="text-neutral-500">Failed to load image</p>
+              </div>
+            </div>
+          );
+        }
       },
     },
     block: {
@@ -147,11 +181,20 @@ export default function ProjectPage() {
     },
   };
 
-  if (!projectData) return (
+  if (isLoading) return (
     <div className="flex h-screen items-center justify-center bg-black text-white">
       <p className="animate-pulse tracking-widest uppercase text-xs">Loading Project...</p>
     </div>
   );
+
+  if (!projectData) return (
+    <div className="flex h-screen items-center justify-center bg-black text-white">
+      <p className="tracking-widest uppercase text-xs">Project not found</p>
+    </div>
+  );
+
+  // Check for hero image as well
+  const heroImageUrl = projectData.projectImage?.url;
 
   return (
     <main ref={containerRef} className="bg-[#f5f5f3] selection:bg-black selection:text-white">
@@ -159,13 +202,17 @@ export default function ProjectPage() {
       <section ref={heroRef} className="relative h-screen w-full overflow-hidden bg-black text-white">
         <div className="absolute inset-0 bg-black/60 z-10"></div>
         <div className="hero-image absolute inset-0 z-0 h-[120%] w-full">
-          <Image
-            src={projectData.projectImage?.url}
-            alt={projectData.title}
-            fill
-            priority
-            className="object-cover opacity-60"
-          />
+          {heroImageUrl ? (
+            <Image
+              src={heroImageUrl}
+              alt={projectData.title}
+              fill
+              priority
+              className="object-cover opacity-60"
+            />
+          ) : (
+            <div className="h-full w-full bg-gradient-to-br from-gray-900 to-black opacity-60" />
+          )}
         </div>
 
         <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-12 lg:p-20">
