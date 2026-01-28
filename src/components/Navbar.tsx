@@ -18,41 +18,53 @@ const Navbar = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
-  // Toggle state with body-scroll lock for UX
+  // UX Logic: Determine if we are on a "Dark Scene" (Gallery or Testimonials)
+  // startsWith handles /gallery and /gallery/[slug]
+  const isWhiteTextScene = pathname.startsWith("/gallery") || pathname === "/testimonials";
+
   const toggleMenu = () => {
     setOpen(!open);
-    if (!open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "unset";
+    if (!open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
   };
 
-  // 1. SCROLL ANIMATION: Elasticity & Visibility
+  // 1. SCROLL ANIMATION: Visibility & Background Glassmorphism
   useEffect(() => {
     const handleScroll = () => {
       const nav = navRef.current;
       const currentScrollY = window.scrollY;
       if (!nav) return;
 
-      // Shrink effect
+      // Handle Background & Padding on Scroll
       if (currentScrollY > 50) {
-        gsap.to(nav, { 
-            py: "1rem", 
-            backgroundColor: "rgba(255, 255, 255, 0.8)", 
-            backdropFilter: "blur(12px)",
-            borderBottom: "1px solid rgba(0,0,0,0.05)",
-            duration: 0.4 
+        gsap.to(nav, {
+          py: "1rem",
+          backgroundColor: isWhiteTextScene 
+            ? "rgba(0, 0, 0, 0.3)" 
+            : "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(12px)",
+          borderBottom: isWhiteTextScene 
+            ? "1px solid rgba(255,255,255,0.1)" 
+            : "1px solid rgba(0,0,0,0.05)",
+          duration: 0.4,
+          ease: "power2.out"
         });
       } else {
-        gsap.to(nav, { 
-            py: "1.5rem", 
-            backgroundColor: "rgba(255, 255, 255, 0)", 
-            backdropFilter: "blur(0px)",
-            borderBottom: "1px solid rgba(0,0,0,0)",
-            duration: 0.4 
+        gsap.to(nav, {
+          py: "1.5rem",
+          backgroundColor: "rgba(255, 255, 255, 0)",
+          backdropFilter: "blur(0px)",
+          borderBottom: "1px solid rgba(0,0,0,0)",
+          duration: 0.4,
+          ease: "power2.out"
         });
       }
 
-      // Hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY.current && currentScrollY > 200) {
+      // Hide/Show Logic
+      if (currentScrollY > lastScrollY.current && currentScrollY > 300) {
         gsap.to(nav, { y: "-100%", duration: 0.3, ease: "power2.inOut" });
       } else {
         gsap.to(nav, { y: 0, duration: 0.3, ease: "power2.out" });
@@ -62,36 +74,44 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isWhiteTextScene]); // Re-run if scene type changes
 
-  // 2. MOBILE MENU ANIMATION (GSAP Stagger)
+  // 2. MOBILE MENU ANIMATION
   useGSAP(() => {
     if (open) {
-      gsap.to(menuRef.current, { x: 0, opacity: 1, duration: 0.6, ease: "expo.out" });
+      gsap.to(menuRef.current, { 
+        x: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "expo.out" 
+      });
       gsap.fromTo(".mobile-link", 
-        { y: 20, opacity: 0 }, 
-        { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, delay: 0.2 }
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, delay: 0.3, ease: "power3.out" }
       );
     } else {
-      gsap.to(menuRef.current, { x: "100%", opacity: 0, duration: 0.5, ease: "expo.in" });
+      gsap.to(menuRef.current, { 
+        x: "100%", 
+        opacity: 0, 
+        duration: 0.6, 
+        ease: "expo.in" 
+      });
     }
   }, [open]);
-
-  const isDarkScene = pathname === "/testimonials";
 
   return (
     <>
       <nav
         ref={navRef}
         className={cn(
-          "fixed top-0 z-[60] flex w-full flex-row items-center justify-between px-6 transition-all duration-300 md:px-20 lg:px-32 py-6",
-          isDarkScene ? "text-white" : "text-black"
+          "fixed top-0 z-[60] flex w-full flex-row items-center justify-between px-6 md:px-20 lg:px-32 py-6 transition-colors duration-500",
+          isWhiteTextScene ? "text-white" : "text-black"
         )}
       >
-        {/* LOGO AREA */}
+        {/* LOGO */}
         <div className="relative z-[70] h-8 w-28 md:h-10 md:w-36 transition-transform hover:scale-105 active:scale-95">
           <Image
-            src={isDarkScene ? "/DUSHIME Aime.png" : "/DUSHIlogopng.png"}
+            src={isWhiteTextScene ? "/DUSHIME Aime.png" : "/DUSHIlogopng.png"}
             className="object-contain"
             alt="Logo"
             fill
@@ -99,28 +119,34 @@ const Navbar = () => {
           />
         </div>
 
-        {/* DESKTOP LINKS */}
+        {/* DESKTOP NAVIGATION */}
         <div className="hidden items-center gap-10 md:flex">
-          {links.map((it, i) => (
-            <div key={i} className="relative group">
-                {
-                  pathname === "gallery" && it.href === "/gallery" ?<FlipLink href={it.href} className="text-sm font-medium tracking-wide uppercase">
-                {it.title}
-                </FlipLink>:
-                <FlipLink href={it.href} className="text-sm font-medium text-white tracking-wide uppercase">
+          {links.map((it, i) => {
+            const isActive = pathname === it.href;
+            return (
+              <div key={i} className="relative group">
+                <FlipLink 
+                  href={it.href} 
+                  className={cn(
+                    "text-sm uppercase",
+                    isWhiteTextScene ? "text-white" : "text-black"
+                  )}
+                >
                   {it.title}
                 </FlipLink>
                 
-                  
-                }
-                {pathname === it.href && (
-                    <motion.div 
-                        layoutId="nav-dot"
-                        className="absolute -bottom-2 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-blue-600" 
-                    />
+                {isActive && (
+                  <motion.div 
+                    layoutId="nav-dot"
+                    className={cn(
+                      "absolute -bottom-3 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full",
+                      isWhiteTextScene ? "bg-white" : "bg-blue-600"
+                    )}
+                  />
                 )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
         {/* MOBILE TRIGGER */}
@@ -129,7 +155,11 @@ const Navbar = () => {
           className="relative z-[70] p-2 md:hidden"
           aria-label="Toggle Menu"
         >
-          {open ? <X size={28} /> : <AlignRight size={28} className={isDarkScene ? "text-white" : "text-black"} />}
+          {open ? (
+            <X size={28} className="text-black" /> 
+          ) : (
+            <AlignRight size={28} className={isWhiteTextScene ? "text-white" : "text-black"} />
+          )}
         </button>
       </nav>
 
@@ -138,22 +168,28 @@ const Navbar = () => {
         ref={menuRef}
         className="fixed inset-0 z-[65] flex translate-x-full flex-col bg-white p-10 opacity-0 md:hidden"
       >
-        <div className="flex h-full flex-col justify-center gap-8">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-400">Navigation</p>
-            {links.map((it, i) => (
-                <div key={i} className="mobile-link overflow-hidden" onClick={toggleMenu}>
-                    <FlipLink 
-                        href={it.href} 
-                        className="text-5xl font-bold tracking-tighter text-black"
-                    >
-                        {it.title}
-                    </FlipLink>
-                </div>
-            ))}
+        <div className="flex h-full flex-col justify-center gap-12">
+            <div className="space-y-2">
+               <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-400 font-bold">Navigation</p>
+               <div className="h-px w-8 bg-blue-600" />
+            </div>
             
-            <div className="mt-20 border-t border-neutral-100 pt-10 mobile-link">
-                <p className="text-sm text-neutral-500">Get in touch</p>
-                <p className="text-xl font-medium text-blue-700">hello@dushime.design</p>
+            <div className="flex flex-col gap-6">
+              {links.map((it, i) => (
+                  <div key={i} className="mobile-link overflow-hidden" onClick={toggleMenu}>
+                      <FlipLink 
+                          href={it.href} 
+                          className="text-5xl tracking-tighter text-black uppercase italic"
+                      >
+                          {it.title}
+                      </FlipLink>
+                  </div>
+              ))}
+            </div>
+            
+            <div className="mt-12 border-t border-neutral-100 pt-10 mobile-link">
+                <p className="text-[10px] uppercase tracking-widest text-neutral-400 mb-2">Project Inquiries</p>
+                <p className="text-2xl font-medium tracking-tight text-neutral-900">hello@dushime.design</p>
             </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ export const links = [
   },
   { title: "gallery", href: "/gallery" },
   // { title: "Testimonial", href: "/testimonials" },
-  // { title: "Contact", href: "/contact" },
+  { title: "Contact", href: "/contact" },
 ];
 
 export const testimonials: Testimonial[] = [
