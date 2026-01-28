@@ -102,7 +102,7 @@ export const StaggerTestimonials = () => {
   }, [active]);
 
   return (
-    <section className="relative w-full py-24 bg-[#fafafa] overflow-hidden" ref={cardsRef}>
+    <section className="relative px-8 md:px-16 lg:px-32 w-full py-24 bg-[#fafafa] overflow-hidden" ref={cardsRef}>
       {/* BACKGROUND DECOR (Senior UX Touch) */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
         <span className="text-[20vw] font-black uppercase tracking-tighter">Testimonials</span>
@@ -120,9 +120,9 @@ export const StaggerTestimonials = () => {
             
             <div className="testimonial-content min-h-[300px]">
               <Quote className="h-12 w-12 text-blue-600/20 mb-6" />
-              <h2 className="text-xl md:text-3xl font-medium tracking-tight leading-[1.1] text-neutral-900">
+              <h4 className=" tracking-tight leading-[1.1] text-neutral-900">
                 "{testimonials[active].testimonial}"
-              </h2>
+              </h4>
               
               <div className="mt-10 flex items-center gap-4">
                 <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-white shadow-lg">
