@@ -22,8 +22,6 @@ export default function RootLayout({
         {/* <LoadingSlider /> */}
         <Navbar />
         <main className="min-h-screen">{children}</main>
-        
-        <Footer />
       </body>
     </html>
   );

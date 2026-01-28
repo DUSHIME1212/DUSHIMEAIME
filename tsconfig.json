@@ -35,7 +35,8 @@
       "~/*": [
         "./src/*"
       ]
-    }
+    },
+    "types": ["next", "next/image-types/global", "node"]
   },
   "include": [
     ".eslintrc.cjs",

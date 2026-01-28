@@ -1,172 +1,174 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { Observer } from 'gsap/Observer';
 import { useGSAP } from '@gsap/react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 gsap.registerPlugin(Observer);
 
-const AnimatedSections = ({ sections = [], className = "" }) => {
+const AnimatedSections = ({ sections = [] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [indexState, setIndexState] = useState(0); // For UI/Dots
-  const currentIndexRef = useRef(0); // For Logic/Animation
+  const [indexState, setIndexState] = useState(0);
+  const currentIndexRef = useRef(0);
   const animatingRef = useRef(false);
-  
-  const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const router = useRouter();
+
+  // Refs for specific layers
+  const sectionRefs = useRef<HTMLAnchorElement[]>([]);
   const bgRefs = useRef<HTMLDivElement[]>([]);
-  const insetRefs = useRef<HTMLDivElement[]>([]);
-  const contentRefs = useRef<HTMLDivElement[]>([]);
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const imageRefs = useRef<HTMLImageElement[]>([]);
+  const titleRefs = useRef<HTMLHeadingElement[]>([]);
+  const counterRef = useRef<HTMLDivElement>(null);
 
-  // 1. MAGNETIC CURSOR
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      gsap.to(cursorRef.current, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.8,
-        ease: "power3.out"
-      });
-    };
-    window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, []);
-
-  // 2. CORE NAVIGATION LOGIC
-  const gotoSection = (index: number, direction: number) => {
-    if (animatingRef.current) return;
+  const gotoSection = useCallback((index: number, direction: number) => {
+    if (animatingRef.current || sections.length === 0) return;
 
     const total = sections.length;
-    const wrap = gsap.utils.wrap(0, total);
-    const nextIndex = wrap(index);
-    
-    // Prevent animating to the same section
+    const nextIndex = gsap.utils.wrap(0, total, index);
     if (nextIndex === currentIndexRef.current) return;
 
     animatingRef.current = true;
     const isDown = direction > 0;
     const prevIndex = currentIndexRef.current;
-
-    // Update Refs and State
+    
     currentIndexRef.current = nextIndex;
     setIndexState(nextIndex);
 
     const tl = gsap.timeline({
-      defaults: { duration: 1.2, ease: "expo.inOut" },
+      defaults: { duration: 1.5, ease: "expo.inOut" },
       onComplete: () => {
         animatingRef.current = false;
-        // Hide previous section completely after transition
         gsap.set(sectionRefs.current[prevIndex], { autoAlpha: 0 });
       }
     });
 
-    const currentSlide = sectionRefs.current[prevIndex];
     const nextSlide = sectionRefs.current[nextIndex];
 
-    // Prepare Next Slide
+    // 1. Prepare Next Slide State
     gsap.set(nextSlide, { autoAlpha: 1, zIndex: 2 });
-    gsap.set(currentSlide, { zIndex: 1 });
+    gsap.set(sectionRefs.current[prevIndex], { zIndex: 1 });
 
+    // 2. Odometer Animation (Numbers)
+    if (counterRef.current) {
+        tl.to(counterRef.current, {
+            y: -nextIndex * 100 + "%",
+            duration: 1.2,
+            ease: "expo.inOut"
+        }, 0);
+    }
+
+    // 3. The "Reveal" Animation
     tl.fromTo(nextSlide, 
       { clipPath: isDown ? "inset(100% 0% 0% 0%)" : "inset(0% 0% 100% 0%)" },
-      { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4 }, 
-      0
+      { clipPath: "inset(0% 0% 0% 0%)" }, 0
     )
     .fromTo(bgRefs.current[nextIndex], 
-      { y: isDown ? "20%" : "-20%", scale: 1.3 },
-      { y: "0%", scale: 1.1, duration: 1.6 }, 
-      0
+      { scale: 1.4, filter: "blur(30px) brightness(0.2)" },
+      { scale: 1.1, filter: "blur(10px) brightness(0.5)", duration: 2 }, 0
     )
-    .fromTo(insetRefs.current[nextIndex],
-      { scale: 0.5, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.4, ease: "power4.out" },
-      0.2
+    .fromTo(imageRefs.current[nextIndex], 
+      { y: isDown ? "30%" : "-30%", scale: 1.2 },
+      { y: "0%", scale: 1, duration: 1.8 }, 0.1
     )
-    .fromTo(contentRefs.current[nextIndex],
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8 },
-      0.7
+    .fromTo(titleRefs.current[nextIndex],
+      { y: 100, opacity: 0, skewY: 7 },
+      { y: 0, opacity: 1, skewY: 0, duration: 1.2, ease: "power4.out" }, 0.4
     );
-  };
 
-  // 3. SCROLL OBSERVER
+  }, [sections]);
+
   useGSAP(() => {
+    if (!Observer) return;
     const obs = Observer.create({
-      target: window,
       type: "wheel,touch,pointer",
       onUp: () => gotoSection(currentIndexRef.current + 1, 1),
       onDown: () => gotoSection(currentIndexRef.current - 1, -1),
       tolerance: 10,
-      preventDefault: true
     });
-    
-    // Set initial state
     gsap.set(sectionRefs.current[0], { autoAlpha: 1, zIndex: 2 });
-    
-    return () => obs.kill();
-  }, [sections]); // Only re-run if sections change
+    return () => {
+      if (obs) obs.kill();
+    };
+  }, { scope: containerRef, dependencies: [sections, gotoSection] });
 
   return (
-    <div ref={containerRef} className={`relative h-screen w-screen overflow-hidden bg-[#0a0a0a] cursor-none ${className}`}>
+    <div ref={containerRef} className="relative h-screen w-screen overflow-hidden bg-white font-dmsans">
       
-      {/* CUSTOM CURSOR */}
-      <div ref={cursorRef} className="pointer-events-none fixed left-0 top-0 z-[100] flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur-md transition-transform active:scale-90">
-        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">View</span>
+      {/* GLOBAL ODOMETER (Top Left) */}
+      <div className="fixed left-12 top-12 z-[60] flex items-center gap-4 mix-blend-difference">
+        <div className="h-8 overflow-hidden text-2xl font-bold text-blue-700">
+          <div ref={counterRef} className="flex flex-col transition-none">
+            {sections.map((_, i) => (
+              <span key={i} className="flex h-8 items-center">
+                {(i + 1).toString().padStart(2, '0')}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="h-[1px] w-12 bg-white/30" />
+        <span className="text-xs tracking-widest text-white/40 uppercase">
+          {sections.length.toString().padStart(2, '0')}
+        </span>
       </div>
 
+      {/* SECTIONS */}
       {sections.map((section, i) => (
-        <div
+        <Link
+        href={`/gallery/${section.slug}`}
           key={i}
           ref={(el) => { if (el) sectionRefs.current[i] = el; }}
           className="invisible absolute inset-0 h-full w-full overflow-hidden"
         >
-          {/* BLURRED BACKGROUND */}
+          {/* BLURRED DYNAMIC BG */}
           <div 
             ref={(el) => { if (el) bgRefs.current[i] = el; }}
-            className="absolute inset-0 h-full w-full bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url("${section.img}")`,
-              filter: 'brightness(0.9) blur(1px)',
-            }}
+            className="absolute inset-0 h-full w-full bg-cover bg-center transition-transform duration-[3s] ease-out"
+            style={{ backgroundImage: `url("${section.img}")` }}
           />
 
-          {/* MAIN CONTENT */}
-          <div className="relative flex h-full w-full items-center justify-center p-20">
-            
-            {/* CENTRAL IMAGE BOX */}
-            <div 
-              ref={(el) => { if (el) insetRefs.current[i] = el; }}
-              className="relative z-10 aspect-[4/5] h-[60vh] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)]"
-            >
-               <img src={section.img} alt={section.title} className="h-full w-full object-cover" />
+          <div className="relative flex h-full w-full flex-col items-center justify-center">
+            {/* HERO IMAGE CONTAINER */}
+            <div className="group relative z-10 h-[65vh] aspect-[3/4] overflow-hidden rounded-sm shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+               <img 
+                ref={(el) => { if (el) imageRefs.current[i] = el; }}
+                src={section.img} 
+                alt="" 
+                className="h-full w-full object-cover scale-110" 
+               />
+               <div className="absolute inset-0 border-[20px] border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
 
-            {/* TEXT CONTENT */}
-            <div 
-              ref={(el) => { if (el) contentRefs.current[i] = el; }}
-              className="absolute bottom-20 left-20 z-20"
-            >
-              <h2 className="text-[8vw] font-medium leading-[0.8] tracking-tighter text-white">
+            {/* FLOATING TEXT */}
+            <div className="absolute bottom-16 text-center z-20">
+              <h2 
+                ref={(el) => { if (el) titleRefs.current[i] = el; }}
+                className="text-[12vw] font-bold tracking-tighter text-white leading-none uppercase italic"
+              >
                 {section.title}
               </h2>
-              <p className="mt-6 text-[10px] uppercase tracking-[0.5em] text-white/40">
-                {section.subtitle || "Seamless Photographic Journey"}
-              </p>
+              <div className="mt-4 flex justify-center gap-4">
+                {section.tags?.map((tag: string, j: number) => (
+                  <span key={j} className="text-[10px] uppercase tracking-[0.3em] text-white border border-white px-3 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
 
-      {/* PAGINATION */}
-      <div className="fixed right-12 top-1/2 z-50 flex -translate-y-1/2 flex-col items-end gap-8">
+      {/* NAVIGATION BAR (Bottom) */}
+      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex gap-3">
         {sections.map((_, i) => (
-          <div key={i} className="flex items-center gap-4">
-            <span className={`text-[10px] font-mono transition-opacity duration-500 ${indexState === i ? 'text-white' : 'text-white/20'}`}>
-              {(i + 1).toString().padStart(2, '0')}
-            </span>
-            <div className={`h-[1px] transition-all duration-700 ${indexState === i ? 'w-12 bg-white' : 'w-4 bg-white/20'}`} />
-          </div>
+          <button
+            key={i}
+            onClick={() => gotoSection(i, i > currentIndexRef.current ? 1 : -1)}
+            className={`h-2 rounded-full transition-all duration-700 ${indexState === i ? 'w-12 bg-white' : 'w-2 bg-white/20'}`}
+          />
         ))}
       </div>
     </div>

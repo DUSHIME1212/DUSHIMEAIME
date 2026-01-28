@@ -1,28 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
-
-import { Button } from "./ui/button";
-import Link from "next/link";
-import { motion } from "motion/react";
-import { ArrowRight, Eye, Github, Link2 } from "lucide-react";
-import { Safari } from "./Safari";
-import { projects } from "~/lib/projects";
-import { TextAnimate } from "./magicui/text-animate";
-import { SmoothCursor } from "./ui/smooth-cursor";
-import { ProjectCard } from "./ProjectCard";
-import { fetchWorks, Project } from "~/lib/sanity/work";
-import Image from "next/image";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { TextAnimate } from "./magicui/text-animate";
+import { fetchWorks, Project } from "~/lib/sanity/work";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Works() {
-  const [projects, setProjects] = React.useState<Project[]>([]);
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {}, []);
-
-  React.useEffect(() => {
+  useEffect(() => {
     const getProjects = async () => {
       try {
         const data = await fetchWorks();
@@ -35,91 +29,113 @@ function Works() {
   }, []);
 
   useGSAP(() => {
-    console.log("Projects updated:", projects);
-  });
+    if (projects.length === 0) return;
 
-  function Hovercard(containerDivRef: React.RefObject<HTMLDivElement | null>) {
-    if (containerDivRef.current) {
-      gsap.to(containerDivRef.current, {
-        rotate: 5,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-    }
-  }
+    // Reveal animation for the whole grid
+    gsap.from(".work-card", {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: ".works-grid",
+        start: "top 80%",
+      }
+    });
 
-  function ResetHovercard(containerDivRef: React.RefObject<HTMLDivElement | null>) {
-    if (containerDivRef.current) {
-      gsap.to(containerDivRef.current, {
-        skewY: 0,
-        rotate: 0,
-        duration: 0.4,
-        ease: "power2.out",
+    // Parallax effect for internal images
+    const cards = gsap.utils.toArray(".work-card");
+    cards.forEach((card: any) => {
+      const img = card.querySelector(".inner-media");
+      gsap.to(img, {
+        yPercent: 15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: card,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        }
       });
-    }
-  }
+    });
+  }, [projects]);
 
   return (
-    <div className="py-0 font-dmsans md:py-8">
-      <div className="my-8 flex flex-col gap-4">
-        <TextAnimate className="w-full text-2xl font-bold  text-blue-700 md:w-2/3 md:text-5xl">
-          What I have been up to lately
-        </TextAnimate>
-        <TextAnimate
-          delay={0.4}
-          className="mt-8 w-full text-xl opacity-70 md:w-2/3"
-        >
-          Bridging the gap between beautiful and bottom-line results.
-        </TextAnimate>
+    <div className="py-24  font-dmsans bg-[#fcfcfc]" ref={containerRef}>
+      {/* HEADER SECTION */}
+      <div className="mb-20 flex flex-col gap-6 max-w-4xl">
+        <span className="text-xs font-bold uppercase tracking-[0.3em] text-blue-700 block">
+          + Selected Works
+        </span>
+        <h2 className=" font-medium tracking-tighter leading-[0.9] text-neutral-900">
+          Bridging the gap between <br />
+          <span className="text-neutral-400 italic font-light">beauty & results.</span>
+        </h2>
       </div>
-      <div className="grid gap-8 lg:grid-cols-2">
-        {projects?.map((item, i) => {
-          const containerDivRef = React.createRef<HTMLDivElement>();
-          return (
-            <Link href={"/works/"+item.slug} key={i} className="relative group flex min-h-96 w-full flex-col gap-2">
-              {item.video ? (
-                <video
-                  src={item.video?.url || item.video?.asset?.url}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="pointer-events-none mx-auto h-full w-full object-contain object-top" // needed because random black line at bottom of video
-                />
-              ) : (
-                <div
-                  ref={containerDivRef}
-                  className="shadow-gray-600 relative h-96 scale-75 w-full overflow- rounded-xl p-2 shadow-2xl"
-                  onMouseEnter={() => Hovercard(containerDivRef)}
-                  onMouseLeave={() => ResetHovercard(containerDivRef)}
-                >
+
+      {/* WORKS GRID */}
+      <div className="works-grid grid gap-y-32 gap-x-12 lg:grid-cols-2">
+        {projects?.map((item, i) => (
+          <Link 
+            href={"/works/" + item.slug} 
+            key={item._id || i} 
+            className="work-card group relative flex flex-col gap-6 cursor-none"
+          >
+            {/* MEDIA CONTAINER */}
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-neutral-100 shadow-sm transition-all duration-700 ease-[cubic-bezier(0.2,1,0.3,1)] group-hover:shadow-2xl">
+              {/* Parallax Wrapper */}
+              <div className="inner-media relative h-[120%] w-full -top-[10%]">
+                {item.video ? (
+                  <video
+                    src={item.video?.url || item.video?.asset?.url}
+                    autoPlay loop muted playsInline
+                    className="h-full w-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
+                  />
+                ) : (
                   <Image
                     src={item.projectImage?.url}
                     alt={item.title}
-                    width={500}
-                    height={100}
-                    className="h-full w-full overflow-hidden rounded-xl object-cover object-center"
+                    fill
+                    className="object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
                   />
-                </div>
-              )}
-              <div className="absolute bottom-0 left-0 flex w-full flex-col items-center justify-center gap-2 bg-white p-0 md:p-4">
-                <h2 className="text-3xl group-hover:text-blue-700 duration-500">{item.title}</h2>
-                <p className="line-clamp-3">
-                  {item.advancedDescription.services.map(
-                    (service: string, n: number) => (
-                      <span key={n}>
-                        {service}
-                        {n < item.advancedDescription.services.length - 1
-                          ? ", "
-                          : ""}
-                      </span>
-                    ),
-                  )}
-                </p>
+                )}
               </div>
-            </Link>
-          );
-        })}
+
+              {/* OVERLAY LINK REVEAL */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/10">
+                <div className="h-20 w-20 rounded-full bg-white text-black flex items-center justify-center scale-50 group-hover:scale-100 transition-transform duration-500 shadow-xl">
+                  <ArrowUpRight size={32} strokeWidth={1.5} />
+                </div>
+              </div>
+            </div>
+
+            {/* METADATA */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-3xl md:text-4xl font-medium tracking-tight uppercase group-hover:translate-x-2 transition-transform duration-500">
+                  {item.title}
+                </h2>
+                <div className="flex gap-2">
+                   {item.advancedDescription.technologies?.slice(0, 2).map((tech: string, index: number) => (
+                      <span key={index} className="text-[10px] px-3 py-1 border border-neutral-200 rounded-full uppercase tracking-widest text-neutral-500">
+                        {tech}
+                      </span>
+                   ))}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-neutral-500 font-light border-t border-neutral-100 pt-4">
+                {item.advancedDescription.services.map((service: string, n: number) => (
+                  <span key={n} className="flex items-center gap-2">
+                    {n !== 0 && <span className="h-1 w-1 rounded-full bg-neutral-300" />}
+                    {service}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
