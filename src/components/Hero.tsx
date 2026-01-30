@@ -24,7 +24,7 @@ const Hero = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[14vw] uppercase leading-[0.8] tracking-tighter text-neutral-900"
+          className="text-[14vw] uppercase leading-[0.8]  tracking-tighter text-neutral-900"
         >
           Don Aime
         </motion.h1>
@@ -44,18 +44,18 @@ const Hero = () => {
                   url=""
                   imageSrc="/image.png"
                   isStatic
-                  className="font-medium italic underline decoration-neutral-300"
+                  className="font-medium italic font-instrumentserif underline decoration-neutral-300"
                 >
                   designer enthusiast based in RWANDA
                 </LinkPreview>
                 , I craft human centered experiences and scalable systems where{" "}
-                <span className="text-blue-700">design meets logic</span>, and
+                <span className="text-blue-700 font-instrumentserif italic">design meets logic</span>, and
                 emotion meets code. From pixel to product, I merge aesthetics
                 with functionality to grow brands and simplify lives. I am
                 enthusiastic about joining a dynamic team to{" "}
                 <LinkPreview
                   url="https://coursera.org/share/45d02afe3a482586006b893d291be290"
-                  className="font-medium italic underline decoration-neutral-300"
+                  className="font-medium font-instrumentserif italic underline decoration-neutral-300"
                 >
                   learn UX best practices
                 </LinkPreview>
@@ -106,7 +106,7 @@ const Hero = () => {
           </span>
           <h2 className=" font-medium leading-[0.9] tracking-tighter text-neutral-900 ">
             A journey of building products <br />
-            <span className="font-light italic text-neutral-400">
+            <span className="font-light italic font-instrumentserif text-blue-700">
               that solve real problems.
             </span>
           </h2>
@@ -137,7 +137,7 @@ const ExperienceRow = ({ item }) => (
         />
       </div>
       <div>
-        <h3 className="text-xl font-medium uppercase italic text-neutral-900 group-hover:text-blue-700 md:text-2xl">
+        <h3 className="text-xl font-medium  uppercase text-neutral-900 group-hover:text-blue-700 md:text-2xl">
           {item.title}
         </h3>
         <p className="font-indie text-sm uppercase tracking-widest text-neutral-500">

@@ -66,7 +66,7 @@ const ContactPage = () => {
               transition={{ delay: 0.1 }}
               className="text-6xl md:text-8xl tracking-tighter"
             >
-              Let’s create <span className="italic text-neutral-400">magic.</span>
+              Let’s create <span className="italic font-instrumentserif text-blue-700">magic.</span>
             </motion.h1>
           </header>
 

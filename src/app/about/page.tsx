@@ -37,7 +37,7 @@ const AboutPage = () => {
             
             <h1 className="text-6xl md:text-8xl font-medium tracking-tighter leading-[0.85] text-neutral-900">
               Hello world, <br />
-              I am <span className="relative inline-block italic text-blue-700">
+              I am <span className="relative font-instrumentserif inline-block italic text-blue-700">
                 DUSHIME AIME
               </span>
             </h1>
@@ -91,7 +91,7 @@ const AboutPage = () => {
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400">01 / Traits</span>
                 <div className="md:w-2/3">
                     <h3 className="text-4xl md:text-6xl font-medium tracking-tighter flex flex-wrap gap-4">
-                        Curious, <span className="text-blue-700">Adaptive</span>, Collaborative, <span className="italic font-light text-neutral-400">forever growing.</span>
+                        Curious, <span className="text-blue-700">Adaptive</span>, Collaborative, <span className="italic font-instrumentserif font-light text-neutral-400">forever growing.</span>
                     </h3>
                 </div>
             </div>
@@ -112,7 +112,7 @@ const AboutPage = () => {
             <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
             
             <h2 className="text-4xl md:text-7xl font-medium tracking-tighter mb-12">
-                Every project is a chance <br /> to <span className="text-blue-400 italic font-light">tell a new story.</span>
+                Every project is a chance <br /> to <span className="text-blue-400 font-instrumentserif italic font-light">tell a new story.</span>
             </h2>
             
             <div className="flex flex-col md:flex-row justify-center gap-6">

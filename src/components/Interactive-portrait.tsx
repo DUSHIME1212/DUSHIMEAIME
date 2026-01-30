@@ -362,12 +362,12 @@ export default function InteractivePortrait() {
       className="fixed inset-0 w-full h-full bg-[#1a1f1a] overflow-hidden"
       style={{ touchAction: "none" }}
     >
-      <img
+      {/* <img
         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/inspired-by-lando-norris-7Yemyvm8AEriZwTYTC8CyLEFYuwjYh.png"
         alt="Inspired by Lorenzo"
         className="absolute bottom-4 left-4 z-10 pointer-events-none"
         style={{ maxWidth: "120px", width: "120px", height: "auto" }}
-      />
+      /> */}
     </div>
   )
 }

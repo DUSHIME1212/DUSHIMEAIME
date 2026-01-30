@@ -120,7 +120,7 @@ export const StaggerTestimonials = () => {
             
             <div className="testimonial-content min-h-[300px]">
               <Quote className="h-12 w-12 text-blue-600/20 mb-6" />
-              <h4 className=" tracking-tight leading-[1.1] text-neutral-900">
+              <h4 className=" tracking-tight font-instrumentserif italic leading-[1.1] text-neutral-900">
                 "{testimonials[active].testimonial}"
               </h4>
               

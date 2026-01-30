@@ -128,8 +128,8 @@ const Navbar = () => {
                 <FlipLink 
                   href={it.href} 
                   className={cn(
-                    "text-sm uppercase",
-                    isWhiteTextScene ? "text-white" : "text-black"
+                    "text-sm font-instrumentserif italic uppercase",
+                    isWhiteTextScene ? "text-white " : "text-black"
                   )}
                 >
                   {it.title}

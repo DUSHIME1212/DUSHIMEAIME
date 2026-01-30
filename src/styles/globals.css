@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400;0,600;1,600;0,700;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -83,6 +84,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.instrument-serif {
+  font-family: "Instrument Serif", serif;
 }
 
 

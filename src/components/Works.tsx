@@ -70,17 +70,17 @@ function Works() {
         </span>
         <h2 className=" font-medium tracking-tighter leading-[0.9] text-neutral-900">
           Bridging the gap between <br />
-          <span className="text-neutral-400 italic font-light">beauty & results.</span>
+          <span className="text-blue-700 italic font-instrumentserif font-light">beauty & results.</span>
         </h2>
       </div>
 
       {/* WORKS GRID */}
-      <div className="works-grid grid gap-y-32 gap-x-12 lg:grid-cols-2">
+      <div className="works-grid grid gap-y-32 grid-cols-1 gap-x-12 lg:grid-cols-2">
         {projects?.map((item, i) => (
           <Link 
             href={"/works/" + item.slug} 
             key={item._id || i} 
-            className="work-card group relative flex flex-col gap-6 cursor-none"
+            className="work-card w-full group relative flex flex-col gap-6 cursor-none"
           >
             {/* MEDIA CONTAINER */}
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-neutral-100 shadow-sm transition-all duration-700 ease-[cubic-bezier(0.2,1,0.3,1)] group-hover:shadow-2xl">
@@ -112,7 +112,7 @@ function Works() {
 
             {/* METADATA */}
             <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between">
                 <h2 className="text-3xl md:text-4xl font-medium tracking-tight uppercase group-hover:translate-x-2 transition-transform duration-500">
                   {item.title}
                 </h2>

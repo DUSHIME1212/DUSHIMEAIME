@@ -72,7 +72,7 @@ const Page = () => {
           <span className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600">+ Selected Works</span>
           <h1 className="mt-6 text-6xl md:text-8xl font-medium tracking-tighter leading-[0.9]">
             Digital experiences <br />
-            <span className="text-blue-700 italic font-light">with purpose.</span>
+            <span className="text-blue-700 italic font-instrumentserif font-light">with purpose.</span>
           </h1>
           <p className="mt-16 text-xl md:text-2xl text-neutral-600 font-light leading-relaxed max-w-2xl">
             I specialize in bridging the gap between complex system architecture and human-centric interface design.
@@ -123,7 +123,7 @@ const Page = () => {
               {/* Card Footer Info */}
               <div className="mt-8 flex justify-between items-start text-black">
                 <div>
-                  <h2 className="text-3xl font-medium tracking-tight uppercase">{item.title}</h2>
+                  <h2 className="text-3xl font-medium tracking-tight font-instrumentserif italic uppercase">{item.title}</h2>
                   <p className="text-xs text-neutral-500 mt-2 uppercase tracking-widest">{item.projectType}</p>
                 </div>
                 <div className="text-right hidden md:block">
@@ -138,7 +138,7 @@ const Page = () => {
 
       {/* MORE PROJECTS (GRID SECTION) */}
       <section className="px-8 py-32 md:px-16 lg:px-32">
-        <div className="flex items-end justify-between border-b border-neutral-200 pb-8">
+        <div className="flex items-end justify-between border-b font-instrumentserif border-neutral-200 pb-8">
           <h2 className="text-4xl font-light tracking-tight">Archive & <span className="italic">More</span></h2>
           <span className="text-xs uppercase tracking-widest text-neutral-400">004 — 008</span>
         </div>
