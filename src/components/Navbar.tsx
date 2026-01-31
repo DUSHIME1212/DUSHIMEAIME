@@ -50,7 +50,7 @@ const Navbar = () => {
           borderBottom: isWhiteTextScene 
             ? "1px solid rgba(255,255,255,0.1)" 
             : "1px solid rgba(0,0,0,0.05)",
-          duration: 0.4,
+          duration: 0,
           ease: "power2.out"
         });
       } else {
@@ -66,7 +66,7 @@ const Navbar = () => {
 
       // Hide/Show Logic
       if (currentScrollY > lastScrollY.current && currentScrollY > 300) {
-        gsap.to(nav, { y: "-100%", duration: 0.3, ease: "power2.inOut" });
+        gsap.to(nav, { y: "-100%", duration: 0, ease: "power2.inOut" });
       } else {
         gsap.to(nav, { y: 0, duration: 0.3, ease: "power2.out" });
       }

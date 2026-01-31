@@ -53,7 +53,7 @@ export default function FancyLoader() {
   return (
     <div 
       ref={container} 
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black text-yellow-700 font-black"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white text-yellow-700 font-black"
     >
       {/* Percentage Display */}
       <div className="absolute bottom-10 right-10 overflow-hidden">
