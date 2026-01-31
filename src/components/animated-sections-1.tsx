@@ -62,7 +62,7 @@ const AnimatedSections = ({ sections = [] }) => {
 
     // 3. The "Reveal" Animation
     tl.fromTo(nextSlide, 
-      { clipPath: isDown ? "inset(100% 0% 0% 0%)" : "inset(0% 0% 100% 0%)" },
+      { clipPath: isDown ? "inset(0% 0% 100% 0%)" : "inset(100% 0% 0% 0%)" },
       { clipPath: "inset(0% 0% 0% 0%)" }, 0
     )
     .fromTo(bgRefs.current[nextIndex], 
@@ -70,7 +70,7 @@ const AnimatedSections = ({ sections = [] }) => {
       { scale: 1.1, filter: "blur(10px) brightness(0.5)", duration: 2 }, 0
     )
     .fromTo(imageRefs.current[nextIndex], 
-      { y: isDown ? "30%" : "-30%", scale: 1.2 },
+      { y: isDown ? "100%" : "-100%", scale: 1.2 },
       { y: "0%", scale: 1, duration: 1.8 }, 0.1
     )
     .fromTo(titleRefs.current[nextIndex],
@@ -98,8 +98,8 @@ const AnimatedSections = ({ sections = [] }) => {
     <div ref={containerRef} className="relative h-screen w-screen overflow-hidden bg-white font-dmsans">
       
       {/* GLOBAL ODOMETER (Top Left) */}
-      <div className="fixed left-12 top-12 z-[60] flex items-center gap-4 mix-blend-difference">
-        <div className="h-8 overflow-hidden text-2xl font-bold text-blue-700">
+      {/* <div className="fixed left-12 bottom-12 z-[60] flex items-center gap-4 mix-blend-difference">
+        <div className="h-8 overflow-hidden text-2xl font-bold text-white">
           <div ref={counterRef} className="flex flex-col transition-none">
             {sections.map((_, i) => (
               <span key={i} className="flex h-8 items-center">
@@ -108,11 +108,11 @@ const AnimatedSections = ({ sections = [] }) => {
             ))}
           </div>
         </div>
-        <div className="h-[1px] w-12 bg-white/30" />
-        <span className="text-xs tracking-widest text-white/40 uppercase">
+        <div className="h-[1px] w-12 bg-white" />
+        <span className="text-xs tracking-widest text-white uppercase">
           {sections.length.toString().padStart(2, '0')}
         </span>
-      </div>
+      </div> */}
 
       {/* SECTIONS */}
       {sections.map((section, i) => (
@@ -129,9 +129,9 @@ const AnimatedSections = ({ sections = [] }) => {
             style={{ backgroundImage: `url("${section.img}")` }}
           />
 
-          <div className="relative flex h-full w-full flex-col items-center justify-center">
+          <div className="relative flex h-full w-full flex-col lg:flex-row-reverse items-center justify-center lg:px-72">
             {/* HERO IMAGE CONTAINER */}
-            <div className="group relative z-10 h-[65vh] aspect-[3/4] overflow-hidden rounded-sm shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
+            <div className="group w-full lg:w-1/2 relative z-10 h-[60vh] aspect-[3/4] overflow-hidden rounded-sm shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
                <img 
                 ref={(el) => { if (el) imageRefs.current[i] = el; }}
                 src={section.img} 
@@ -142,14 +142,17 @@ const AnimatedSections = ({ sections = [] }) => {
             </div>
 
             {/* FLOATING TEXT */}
-            <div className="absolute bottom-16 text-center z-20">
+            <div className="lg:w-1/2 sm:absolute -translate-y-1/2 top-1/2 text-left z-20">
               <h2 
                 ref={(el) => { if (el) titleRefs.current[i] = el; }}
-                className="text-[12vw] font-bold tracking-tighter text-white leading-none uppercase italic"
+                className="text-5xl lg:text-7xl w-2/3 font-instrumentserif tracking-tighter text-white leading-none uppercase italic"
               >
                 {section.title}
               </h2>
-              <div className="mt-4 flex justify-center gap-4">
+              <p className="mt-6 max-w-lg text-white/80">{section.subtitle}</p>
+              
+              {/* TAGS */}
+              <div className="mt-4 hidden justify-self-start flex-wrap gap-4">
                 {section.tags?.map((tag: string, j: number) => (
                   <span key={j} className="text-[10px] uppercase tracking-[0.3em] text-white border border-white px-3 py-1 rounded-full">
                     {tag}
@@ -162,12 +165,12 @@ const AnimatedSections = ({ sections = [] }) => {
       ))}
 
       {/* NAVIGATION BAR (Bottom) */}
-      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex gap-3">
+      <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-50 flex gap-2">
         {sections.map((_, i) => (
           <button
             key={i}
             onClick={() => gotoSection(i, i > currentIndexRef.current ? 1 : -1)}
-            className={`h-2 rounded-full transition-all duration-700 ${indexState === i ? 'w-12 bg-white' : 'w-2 bg-white/20'}`}
+            className={`h-1 rounded-full transition-all duration-700 ${indexState === i ? 'w-12 bg-white' : 'w-1 bg-white/20'}`}
           />
         ))}
       </div>

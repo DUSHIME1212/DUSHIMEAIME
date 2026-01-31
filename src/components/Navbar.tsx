@@ -5,11 +5,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { links } from "~/lib/utils";
 import { usePathname } from "next/navigation";
-import { AlignRight, X } from "lucide-react";
+import { AlignRight, Menu, X } from "lucide-react";
 import { FlipLink } from "./ui/FlipLink";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { cn } from "~/lib/utils";
+import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -158,7 +159,10 @@ const Navbar = () => {
           {open ? (
             <X size={28} className="text-black" /> 
           ) : (
-            <AlignRight size={28} className={isWhiteTextScene ? "text-white" : "text-black"} />
+            <div className="flex flex-row-reverse items-center gap-4">
+              <Menu size={24} className={isWhiteTextScene ? "text-white" : "text-black"} />
+              <span className="font-instrumentserif text-xl italic">Menu</span>
+            </div>
           )}
         </button>
       </nav>
@@ -177,19 +181,19 @@ const Navbar = () => {
             <div className="flex flex-col gap-6">
               {links.map((it, i) => (
                   <div key={i} className="mobile-link overflow-hidden" onClick={toggleMenu}>
-                      <FlipLink 
+                      <Link 
                           href={it.href} 
                           className="text-5xl tracking-tighter text-black uppercase italic"
                       >
                           {it.title}
-                      </FlipLink>
+                      </Link>
                   </div>
               ))}
             </div>
             
             <div className="mt-12 border-t border-neutral-100 pt-10 mobile-link">
                 <p className="text-[10px] uppercase tracking-widest text-neutral-400 mb-2">Project Inquiries</p>
-                <p className="text-2xl font-medium tracking-tight text-neutral-900">hello@dushime.design</p>
+                <p className="text-2xl font-medium tracking-tight text-neutral-900">mdonavan33@gmail.com</p>
             </div>
         </div>
       </div>

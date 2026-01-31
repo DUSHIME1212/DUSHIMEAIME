@@ -48,14 +48,14 @@ export interface GalleryBySlugResponse {
 
 // Fetch all galleries
 export async function getAllGalleries(): Promise<GalleryProject[]> {
-  const query = groq`*[_type == "Gallery"] | order(projectGallery.title asc) {
+  const query = groq`*[_type == "Gallery"] {
     _id,
     _type,
     "projectGallery": {
-      title,
+      "title": projectGallery.title,
       "slug": projectGallery.slug.current,
-      tags,
-      shortDescription,
+      "shortDescription": projectGallery.shortDescription,
+      "tags": projectGallery.tags,
       "mainImage": {
         "url": projectGallery.mainImage.asset->url,
         "alt": projectGallery.mainImage.alt,
@@ -67,7 +67,7 @@ export async function getAllGalleries(): Promise<GalleryProject[]> {
         "alt": alt,
         "dimensions": asset->metadata.dimensions
       }
-    }
+  }
   }`;
 
   return client.fetch(query);
@@ -82,9 +82,10 @@ export async function getGalleryBySlug(
     _type,
     "projectGallery": {
       title,
+      "title": projectGallery.title,
       "slug": projectGallery.slug.current,
-      tags,
-      shortDescription,
+      "shortDescription": projectGallery.shortDescription,
+      "tags": projectGallery.tags,
       "mainImage": {
         "url": projectGallery.mainImage.asset->url,
         "alt": projectGallery.mainImage.alt,
