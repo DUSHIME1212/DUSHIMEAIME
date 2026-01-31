@@ -69,10 +69,10 @@ const Page = () => {
       {/* HEADER SECTION */}
       <section className="px-8 pt-32 pb-20 md:px-16 lg:px-32">
         <div className="max-w-4xl">
-          <span className="text-xs font-bold uppercase tracking-[0.3em] text-blue-600">+ Selected Works</span>
+          <span className="text-xs font-bold uppercase tracking-[0.3em] text-yellow-600">+ Selected Works</span>
           <h1 className="mt-6 text-6xl md:text-8xl font-medium tracking-tighter leading-[0.9]">
             Digital experiences <br />
-            <span className="text-blue-700 italic font-instrumentserif font-light">with purpose.</span>
+            <span className="text-yellow-700 italic font-instrumentserif font-light">with purpose.</span>
           </h1>
           <p className="mt-16 text-xl md:text-2xl text-neutral-600 font-light leading-relaxed max-w-2xl">
             I specialize in bridging the gap between complex system architecture and human-centric interface design.

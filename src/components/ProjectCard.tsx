@@ -47,7 +47,7 @@ export function ProjectCard({
         "relative flex rounded-2xl h-full min-h-96 flex-col overflow-hidden border bg-none transition-all duration-300 ease-out hover:shadow-lg"
       }
     >
-      <div className="absolute size-full bg-gradient-to-b from-transparent to-blue-700/50 to-50%" />
+      <div className="absolute size-full bg-gradient-to-b from-transparent to-yellow-700/50 to-50%" />
       <div
         className={cn("block cursor-pointer", className)}
       >

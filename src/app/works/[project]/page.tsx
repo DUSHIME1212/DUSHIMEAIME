@@ -122,7 +122,7 @@ export default function ProjectPage() {
                 fill
                 alt={value.alt || "Project Visual"}
                 src={imageUrl}
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, 80vw"
               />
             </div>
@@ -171,7 +171,7 @@ export default function ProjectPage() {
         </p>
       ),
       li: ({ children }: any) => (
-        <ul className="my-6 ml-6 text-xl md:text-2xl list-disc marker:text-blue-700">
+        <ul className="my-6 ml-6 text-xl md:text-2xl list-disc marker:text-yellow-700">
           {children}
         </ul>
       ),
@@ -181,11 +181,11 @@ export default function ProjectPage() {
     },
   };
 
-  if (isLoading) return (
-    <div className="flex h-screen items-center justify-center bg-black text-white">
-      <p className="animate-pulse tracking-widest uppercase text-xs">Loading Project...</p>
-    </div>
-  );
+  // if (isLoading) return (
+  //   <div className="flex h-screen items-center justify-center bg-black text-white">
+  //     <p className="animate-pulse tracking-widest uppercase text-xs">Loading Project...</p>
+  //   </div>
+  // );
 
   if (!projectData) return (
     <div className="flex h-screen items-center justify-center bg-black text-white">
@@ -241,17 +241,17 @@ export default function ProjectPage() {
 
       {/* --- CONTENT SECTION --- */}
       <section className="mx-auto max-w-[1400px] px-6 py-24 md:px-12 lg:py-40">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div className="gap-16">
           {/* Left Sidebar (Sticky Role/Objective) */}
           <aside className="lg:col-span-4">
-            <div className="sticky top-32 space-y-12">
-              <div>
+            <div className=" flex flex-col lg:flex-row items-start  w-full top-32 ">
+              <div className="w-full p-4">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-black block mb-4">+ Objective</span>
                 <p className="text-lg text-neutral-600 ">
                   {projectData.description}
                 </p>
               </div>
-              <div>
+              <div className="w-full p-4">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-black block mb-4">+ Role</span>
                 <p className="text-sm font-medium uppercase tracking-wider">{projectData.advancedDescription.role}</p>
               </div>

@@ -20,7 +20,7 @@ const AboutPage = () => {
   const yImage = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <div className="bg-[#fafafa] font-dmsans selection:bg-blue-100 selection:text-blue-700">
+    <div className="bg-[#fafafa] font-dmsans selection:bg-yellow-100 selection:text-yellow-700">
       <div className="mt-16">
         <HeroSection />
       </div>
@@ -30,14 +30,14 @@ const AboutPage = () => {
         {/* SECTION 1: IDENTITY */}
         <div className="flex flex-col lg:flex-row gap-20 items-start py-20">
           <div className="w-full lg:w-1/2 space-y-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-50 text-yellow-700 border border-yellow-100">
               <Sparkles size={14} />
               <span className="text-[10px] font-bold uppercase tracking-[0.2em]">The Designer</span>
             </div>
             
             <h1 className="text-6xl md:text-8xl font-medium tracking-tighter leading-[0.85] text-neutral-900">
               Hello world, <br />
-              I am <span className="relative font-instrumentserif inline-block italic text-blue-700">
+              I am <span className="relative font-instrumentserif inline-block italic text-yellow-700">
                 DUSHIME AIME
               </span>
             </h1>
@@ -78,7 +78,7 @@ const AboutPage = () => {
               </p>
            </div>
            <div className="bg-white p-12 md:p-20 space-y-6">
-              <h2 className="text-3xl font-medium tracking-tight text-blue-700">Why I prioritize SMBs</h2>
+              <h2 className="text-3xl font-medium tracking-tight text-yellow-700">Why I prioritize SMBs</h2>
               <p className="text-lg text-neutral-500 leading-relaxed">
                 I believe that great design can level the playing field. Small businesses are the heart of communities, and I use design to help their dreams grow into realities.
               </p>
@@ -91,7 +91,7 @@ const AboutPage = () => {
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400">01 / Traits</span>
                 <div className="md:w-2/3">
                     <h3 className="text-4xl md:text-6xl font-medium tracking-tighter flex flex-wrap gap-4">
-                        Curious, <span className="text-blue-700">Adaptive</span>, Collaborative, <span className="italic font-instrumentserif font-light text-neutral-400">forever growing.</span>
+                        Curious, <span className="text-yellow-700">Adaptive</span>, Collaborative, <span className="italic font-instrumentserif font-light text-neutral-400">forever growing.</span>
                     </h3>
                 </div>
             </div>
@@ -100,7 +100,7 @@ const AboutPage = () => {
                 <span className="text-xs font-bold uppercase tracking-widest text-neutral-400">02 / Approach</span>
                 <div className="md:w-2/3">
                     <p className="text-2xl md:text-4xl text-neutral-800 leading-tight">
-                        I focus on being <span className="underline decoration-blue-200 underline-offset-8">flexible and resourceful</span>. I enjoy finding creative solutions that align with both user needs and business goals.
+                        I focus on being <span className="underline decoration-yellow-200 underline-offset-8">flexible and resourceful</span>. I enjoy finding creative solutions that align with both user needs and business goals.
                     </p>
                 </div>
             </div>
@@ -112,14 +112,14 @@ const AboutPage = () => {
             <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
             
             <h2 className="text-4xl md:text-7xl font-medium tracking-tighter mb-12">
-                Every project is a chance <br /> to <span className="text-blue-400 font-instrumentserif italic font-light">tell a new story.</span>
+                Every project is a chance <br /> to <span className="text-yellow-400 font-instrumentserif italic font-light">tell a new story.</span>
             </h2>
             
             <div className="flex flex-col md:flex-row justify-center gap-6">
                 <Button variant="outline" className="rounded-full h-16 px-10 border-white/20 text-black transition-all">
                     What people say
                 </Button>
-                <Button className="rounded-full h-16 px-10 bg-blue-600 hover:bg-blue-500 transition-all flex items-center gap-2">
+                <Button className="rounded-full h-16 px-10 bg-yellow-600 hover:bg-yellow-500 transition-all flex items-center gap-2">
                     Let's collaborate <ArrowDownRight size={20} />
                 </Button>
             </div>

@@ -98,7 +98,7 @@ const page = () => {
   return (
     <section className="mb-32">
       {/* topsection */}
-      <div className="flex min-h-96 flex-col bg-blue-700 text-white sm:px-8 md:flex-row md:rounded-b-[96px] md:px-16 lg:px-72">
+      <div className="flex min-h-96 flex-col bg-yellow-700 text-white sm:px-8 md:flex-row md:rounded-b-[96px] md:px-16 lg:px-72">
         <div className="flex w-full flex-col justify-center gap-4 md:w-1/2">
           <h3 className="text-4xl">Testimonials</h3>
           <h1 className="text-xl md:text-3xl lg:text-5xl">
@@ -143,7 +143,7 @@ const page = () => {
             //         {testimonial.testimonial}
             //       </p>
             //       <Button asChild variant={"gooeyLeft"} className="w-fit">
-            //         <Link href={testimonial.linkedin} className="flex bg-blue-600 from-blue-800 flex-row gap-2">
+            //         <Link href={testimonial.linkedin} className="flex bg-yellow-600 from-blue-800 flex-row gap-2">
             //           <Linkedin size={12} />
             //           Linkedin
             //         </Link>

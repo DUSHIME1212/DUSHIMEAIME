@@ -113,13 +113,13 @@ export const StaggerTestimonials = () => {
           
           {/* LEFT: CONTENT */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-100">
-              <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-50 text-yellow-600 border border-yellow-100">
+              <span className="flex h-2 w-2 rounded-full bg-yellow-600 animate-pulse" />
               <span className="text-[10px] font-bold uppercase tracking-widest">Worked with</span>
             </div>
             
             <div className="testimonial-content min-h-[300px]">
-              <Quote className="h-12 w-12 text-blue-600/20 mb-6" />
+              <Quote className="h-12 w-12 text-yellow-600/20 mb-6" />
               <h4 className=" tracking-tight font-instrumentserif italic leading-[1.1] text-neutral-900">
                 "{testimonials[active].testimonial}"
               </h4>

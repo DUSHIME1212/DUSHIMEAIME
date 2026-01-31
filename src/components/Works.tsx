@@ -65,12 +65,12 @@ function Works() {
     <div className="py-24  font-dmsans bg-[#fcfcfc]" ref={containerRef}>
       {/* HEADER SECTION */}
       <div className="mb-20 flex flex-col gap-6 max-w-4xl">
-        <span className="text-xs font-bold uppercase tracking-[0.3em] text-blue-700 block">
+        <span className="text-xs font-bold uppercase tracking-[0.3em] text-yellow-700 block">
           + Selected Works
         </span>
         <h2 className=" font-medium tracking-tighter leading-[0.9] text-neutral-900">
           Bridging the gap between <br />
-          <span className="text-blue-700 italic font-instrumentserif font-light">beauty & results.</span>
+          <span className="text-yellow-700 italic font-instrumentserif font-light">beauty & results.</span>
         </h2>
       </div>
 

@@ -47,7 +47,7 @@ const ContactPage = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-[#fafafa] selection:bg-blue-100 selection:text-blue-700">
+    <section className="relative min-h-screen bg-[#fafafa] selection:bg-yellow-100 selection:text-yellow-700">
       <div className=" px-6 md:px-16 lg:px-32 py-24  lg:flex lg:gap-24 lg:py-32">
         
         {/* LEFT COLUMN: NARRATIVE & FORM */}
@@ -56,7 +56,7 @@ const ContactPage = () => {
             <motion.p 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-xs font-bold uppercase tracking-[0.4em] text-blue-600"
+              className="text-xs font-bold uppercase tracking-[0.4em] text-yellow-600"
             >
               Available for projects
             </motion.p>
@@ -66,7 +66,7 @@ const ContactPage = () => {
               transition={{ delay: 0.1 }}
               className="text-6xl md:text-8xl tracking-tighter"
             >
-              Let’s create <span className="italic font-instrumentserif text-blue-700">magic.</span>
+              Let’s create <span className="italic font-instrumentserif text-yellow-700">magic.</span>
             </motion.h1>
           </header>
 
@@ -75,7 +75,7 @@ const ContactPage = () => {
               <div className="group relative">
                 <Input 
                   placeholder="Your Name" 
-                  className="h-16 border-0 border-b-2 border-neutral-200 bg-transparent  text-lg transition-all focus:border-blue-600 focus:ring-0" 
+                  className="h-16 border-0 border-b-2 border-neutral-200 bg-transparent  text-lg transition-all focus:border-yellow-600 focus:ring-0" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -84,7 +84,7 @@ const ContactPage = () => {
                 <Input 
                   placeholder="Email Address" 
                   type="email"
-                  className="h-16 border-0 border-b-2 border-neutral-200 bg-transparent  text-lg transition-all focus:border-blue-600 focus:ring-0" 
+                  className="h-16 border-0 border-b-2 border-neutral-200 bg-transparent  text-lg transition-all focus:border-yellow-600 focus:ring-0" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -95,7 +95,7 @@ const ContactPage = () => {
             <div className="group relative">
               <Textarea
                 placeholder="Tell me about your vision..."
-                className="min-h-[200px] border-0 border-b-2 border-neutral-200 bg-transparent text-lg transition-all focus:border-blue-600 focus:ring-0 resize-none"
+                className="min-h-[200px] border-0 border-b-2 border-neutral-200 bg-transparent text-lg transition-all focus:border-yellow-600 focus:ring-0 resize-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 required
@@ -105,7 +105,7 @@ const ContactPage = () => {
             <div className="flex items-center gap-6">
               <Button
                 disabled={isLoading}
-                className="group h-16 rounded-full bg-neutral-900 px-10 text-lg hover:bg-blue-700 transition-all duration-500 disabled:bg-neutral-300"
+                className="group h-16 rounded-full bg-neutral-900 px-10 text-lg hover:bg-yellow-700 transition-all duration-500 disabled:bg-neutral-300"
               >
                 {isLoading ? (
                   <Loader2 className="animate-spin" />
@@ -135,8 +135,8 @@ const ContactPage = () => {
           <footer className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-neutral-200">
             <div className="space-y-4">
               <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Direct</p>
-              <Link href="mailto:mdonavan33@gmail.com" className="group flex items-center gap-3 text-xl font-medium hover:text-blue-600 transition-colors">
-                <div className="p-3 bg-white shadow-sm border border-neutral-100 rounded-xl group-hover:bg-blue-50 transition-colors">
+              <Link href="mailto:mdonavan33@gmail.com" className="group flex items-center gap-3 text-xl font-medium hover:text-yellow-600 transition-colors">
+                <div className="p-3 bg-white shadow-sm border border-neutral-100 rounded-xl group-hover:bg-yellow-50 transition-colors">
                   <Mail size={20} />
                 </div>
                 mdonavan33@gmail.com

@@ -37,7 +37,7 @@ const Footer = () => {
     //         asChild
     //         size={"lg"}
     //         variant={"gooeyRight"}
-    //         className="mb-4 w-fit rounded-full bg-blue-700 from-blue-500"
+    //         className="mb-4 w-fit rounded-full bg-yellow-700 from-yellow-500"
     //       >
     //         <Link href={"contact"}>Let talk</Link>
     //       </Button>

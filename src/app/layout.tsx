@@ -6,6 +6,8 @@ import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import LoadingSlider from "~/components/ui/LoadingAnimation";
 import { SmoothCursor } from "~/components/ui/smooth-cursor";
+import PageTransition from "~/components/magicui/PageTransition";
+import FancyLoader from "~/components/magicui/FancyLoader";
 
 export const metadata: Metadata = {
   title: "Don Aime Portfolio",
@@ -19,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`font-dmsans`}>
       <body>
-        {/* <LoadingSlider /> */}
+        <FancyLoader/>
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <PageTransition>  {/* Plays on every route change */}
+          {children}
+        </PageTransition>
       </body>
     </html>
   );

@@ -30,7 +30,7 @@ export function NotFoundPage() {
               <Button
                 variant="default"
                 onClick={() => router.push("/")}
-                className="my-5 bg-blue-700 hover:bg-blue-800 "
+                className="my-5 bg-yellow-700 hover:bg-blue-800 "
               >
                 Go to Home
               </Button>

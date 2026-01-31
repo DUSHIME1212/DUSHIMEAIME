@@ -103,7 +103,7 @@ export const projects = [
     role: "Full Stack Developer",
     type: ProjectType.WEBSITE,
     theme: {
-      background: "bg-blue-700",
+      background: "bg-yellow-700",
     },
     links: [
       {

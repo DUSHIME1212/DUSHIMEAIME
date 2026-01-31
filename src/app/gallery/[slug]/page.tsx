@@ -32,7 +32,7 @@ export default function GalleryPage() {
   if (loading) {
     return (
       <div className="flex h-screen w-full items-center justify-center bg-[#fafafa]">
-        <Loader2 className="animate-spin text-blue-600" size={32} />
+        <Loader2 className="animate-spin text-yellow-600" size={32} />
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default function GalleryPage() {
     return (
       <div className="flex h-screen flex-col items-center justify-center space-y-4">
         <h1 className="text-2xl font-bold">Project not found</h1>
-        <Link href="/gallery" className="text-blue-600 underline">Return to Gallery</Link>
+        <Link href="/gallery" className="text-yellow-600 underline">Return to Gallery</Link>
       </div>
     );
   }
@@ -51,7 +51,7 @@ export default function GalleryPage() {
   const { title, shortDescription, tags, mainImage, gallery: images } = project.projectGallery;
 
   return (
-    <main className="min-h-screen bg-[#fafafa] font-dmsans selection:bg-blue-100 selection:text-blue-700">
+    <main className="min-h-screen bg-[#fafafa] font-dmsans selection:bg-yellow-100 selection:text-yellow-700">
       
       {/* 1. IMMERSIVE HERO */}
       <section className="relative h-[80vh] w-full overflow-hidden bg-neutral-900">
@@ -83,7 +83,7 @@ export default function GalleryPage() {
           {/* STICKY INFO PANEL */}
           <aside className="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-12">
             <div className="space-y-6">
-              <div className="h-px w-12 bg-blue-600" />
+              <div className="h-px w-12 bg-yellow-600" />
               <p className="text-2xl leading-relaxed text-neutral-800 font-medium">
                 {shortDescription}
               </p>
@@ -101,7 +101,7 @@ export default function GalleryPage() {
             </div>
 
             <div className="pt-10 border-t border-neutral-200 flex flex-col gap-4">
-               <button className="flex w-full items-center justify-between rounded-full bg-neutral-900 px-8 py-4 text-white transition-all hover:bg-blue-700">
+               <button className="flex w-full items-center justify-between rounded-full bg-neutral-900 px-8 py-4 text-white transition-all hover:bg-yellow-700">
                   <span className="text-sm font-bold uppercase tracking-widest">Share Project</span>
                   <Expand size={18} />
                </button>
@@ -141,7 +141,7 @@ export default function GalleryPage() {
          <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
          
          <Link href="/gallery" className="group relative z-10 inline-flex flex-col items-center">
-            <span className="mb-4 text-blue-400 text-[10px] uppercase tracking-[0.8em]">Next Project</span>
+            <span className="mb-4 text-yellow-400 text-[10px] uppercase tracking-[0.8em]">Next Project</span>
             <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter transition-all duration-700 group-hover:italic group-hover:tracking-normal">
                 VIEW MORE <ArrowRight className="inline-block ml-4 transition-transform group-hover:translate-x-6" size={48} />
             </h2>

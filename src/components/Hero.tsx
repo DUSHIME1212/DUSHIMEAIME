@@ -49,7 +49,7 @@ const Hero = () => {
                   designer enthusiast based in RWANDA
                 </LinkPreview>
                 , I craft human centered experiences and scalable systems where{" "}
-                <span className="text-blue-700 font-instrumentserif italic">design meets logic</span>, and
+                <span className="text-yellow-700 font-instrumentserif italic">design meets logic</span>, and
                 emotion meets code. From pixel to product, I merge aesthetics
                 with functionality to grow brands and simplify lives. I am
                 enthusiastic about joining a dynamic team to{" "}
@@ -101,12 +101,12 @@ const Hero = () => {
       <div className="mt-24">
         {/* HEADER SECTION */}
         <div className="mb-20 flex max-w-4xl flex-col gap-6">
-          <span className="block text-xs font-bold uppercase tracking-[0.3em] text-blue-700">
+          <span className="block text-xs font-bold uppercase tracking-[0.3em] text-yellow-700">
             + My experience
           </span>
           <h2 className=" font-medium leading-[0.9] tracking-tighter text-neutral-900 ">
             A journey of building products <br />
-            <span className="font-light italic font-instrumentserif text-blue-700">
+            <span className="font-light italic font-instrumentserif text-yellow-700">
               that solve real problems.
             </span>
           </h2>
@@ -126,7 +126,7 @@ const Hero = () => {
 const ExperienceRow = ({ item }) => (
   <Link
     href="/"
-    className="group flex items-center justify-between border-b border-neutral-100 transition-colors hover:border-blue-700"
+    className="group flex items-center justify-between border-b border-neutral-100 transition-colors hover:border-yellow-700"
   >
     <div className="flex items-center gap-6">
       <div className="relative h-14 w-14 overflow-hidden bg-neutral-100">
@@ -137,7 +137,7 @@ const ExperienceRow = ({ item }) => (
         />
       </div>
       <div>
-        <h3 className="text-xl font-medium  uppercase text-neutral-900 group-hover:text-blue-700 md:text-2xl">
+        <h3 className="text-xl font-medium  uppercase text-neutral-900 group-hover:text-yellow-700 md:text-2xl">
           {item.title}
         </h3>
         <p className="font-indie text-sm uppercase tracking-widest text-neutral-500">
@@ -152,7 +152,7 @@ const ExperienceRow = ({ item }) => (
         </span>
       )}
       <ArrowUpRight
-        className="text-neutral-300 transition-colors group-hover:text-blue-700"
+        className="text-neutral-300 transition-colors group-hover:text-yellow-700"
         size={32}
         strokeWidth={1}
       />
@@ -181,7 +181,7 @@ export function BlockinText({ examples }) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.5, ease: "circOut" }}
-          className="text-lg font-medium text-blue-700"
+          className="text-lg font-medium text-yellow-700"
         >
           {examples[index]}
         </motion.p>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function SignatureMarqueeSection() {
   return (
-    <div className="relative bg-blue-700 w-full h-full flex flex-col items-center justify-center z-0 overflow-hidden">
+    <div className="relative bg-yellow-700 w-full h-full flex flex-col items-center justify-center z-0 overflow-hidden">
       <div className="w-full flex flex-col gap-4 md:gap-8 py-10 select-none pointer-events-none">
         {/* Top Line - Moving Right */}
         <div className="w-full overflow-hidden flex">
@@ -25,7 +25,7 @@ export default function SignatureMarqueeSection() {
             {[...Array(4)].map((_, i) => (
               <h2
                 key={i}
-                className="text-[12vw] md:text-[8vw] font-instrumentserif italic text-blue-100 leading-[0.9] tracking-tight px-4"
+                className="text-[12vw] md:text-[8vw] font-instrumentserif italic text-yellow-100 leading-[0.9] tracking-tight px-4"
               >
                 FRONTEND DEVELOPER | FULLSTACK DEVELOPMENT
               </h2>

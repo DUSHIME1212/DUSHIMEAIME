@@ -141,7 +141,7 @@ const Navbar = () => {
                     layoutId="nav-dot"
                     className={cn(
                       "absolute -bottom-3 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full",
-                      isWhiteTextScene ? "bg-white" : "bg-blue-600"
+                      isWhiteTextScene ? "bg-white" : "bg-yellow-600"
                     )}
                   />
                 )}
@@ -175,7 +175,7 @@ const Navbar = () => {
         <div className="flex h-full flex-col justify-center gap-12">
             <div className="space-y-2">
                <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-400 font-bold">Navigation</p>
-               <div className="h-px w-8 bg-blue-600" />
+               <div className="h-px w-8 bg-yellow-600" />
             </div>
             
             <div className="flex flex-col gap-6">
