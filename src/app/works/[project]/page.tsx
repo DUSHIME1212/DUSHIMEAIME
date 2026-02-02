@@ -187,11 +187,7 @@ export default function ProjectPage() {
   //   </div>
   // );
 
-  if (!projectData) return (
-    <div className="flex h-screen items-center justify-center bg-black text-white">
-      <p className="tracking-widest uppercase text-xs">Project not found</p>
-    </div>
-  );
+  if (!projectData) return null;
 
   // Check for hero image as well
   const heroImageUrl = projectData.projectImage?.url;
@@ -270,9 +266,9 @@ export default function ProjectPage() {
 
       {/* --- FOOTER / NEXT PROJECT --- */}
       <footer className="bg-black py-40 text-center text-white">
-        <Link href="/work" className="group">
+        <Link href="/works" className="group">
           <p className="text-xs uppercase tracking-[0.3em] opacity-50 group-hover:opacity-100 transition-opacity">Next Project</p>
-          <h2 className="text-5xl md:text-8xl font-medium mt-4">Browse All</h2>
+          <h2 className="text-5xl md:text-8xl mt-4">Browse All</h2>
         </Link>
       </footer>
     </main>

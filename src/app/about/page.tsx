@@ -107,7 +107,7 @@ const AboutPage = () => {
         </div>
 
         {/* SECTION 4: CALL TO ACTION */}
-        <div className="bg-neutral-900 rounded-[3rem] p-12 md:p-32 text-center text-white relative overflow-hidden">
+        <div className="bg-neutral-900 p-12 md:p-32 text-center text-white relative overflow-hidden">
             {/* Background Texture */}
             <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
             

@@ -30,11 +30,7 @@ export default function GalleryPage() {
 
   // 1. Loading State (Senior UX: Use a centered, minimal loader)
   if (loading) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center bg-[#fafafa]">
-        <Loader2 className="animate-spin text-yellow-600" size={32} />
-      </div>
-    );
+    return null
   }
 
   // 2. 404 State
@@ -55,7 +51,7 @@ export default function GalleryPage() {
       
       {/* 1. IMMERSIVE HERO */}
       <section className="relative h-[80vh] w-full overflow-hidden bg-neutral-900">
-        <div className="absolute inset-0 z-10 bg-black/30" />
+        <div className="absolute inset-0 z-10 bg-black/60" />
         <Image
           src={mainImage?.url || ""}
           alt={title || "Gallery project image"}
@@ -69,7 +65,7 @@ export default function GalleryPage() {
               <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> 
               <span className="text-sm font-medium uppercase tracking-widest">Explore All Projects</span>
             </Link>
-            <h1 className="text-6xl md:text-[10vw] font-bold tracking-tighter text-white uppercase leading-[0.8]">
+            <h1 className="text-6xl md:text-[10vw]  tracking-tighter text-white uppercase leading-[0.8]">
               {title}
             </h1>
           </BlurFade>
