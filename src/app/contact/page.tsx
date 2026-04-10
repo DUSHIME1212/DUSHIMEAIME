@@ -7,7 +7,6 @@ import React, { useState, FormEvent } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import emailjs from '@emailjs/browser';
 import { motion, AnimatePresence } from "framer-motion";
 
 const ContactPage = () => {
@@ -17,30 +16,42 @@ const ContactPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
+  const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzS96621EOfKkPBQvxSfNBDwHvsrbwfSIvyAmrQajFB3vXoloBPRUI0PDEoaRAFtBkY/exec";
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!GOOGLE_SHEET_URL) {
+      alert("Please configure the Google Sheet Web App URL in the code.");
+      return;
+    }
+
     setStatus('idle');
     setIsLoading(true);
 
-    const templateParams = {
-      from_name: name,
-      from_email: email,
-      to_name: "Hosanna DUSHIME",
+    const formData = {
+      name,
+      email,
       message,
     };
 
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_USER_ID
-      );
+      await fetch(GOOGLE_SHEET_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Script Web App
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Note: 'no-cors' mode always returns an opaque response with status 0
+      // We assume success if no error is thrown
       setIsLoading(false);
       setStatus('success');
       setName(""); setEmail(""); setMessage("");
-      setTimeout(() => setStatus('idle'), 5000); // Reset after 5s
+      setTimeout(() => setStatus('idle'), 5000); 
     } catch (err) {
+      console.error("Submission error:", err);
       setIsLoading(false);
       setStatus('error');
     }
@@ -70,7 +81,7 @@ const ContactPage = () => {
             </motion.h1>
           </header>
 
-          <form onSubmit={sendEmail} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
               <div className="group relative">
                 <Input 
@@ -78,6 +89,7 @@ const ContactPage = () => {
                   className="h-16 border-0 border-b-2 border-border bg-transparent text-lg transition-all focus:border-notion-blue focus:ring-0" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
               <div className="group relative">
@@ -128,6 +140,10 @@ const ContactPage = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
+              
+              {status === 'error' && (
+                <p className="text-red-500 font-medium">Something went wrong. Please try again.</p>
+              )}
             </div>
           </form>
 
@@ -174,7 +190,6 @@ const ContactPage = () => {
         </div>
       </div>
     </section>
-
   );
 };
 

@@ -120,11 +120,7 @@ export default function FancyLoader() {
       </div>
 
       {/* Year bottom-right */}
-      <div className="absolute bottom-8 right-8 md:bottom-16 md:right-16 lg:bottom-24 lg:right-24">
-        <span className="text-[10px] text-white/15 tracking-widest uppercase">
-          2025
-        </span>
-      </div>
+      
     </div>
   );
 }

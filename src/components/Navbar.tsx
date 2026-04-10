@@ -225,7 +225,7 @@ export default function Navbar() {
           >
             <div className="w-full h-full relative">
               <Image
-                src="/hero-no-suit (1).png"
+                src="/Rectangle 1.png"
                 alt="Dushime Aime"
                 fill
                 sizes="40vw"
@@ -299,7 +299,7 @@ export default function Navbar() {
                 <p className="text-[9px] tracking-[0.4em] uppercase text-white/20 mb-2 font-medium">
                   Contact
                 </p>
-                <p className="text-sm text-white/70 font-medium">+250 798 840 568</p>
+                <p className="text-sm text-white/70 font-medium">+250 782 454 192</p>
                 <p className="text-sm">mdonavan33@gmail.com</p>
               </div>
               <div className="menu-col flex-1 flex items-end pt-2 lg:pt-0">
