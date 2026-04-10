@@ -37,7 +37,7 @@ const Page = () => {
   const mappedSections = galleries
     .filter((item) => item.projectGallery?.mainImage?.url && item.projectGallery?.slug)
     .map((item) => ({
-      img: item.projectGallery.mainImage.url,
+      img: `${item.projectGallery.mainImage.url}?w=2000&auto=format&q=75`,
       slug: item.projectGallery.slug,
       title: item.projectGallery.title || "",
       subtitle: item.projectGallery.shortDescription || "",

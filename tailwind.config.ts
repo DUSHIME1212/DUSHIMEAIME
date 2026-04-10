@@ -7,19 +7,40 @@ export default {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ["var(--font-geist-sans)", ...fontFamily.sans],
-  			indie: ["Indie Flower", 'cursive'],
-  			dmsans: ["DM Sans", "sans-serif"],
-			instrumentserif: ['Instrument Serif', 'serif']
-  		},
+  			sans: ["Inter", ...fontFamily.sans],
+			notion: ["Inter", ...fontFamily.sans],
+		},
   		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			lg: '12px',
+  			md: '8px',
+  			sm: '4px',
+			pill: '9999px',
   		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			notion: {
+				blue: {
+					DEFAULT: '#0075de',
+					active: '#005bab',
+					focus: '#097fe8',
+					badge: '#f2f9ff',
+					'badge-text': '#097fe8',
+				},
+				black: 'rgba(0,0,0,0.95)',
+				warm: {
+					white: '#f6f5f4',
+					dark: '#31302e',
+					gray500: '#615d59',
+					gray300: '#a39e98',
+				},
+				teal: '#2a9d99',
+				green: '#1aae39',
+				orange: '#dd5b00',
+				pink: '#ff64c8',
+				purple: '#391c57',
+				brown: '#523410',
+			},
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -69,6 +90,19 @@ export default {
   				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
+		letterSpacing: {
+			'notion-display': '-2.125px',
+			'notion-secondary': '-1.875px',
+			'notion-heading': '-1.5px',
+			'notion-subheading': '-0.625px',
+			'notion-card-title': '-0.25px',
+			'notion-body-large': '-0.125px',
+			'notion-badge': '0.125px',
+		},
+		boxShadow: {
+			'notion-card': '0px 4px 18px rgba(0,0,0,0.04), 0px 2.025px 7.84688px rgba(0,0,0,0.027), 0px 0.8px 2.925px rgba(0,0,0,0.02), 0px 0.175px 1.04062px rgba(0,0,0,0.01)',
+			'notion-deep': '0px 1px 3px rgba(0,0,0,0.01), 0px 3px 7px rgba(0,0,0,0.02), 0px 7px 15px rgba(0,0,0,0.02), 0px 14px 28px rgba(0,0,0,0.04), 0px 23px 52px rgba(0,0,0,0.05)',
+		},
 	keyframes: {
 		'accordion-down': {
 			from: {
@@ -96,7 +130,16 @@ export default {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
 			'loading-bar': 'loading-bar 1.5s infinite ease-in-out',
-  		}
+  		},
+		transitionDuration: {
+			'2000': '2000ms',
+			'3000': '3000ms',
+		},
+		transitionTimingFunction: {
+			'hop': 'cubic-bezier(0.87, 0, 0.13, 1)',
+			'expo-out': 'cubic-bezier(0.2, 1, 0.3, 1)',
+			'quint-out': 'cubic-bezier(0.23, 1, 0.32, 1)',
+		}
   	}
   },
   plugins: [require("tailwindcss-animate"),require('@tailwindcss/typography')],

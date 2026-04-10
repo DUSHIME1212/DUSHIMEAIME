@@ -44,13 +44,11 @@ export function ProjectCard({
     <Link
       href={href || "#"}
       className={
-        "relative flex rounded-2xl h-full min-h-96 flex-col overflow-hidden border bg-none transition-all duration-300 ease-out hover:shadow-lg"
+        "relative flex h-full min-h-96 flex-col overflow-hidden rounded-2xl border bg-none transition-all duration-300 ease-out hover:shadow-lg"
       }
     >
       <div className="absolute size-full bg-gradient-to-b from-transparent to-yellow-700/50 to-50%" />
-      <div
-        className={cn("block cursor-pointer", className)}
-      >
+      <div className={cn("block cursor-pointer", className)}>
         {video && (
           <video
             src={video}
@@ -76,13 +74,11 @@ export function ProjectCard({
             {title}
           </CardTitle>
           <time className="font-sans text-xs">{dates}</time>
-          <div className="hidden font-sans text-xs underline print:visible">
+          <div className="hidden font-sans text-xs print:visible">
             {link?.replace("https://", "").replace("www.", "").replace("/", "")}
           </div>
           <div className="prose max-w-full text-pretty font-sans text-xs text-muted dark:prose-invert">
-            <Markdown>
-              {description}
-            </Markdown>
+            <Markdown>{description}</Markdown>
           </div>
         </div>
       </div>

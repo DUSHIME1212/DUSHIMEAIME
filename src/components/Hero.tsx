@@ -7,6 +7,7 @@ import Link from "next/link";
 import { LinkPreview } from "./ui/link-preview";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import Image from "next/image";
 import { fetchExperience } from "~/lib/sanity/experience";
 
 const Hero = () => {
@@ -17,14 +18,14 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-col justify-between overflow-hidden pb-12 pt-20 font-dmsans">
+    <section className="relative flex min-h-screen flex-col justify-between overflow-hidden pb-12 pt-20 font-notion">
       {/* 1. BRUTALIST HEADER */}
       <div className="">
         <motion.h1
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[14vw] uppercase leading-[0.8]  tracking-tighter text-neutral-900"
+          className="text-[14vw] font-medium uppercase  leading-[0.8] tracking-notion-display text-foreground"
         >
           Don Aime
         </motion.h1>
@@ -37,25 +38,27 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
             className="lg:col-span-7"
           >
-            <h2 className="group text-gray-700">
-              <span className="text-2xl text-gray-900/60">
+            <h2 className="group text-foreground">
+              <span className="text-2xl leading-relaxed">
                 I am a{" "}
                 <LinkPreview
-                  url=""
+                  url="/about"
                   imageSrc="/image.png"
                   isStatic
-                  className="font-medium italic font-instrumentserif underline decoration-neutral-300"
+                  className="-offset-4 font-semibold decoration-border decoration-2 transition-colors hover:text-notion-blue"
                 >
                   designer enthusiast based in RWANDA
                 </LinkPreview>
                 , I craft human centered experiences and scalable systems where{" "}
-                <span className="text-yellow-700 font-instrumentserif italic">design meets logic</span>, and
-                emotion meets code. From pixel to product, I merge aesthetics
-                with functionality to grow brands and simplify lives. I am
-                enthusiastic about joining a dynamic team to{" "}
+                <span className="font-semibold text-notion-blue italic font-instrumentserif">
+                  design meets logic
+                </span>
+                , and emotion meets code. From pixel to product, I merge
+                aesthetics with functionality to grow brands and simplify lives.
+                I am enthusiastic about joining a dynamic team to{" "}
                 <LinkPreview
                   url="https://coursera.org/share/45d02afe3a482586006b893d291be290"
-                  className="font-medium font-instrumentserif italic underline decoration-neutral-300"
+                  className="-offset-4 font-semibold decoration-border decoration-2 transition-colors hover:text-notion-blue"
                 >
                   learn UX best practices
                 </LinkPreview>
@@ -64,12 +67,12 @@ const Hero = () => {
               </span>
             </h2>
 
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-10 flex flex-wrap gap-3">
               {["React", "TypeScript", "Python", "Go", "Docker"].map(
                 (skill) => (
                   <span
                     key={skill}
-                    className="rounded-full border border-neutral-200 px-3 py-1 text-[10px] uppercase tracking-widest text-neutral-500"
+                    className="rounded-pill border border-border bg-notion-warm-white/50 px-3 py-1 text-[12px] font-medium tracking-notion-badge text-muted-foreground transition-all hover:bg-notion-blue-badge hover:text-notion-blue-badge-text"
                   >
                     {skill}
                   </span>
@@ -80,8 +83,8 @@ const Hero = () => {
 
           {/* 3. TYPEWRITER BOX */}
           <div className="flex items-end lg:col-span-5">
-            <div className="w-full   p-6 shadow-sm">
-              <p className="mb-2 text-xs uppercase tracking-widest text-neutral-400">
+            <div className="whisper-border w-full rounded-lg bg-card p-6 shadow-sm notion-shadow">
+              <p className="mb-2 text-[12px] font-semibold uppercase tracking-notion-badge text-muted-foreground">
                 Focus
               </p>
               <BlockinText
@@ -98,63 +101,68 @@ const Hero = () => {
       </div>
 
       {/* 4. CAREER TIMELINE (Currently & Previous) */}
-      <div className="mt-24">
+      <div className="mt-32">
         {/* HEADER SECTION */}
         <div className="mb-20 flex max-w-4xl flex-col gap-6">
-          <span className="block text-xs font-bold uppercase tracking-[0.3em] text-yellow-700">
+          <span className="block text-[12px] font-semibold uppercase tracking-notion-badge text-notion-blue">
             + My experience
           </span>
-          <h2 className=" font-medium leading-[0.9] tracking-tighter text-neutral-900 ">
+          <h2 className="font-medium leading-[1.0] tracking-notion-heading text-foreground">
             A journey of building products <br />
-            <span className="font-light italic font-instrumentserif text-yellow-700">
+            <span className="font-medium text-muted-foreground">
               that solve real problems.
             </span>
           </h2>
         </div>
-        <div className="pt8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="pt-8">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {experience.map((item, index) => (
               <ExperienceRow key={index} item={item} />
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 const ExperienceRow = ({ item }) => (
   <Link
     href="/"
-    className="group flex items-center justify-between border-b border-neutral-100 transition-colors hover:border-yellow-700"
+    aria-label={`View experience at ${item.company}`}
+    className="r group -mx-4 flex w-full items-center justify-between rounded-lg px-4 py-6 transition-all hover:bg-notion-blue-badge/30"
   >
     <div className="flex items-center gap-6">
-      <div className="relative h-14 w-14 overflow-hidden bg-neutral-100">
-        <img
-          src={item.companyLogo?.url}
-          className="h-full w-full object-cover grayscale transition-all group-hover:grayscale-0"
-          alt=""
-        />
+      <div className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted bg-notion-warm-white border whisper-border">
+        {item.companyLogo?.url ? (
+          <Image
+            src={item.companyLogo?.url}
+            fill
+            sizes="56px"
+            className="object-cover grayscale transition-all group-hover:grayscale-0"
+            alt={item.company || "Company logo"}
+          />
+        ) : (
+          <span className="text-[10px] font-medium text-muted-foreground">
+            LOGO
+          </span>
+        )}
       </div>
       <div>
-        <h3 className="text-xl font-medium  uppercase text-neutral-900 group-hover:text-yellow-700 md:text-2xl">
+        <h3 className="text-lg font-medium uppercase tracking-notion-subheading text-foreground transition-colors group-hover:text-notion-blue">
           {item.title}
         </h3>
-        <p className="font-indie text-sm uppercase tracking-widest text-neutral-500">
+        <p className="text-sm font-medium tracking-notion-body-large text-muted-foreground">
           {item.company}
         </p>
       </div>
     </div>
     <div className="flex items-center gap-4">
-      {item.isCurrentlyWorkingHere && (
-        <span className="animate-pulse rounded-md bg-green-50 px-2 py-1 text-[10px] font-bold uppercase tracking-tighter text-green-600">
-          Present
-        </span>
-      )}
+      {item.isCurrentlyWorkingHere && <span className="badge">Present</span>}
       <ArrowUpRight
-        className="text-neutral-300 transition-colors group-hover:text-yellow-700"
-        size={32}
-        strokeWidth={1}
+        className="text-muted-foreground transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-notion-blue"
+        size={20}
+        strokeWidth={2}
       />
     </div>
   </Link>
@@ -181,7 +189,7 @@ export function BlockinText({ examples }) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.5, ease: "circOut" }}
-          className="text-lg font-medium text-yellow-700"
+          className="text-lg font-semibold text-notion-blue"
         >
           {examples[index]}
         </motion.p>

@@ -1,123 +1,111 @@
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400;0,600;1,600;0,700;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --background: 30 7% 96%; /* Warm White #f6f5f4 */
+    --foreground: 0 0% 0% / 0.95; /* Notion Black rgba(0,0,0,0.95) */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 0 0% 0% / 0.95;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --popover-foreground: 0 0% 0% / 0.95;
+    --primary: 208 100% 44%; /* Notion Blue #0075de */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 7% 94%;
+    --secondary-foreground: 0 0% 12%;
+    --muted: 30 7% 94%;
+    --muted-foreground: 24 5% 30%; /* Darkened for better contrast #4d4a47 */
+    --accent: 208 100% 44% / 0.05;
+    --accent-foreground: 208 100% 44%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 0% / 0.1; /* Whisper Border */
+    --input: 0 0% 87%;
+    --ring: 208 100% 46%;
+    --radius: 4px;
   }
+
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
+    --background: 30 3% 19%; /* Warm Dark #31302e */
+    --foreground: 0 0% 100% / 0.95;
+    --card: 30 3% 15%;
+    --card-foreground: 0 0% 100% / 0.95;
+    --popover: 30 3% 15%;
+    --popover-foreground: 0 0% 100% / 0.95;
+    --primary: 208 100% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 3% 25%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --muted: 30 3% 25%;
+    --muted-foreground: 30 2% 64%;
+    --accent: 208 100% 44% / 0.2;
+    --accent-foreground: 208 100% 66%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 100% / 0.1;
+    --input: 30 3% 25%;
+    --ring: 208 100% 46%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-notion antialiased;
+    font-feature-settings: "lnum", "locl";
+  }
+
+  h1 {
+    @apply scroll-m-20 text-[clamp(2.5rem,8vw,5.5rem)] font-medium tracking-notion-display leading-[0.9] text-foreground;
+  }
+  h2 {
+    @apply scroll-m-20 text-[clamp(2rem,6vw,4rem)] font-medium tracking-notion-heading leading-[1.0] text-foreground;
+  }
+  h3 {
+    @apply scroll-m-20 text-[clamp(1.75rem,4vw,2.5rem)] font-medium leading-[1.2] text-foreground;
+  }
+  h4 {
+    @apply scroll-m-20 text-[26px] font-medium tracking-notion-subheading leading-[1.23] text-foreground;
+  }
+  h5 {
+    @apply scroll-m-20 text-[22px] font-medium tracking-notion-card-title leading-[1.27] text-foreground;
+  }
+  h6 {
+    @apply scroll-m-20 text-[20px] font-medium tracking-notion-body-large leading-[1.4] text-foreground;
+  }
+  p {
+    @apply text-[17px] leading-[1.65] text-foreground font-normal;
+  }
+  
+  .caption {
+    @apply text-[14px] leading-[1.43] text-muted-foreground font-medium;
+  }
+  
+  .badge {
+    @apply text-[12px] font-semibold tracking-notion-badge leading-[1.33] rounded-pill px-2 py-1 bg-notion-blue-badge text-notion-blue-badge-text;
   }
 }
 
-.instrument-serif {
-  font-family: "Instrument Serif", serif;
-}
-
-
-
-h1 {
-  @apply scroll-m-20 text-6xl tracking-tighter font-normal lg:text-7xl;
-}
-h2 {
-  @apply scroll-m-20 text-5xl tracking-tight font-medium transition-colors first:mt-0;
-}
-h3 {
-  @apply scroll-m-20 text-4xl tracking-tight font-medium;
-}
-h4 {
-  @apply scroll-m-20 text-3xl tracking-tight font-medium;
-}
-h5 {
-  @apply scroll-m-20 text-2xl  tracking-tight font-medium;
-}
-h6 {
-  @apply scroll-m-20 text-xl tracking-tight font-medium;
-}
-p {
-  @apply leading-7 opacity-60 tracking-tight [&:not(:first-child)]:mt-0;
-}
-ul {
-  @apply my-2 ml-2 list-disc [&>li]:mt-2;
-}
-blockquote {
-  @apply mt-6 border-l-2 pl-6 italic;
+@layer utilities {
+  .whisper-border {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .dark .whisper-border {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .notion-shadow {
+    @apply shadow-notion-card;
+  }
+  
+  .notion-shadow-deep {
+    @apply shadow-notion-deep;
+  }
 }
 
 

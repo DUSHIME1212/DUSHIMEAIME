@@ -47,25 +47,25 @@ export default function GalleryPage() {
   const { title, shortDescription, tags, mainImage, gallery: images } = project.projectGallery;
 
   return (
-    <main className="min-h-screen bg-[#fafafa] font-dmsans selection:bg-yellow-100 selection:text-yellow-700">
+    <main className="min-h-screen bg-background font-notion selection:bg-notion-blue/20 selection:text-notion-blue">
       
       {/* 1. IMMERSIVE HERO */}
-      <section className="relative h-[80vh] w-full overflow-hidden bg-neutral-900">
-        <div className="absolute inset-0 z-10 bg-black/60" />
+      <section className="relative h-[80vh] w-full overflow-hidden bg-muted">
+        <div className="absolute inset-0 z-10 bg-black/40" />
         <Image
-          src={mainImage?.url || ""}
+          src={mainImage?.url ? `${mainImage.url}?w=2040&q=75` : ""}
           alt={title || "Gallery project image"}
           fill
-          className="object-cover transition-transform duration-[3s] hover:scale-110"
+          className="object-cover transition-transform duration-3000 hover:scale-110"
           priority
         />
-        <div className="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-20 bg-gradient-to-t from-neutral-900 via-transparent to-transparent">
+        <div className="absolute inset-0 z-20 flex flex-col justify-end p-8 md:p-20 bg-gradient-to-t from-black/60 via-transparent to-transparent">
           <BlurFade delay={0.2} direction="up">
-            <Link href="/gallery" className="mb-8 inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
+            <Link href="/gallery" className="mb-8 inline-flex items-center gap-2 text-white/90 hover:text-white transition-colors group">
               <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" /> 
-              <span className="text-sm font-medium uppercase tracking-widest">Explore All Projects</span>
+              <span className="text-sm font-medium uppercase tracking-notion-badge">Explore All Projects</span>
             </Link>
-            <h1 className="text-6xl md:text-[10vw]  tracking-tighter text-white uppercase leading-[0.8]">
+            <h1 className="text-6xl md:text-[10vw] font-medium tracking-notion-display text-white uppercase leading-[0.8]">
               {title}
             </h1>
           </BlurFade>
@@ -79,26 +79,26 @@ export default function GalleryPage() {
           {/* STICKY INFO PANEL */}
           <aside className="lg:col-span-4 lg:sticky lg:top-32 h-fit space-y-12">
             <div className="space-y-6">
-              <div className="h-px w-12 bg-yellow-600" />
-              <p className="text-2xl leading-relaxed text-neutral-800 font-medium">
+              <div className="h-px w-12 bg-notion-blue" />
+              <p className="text-2xl leading-relaxed text-foreground font-medium">
                 {shortDescription}
               </p>
             </div>
 
             <div className="space-y-4">
-               <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold">Disciplines</p>
+               <p className="text-[10px] uppercase tracking-notion-badge text-muted-foreground font-semibold">Disciplines</p>
                <div className="flex flex-wrap gap-2">
                 {tags?.map((tag) => (
-                    <span key={tag} className="px-4 py-1.5 rounded-full border border-neutral-200 text-[10px] uppercase tracking-widest text-neutral-600 bg-white shadow-sm">
+                    <span key={tag} className="px-4 py-1.5 rounded-pill border whisper-border text-[10px] uppercase tracking-notion-badge text-muted-foreground bg-notion-warm-white/50 dark:bg-notion-warm-dark/50 shadow-sm">
                     {tag}
                     </span>
                 ))}
                </div>
             </div>
 
-            <div className="pt-10 border-t border-neutral-200 flex flex-col gap-4">
-               <button className="flex w-full items-center justify-between rounded-full bg-neutral-900 px-8 py-4 text-white transition-all hover:bg-yellow-700">
-                  <span className="text-sm font-bold uppercase tracking-widest">Share Project</span>
+            <div className="pt-10 border-t  flex flex-col gap-4">
+               <button className="flex w-full items-center justify-between rounded-pill bg-foreground px-8 py-4 text-background transition-all hover:bg-notion-blue">
+                  <span className="text-sm font-medium uppercase tracking-notion-badge">Share Project</span>
                   <Expand size={18} />
                </button>
             </div>
@@ -109,16 +109,16 @@ export default function GalleryPage() {
             {images && images.length > 0 ? (
               images.map((image, index) => (
                 <BlurFade key={image._key || index} delay={0.1 * index} inView>
-                  <figure className="group relative overflow-hidden rounded-2xl bg-neutral-200">
+                  <figure className="group relative overflow-hidden rounded-lg bg-muted whisper-border notion-shadow transition-all duration-700 hover:notion-shadow-deep">
                     <Image
-                      src={image.url || ""}
+                      src={image.url ? `${image.url}?w=1600&q=75` : ""}
                       alt={image.alt || `Gallery image ${index + 1}`}
-                      width={image.dimensions?.width || 1200}
-                      height={image.dimensions?.height || 800}
-                      className="w-full object-cover transition-all duration-700 group-hover:scale-[1.03]"
+                      width={1600}
+                      height={1000}
+                      className="w-full object-cover grayscale-[0.1] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
                     />
                     {image.alt && (
-                      <figcaption className="absolute bottom-6 left-6 rounded-lg bg-white/80 px-4 py-2 text-xs font-medium backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100">
+                      <figcaption className="absolute bottom-6 left-6 rounded-lg bg-white/90 dark:bg-notion-warm-dark/90 px-4 py-2 text-xs font-medium backdrop-blur-md opacity-0 transition-opacity group-hover:opacity-100 border whisper-border text-foreground">
                         {image.alt}
                       </figcaption>
                     )}
@@ -126,19 +126,19 @@ export default function GalleryPage() {
                 </BlurFade>
               ))
             ) : (
-              <p className="text-neutral-400 italic">No additional images in this gallery.</p>
+              <p className="text-muted-foreground italic font-medium">No additional images in this gallery.</p>
             )}
           </div>
         </div>
       </section>
 
       {/* 3. NEXT PROJECT FOOTER (The Bridge) */}
-      <footer className="bg-neutral-900 py-40 text-center relative overflow-hidden">
+      <footer className="bg-foreground py-40 text-center relative overflow-hidden">
          <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
          
          <Link href="/gallery" className="group relative z-10 inline-flex flex-col items-center">
-            <span className="mb-4 text-yellow-400 text-[10px] uppercase tracking-[0.8em]">Next Project</span>
-            <h2 className="text-5xl md:text-8xl font-bold text-white tracking-tighter transition-all duration-700 group-hover:italic group-hover:tracking-normal">
+            <span className="mb-4 text-notion-blue text-[10px] uppercase tracking-notion-badge font-medium">Next Project</span>
+            <h2 className="text-5xl md:text-8xl font-medium text-background tracking-notion-display transition-all duration-700 hover:text-notion-blue">
                 VIEW MORE <ArrowRight className="inline-block ml-4 transition-transform group-hover:translate-x-6" size={48} />
             </h2>
          </Link>

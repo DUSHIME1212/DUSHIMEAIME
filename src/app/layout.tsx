@@ -1,6 +1,5 @@
 import "~/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
@@ -11,21 +10,33 @@ import FancyLoader from "~/components/magicui/FancyLoader";
 
 export const metadata: Metadata = {
   title: "Don Aime Portfolio",
-  description: "Don Aime Portfolio",
+  description: "Creative Developer & UX Enthusiast Portfolio",
   icons: [{ rel: "icon", url: "/logo23.png" }],
 };
+
+import { ThemeProvider } from "~/components/theme-provider";
+import { ThemeToggle } from "~/components/ThemeToggle";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`font-dmsans`}>
-      <body>
-        <FancyLoader/>
-        <Navbar />
-        <PageTransition>  {/* Plays on every route change */}
-          {children}
-        </PageTransition>
+    <html lang="en" suppressHydrationWarning className="font-notion antialiased">
+      <body className="bg-background text-foreground selection:bg-notion-blue/20 selection:text-notion-blue">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <FancyLoader/>
+          <Navbar />
+          <PageTransition>
+            {children}
+          </PageTransition>
+          <Footer />
+          <ThemeToggle />
+        </ThemeProvider>
       </body>
     </html>
   );

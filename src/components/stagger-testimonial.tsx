@@ -102,7 +102,7 @@ export const StaggerTestimonials = () => {
   }, [active]);
 
   return (
-    <section className="relative px-8 md:px-16 lg:px-32 w-full py-24 bg-[#fafafa] overflow-hidden" ref={cardsRef}>
+    <section className="relative px-8 md:px-16 lg:px-32 w-full py-24 bg-background overflow-hidden" ref={cardsRef}>
       {/* BACKGROUND DECOR (Senior UX Touch) */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
         <span className="text-[20vw] font-black uppercase tracking-tighter">Testimonials</span>
@@ -113,33 +113,33 @@ export const StaggerTestimonials = () => {
           
           {/* LEFT: CONTENT */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-50 text-yellow-600 border border-yellow-100">
-              <span className="flex h-2 w-2 rounded-full bg-yellow-600 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-notion-blue-badge text-notion-blue-badge-text border whisper-border">
+              <span className="flex h-2 w-2 rounded-full bg-notion-blue animate-pulse" />
               <span className="text-[10px] font-bold uppercase tracking-widest">Worked with</span>
             </div>
             
             <div className="testimonial-content min-h-[300px]">
-              <Quote className="h-12 w-12 text-yellow-600/20 mb-6" />
-              <h4 className=" tracking-tight font-instrumentserif italic leading-[1.1] text-neutral-900">
+              <Quote className="h-12 w-12 text-notion-blue/20 mb-6" />
+              <h4 className=" tracking-tight font-instrumentserif italic leading-[1.1] text-foreground">
                 "{testimonials[active].testimonial}"
               </h4>
               
               <div className="mt-10 flex items-center gap-4">
-                <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-white shadow-lg">
+                <div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-border shadow-lg">
                   <img src={testimonials[active].imgSrc} alt="" className="object-cover h-full w-full" />
                 </div>
                 <div>
-                  <p className="font-bold text-lg text-neutral-900">{testimonials[active].by}</p>
+                  <p className="font-bold text-lg text-foreground">{testimonials[active].by}</p>
                 </div>
               </div>
             </div>
 
             {/* NAV CONTROLS */}
             <div className="flex gap-4 pt-8">
-              <button onClick={prev} className="h-12 w-12 rounded-full border border-neutral-200 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300">
+              <button onClick={prev} className="h-12 w-12 rounded-full border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300">
                 <ChevronLeft size={20} />
               </button>
-              <button onClick={next} className="h-12 w-12 rounded-full border border-neutral-200 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300">
+              <button onClick={next} className="h-12 w-12 rounded-full border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300">
                 <ChevronRight size={20} />
               </button>
             </div>
@@ -155,7 +155,7 @@ export const StaggerTestimonials = () => {
                 <div
                   key={t.tempId}
                   className={cn(
-                    "absolute group w-full max-w-[400px] aspect-[4/5] rounded-2xl overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-2xl",
+                    "absolute group w-full max-w-[400px] aspect-[4/5] rounded-2xl overflow-hidden transition-all duration-700 ease-quint-out shadow-2xl",
                     active === i ? "z-30 scale-100 opacity-100 translate-x-0" : "z-10 scale-90 opacity-40 translate-x-20 grayscale"
                   )}
                   style={{

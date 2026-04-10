@@ -6,6 +6,7 @@ import { Observer } from 'gsap/Observer';
 import { useGSAP } from '@gsap/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 gsap.registerPlugin(Observer);
 
@@ -17,7 +18,7 @@ const AnimatedSections = ({ sections = [] }) => {
   const router = useRouter();
 
   // Refs for specific layers
-  const sectionRefs = useRef<HTMLAnchorElement[]>([]);
+  const sectionRefs = useRef<HTMLDivElement[]>([]);
   const bgRefs = useRef<HTMLDivElement[]>([]);
   const imageRefs = useRef<HTMLImageElement[]>([]);
   const titleRefs = useRef<HTMLHeadingElement[]>([]);
@@ -95,7 +96,7 @@ const AnimatedSections = ({ sections = [] }) => {
   }, { scope: containerRef, dependencies: [sections, gotoSection] });
 
   return (
-    <div ref={containerRef} className="relative h-screen w-screen overflow-hidden bg-white font-dmsans">
+    <div ref={containerRef} className="relative h-screen w-screen overflow-hidden bg-[#0a0a0a]">
       
       {/* GLOBAL ODOMETER (Top Left) */}
       {/* <div className="fixed left-12 bottom-12 z-[60] flex items-center gap-4 mix-blend-difference">
@@ -116,8 +117,7 @@ const AnimatedSections = ({ sections = [] }) => {
 
       {/* SECTIONS */}
       {sections.map((section, i) => (
-        <Link
-        href={`/gallery/${section.slug}`}
+        <div
           key={i}
           ref={(el) => { if (el) sectionRefs.current[i] = el; }}
           className="invisible absolute inset-0 h-full w-full overflow-hidden"
@@ -125,43 +125,51 @@ const AnimatedSections = ({ sections = [] }) => {
           {/* BLURRED DYNAMIC BG */}
           <div 
             ref={(el) => { if (el) bgRefs.current[i] = el; }}
-            className="absolute inset-0 h-full w-full bg-cover bg-center transition-transform duration-[3s] ease-out"
+            className="absolute inset-0 h-full w-full bg-cover bg-center transition-transform duration-[3s] ease-out opacity-40"
             style={{ backgroundImage: `url("${section.img}")` }}
           />
 
           <div className="relative flex h-full w-full flex-col lg:flex-row-reverse items-center justify-center lg:px-72">
             {/* HERO IMAGE CONTAINER */}
-            <div className="group w-full lg:w-1/2 relative z-10 h-[60vh] aspect-[3/4] overflow-hidden rounded-sm shadow-2xl transition-transform duration-700 hover:scale-[1.02]">
-               <img 
-                ref={(el) => { if (el) imageRefs.current[i] = el; }}
+            <Link 
+              href={`/gallery/${section.slug}`}
+              className="group w-full lg:w-1/2 relative z-10 h-[60vh] aspect-[3/4] overflow-hidden rounded-sm shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+            >
+               <Image 
+                ref={(el) => { if (el) imageRefs.current[i] = el as unknown as HTMLImageElement; }}
                 src={section.img} 
-                alt="" 
+                alt={section.title} 
+                fill
+                priority={i === 0}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw"
                 className="h-full w-full object-cover scale-110" 
                />
-               <div className="absolute inset-0 border-[20px] border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
+               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+                  <span className="text-white text-xs font-medium uppercase tracking-[0.3em] border border-white/50 px-4 py-2 rounded-full backdrop-blur-md">View Project</span>
+               </div>
+            </Link>
 
             {/* FLOATING TEXT */}
-            <div className="lg:w-1/2 sm:absolute -translate-y-1/2 top-1/2 text-left z-20">
+            <div className="lg:w-1/2 sm:absolute -translate-y-1/2 top-1/2 text-left z-20 pointer-events-none">
               <h2 
                 ref={(el) => { if (el) titleRefs.current[i] = el; }}
-                className="text-5xl lg:text-7xl w-2/3 font-instrumentserif tracking-tighter text-white leading-none uppercase italic"
+                className="text-5xl lg:text-7xl w-2/3 font-medium tracking-tighter text-white leading-none uppercase italic"
               >
                 {section.title}
               </h2>
-              <p className="mt-6 max-w-lg text-white/80">{section.subtitle}</p>
+              <p className="mt-6 max-w-lg text-white font-medium leading-relaxed">{section.subtitle}</p>
               
               {/* TAGS */}
               <div className="mt-4 hidden justify-self-start flex-wrap gap-4">
                 {section.tags?.map((tag: string, j: number) => (
-                  <span key={j} className="text-[10px] uppercase tracking-[0.3em] text-white border border-white px-3 py-1 rounded-full">
+                  <span key={j} className="text-[10px] uppercase tracking-[0.3em] text-white border border-white px-3 py-1 rounded-full font-medium">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
           </div>
-        </Link>
+        </div>
       ))}
 
       {/* NAVIGATION BAR (Bottom) */}

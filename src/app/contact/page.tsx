@@ -47,7 +47,7 @@ const ContactPage = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-[#fafafa] selection:bg-yellow-100 selection:text-yellow-700">
+    <section className="relative min-h-screen bg-background font-notion selection:bg-notion-blue/20 selection:text-notion-blue">
       <div className=" px-6 md:px-16 lg:px-32 py-24  lg:flex lg:gap-24 lg:py-32">
         
         {/* LEFT COLUMN: NARRATIVE & FORM */}
@@ -56,7 +56,7 @@ const ContactPage = () => {
             <motion.p 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-xs font-bold uppercase tracking-[0.4em] text-yellow-600"
+              className="text-xs font-medium uppercase tracking-notion-badge text-notion-blue"
             >
               Available for projects
             </motion.p>
@@ -64,9 +64,9 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-6xl md:text-8xl tracking-tighter"
+              className="text-6xl md:text-8xl font-medium tracking-notion-display text-foreground"
             >
-              Let’s create <span className="italic font-instrumentserif text-yellow-700">magic.</span>
+              Let’s create <span className="text-notion-blue">magic.</span>
             </motion.h1>
           </header>
 
@@ -75,7 +75,7 @@ const ContactPage = () => {
               <div className="group relative">
                 <Input 
                   placeholder="Your Name" 
-                  className="h-16 border-0 border-b-2 border-neutral-200 bg-transparent  text-lg transition-all focus:border-yellow-600 focus:ring-0" 
+                  className="h-16 border-0 border-b-2 border-border bg-transparent text-lg transition-all focus:border-notion-blue focus:ring-0" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -84,7 +84,7 @@ const ContactPage = () => {
                 <Input 
                   placeholder="Email Address" 
                   type="email"
-                  className="h-16 border-0 border-b-2 border-neutral-200 bg-transparent  text-lg transition-all focus:border-yellow-600 focus:ring-0" 
+                  className="h-16 border-0 border-b-2 border-border bg-transparent text-lg transition-all focus:border-notion-blue focus:ring-0" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -95,7 +95,7 @@ const ContactPage = () => {
             <div className="group relative">
               <Textarea
                 placeholder="Tell me about your vision..."
-                className="min-h-[200px] border-0 border-b-2 border-neutral-200 bg-transparent text-lg transition-all focus:border-yellow-600 focus:ring-0 resize-none"
+                className="min-h-[200px] border-0 border-b-2 border-border bg-transparent text-lg transition-all focus:border-notion-blue focus:ring-0 resize-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 required
@@ -105,7 +105,7 @@ const ContactPage = () => {
             <div className="flex items-center gap-6">
               <Button
                 disabled={isLoading}
-                className="group h-16 rounded-full bg-neutral-900 px-10 text-lg hover:bg-yellow-700 transition-all duration-500 disabled:bg-neutral-300"
+                className="group h-16 rounded-pill bg-foreground px-10 text-lg hover:bg-notion-blue transition-all duration-500 disabled:bg-muted font-medium"
               >
                 {isLoading ? (
                   <Loader2 className="animate-spin" />
@@ -122,7 +122,7 @@ const ContactPage = () => {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0 }}
-                    className="flex items-center gap-2 text-green-600 font-medium"
+                    className="flex items-center gap-2 text-notion-blue font-medium"
                   >
                     <CheckCircle2 size={20} /> Sent successfully
                   </motion.div>
@@ -132,25 +132,25 @@ const ContactPage = () => {
           </form>
 
           {/* SOCIAL & DIRECT CONTACT */}
-          <footer className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-neutral-200">
+          <footer className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 ">
             <div className="space-y-4">
-              <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Direct</p>
-              <Link href="mailto:mdonavan33@gmail.com" className="group flex items-center gap-3 text-xl font-medium hover:text-yellow-600 transition-colors">
-                <div className="p-3 bg-white shadow-sm border border-neutral-100 rounded-xl group-hover:bg-yellow-50 transition-colors">
-                  <Mail size={20} />
+              <p className="text-[10px] uppercase tracking-notion-badge text-muted-foreground font-medium">Direct</p>
+              <Link href="mailto:mdonavan33@gmail.com" className="group flex items-center gap-3 text-xl font-medium hover:text-notion-blue transition-colors text-foreground">
+                <div className="p-3 bg-card shadow-sm border whisper-border rounded-lg group-hover:bg-notion-blue-badge transition-colors">
+                  <Mail size={20} className="text-foreground" />
                 </div>
                 mdonavan33@gmail.com
               </Link>
             </div>
             
             <div className="space-y-4">
-              <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-bold">Social Architecture</p>
+              <p className="text-[10px] uppercase tracking-notion-badge text-muted-foreground font-medium">Social Architecture</p>
               <div className="flex gap-4">
                 {['Instagram', 'LinkedIn', 'Dribbble'].map((platform) => (
                   <Link 
                     key={platform}
                     href="#" 
-                    className="px-4 py-2 rounded-lg border border-neutral-200 text-sm font-medium hover:bg-neutral-900 hover:text-white transition-all"
+                    className="px-4 py-2 rounded-lg border whisper-border text-sm font-medium hover:bg-foreground hover:text-background transition-all"
                   >
                     {platform}
                   </Link>
@@ -162,18 +162,19 @@ const ContactPage = () => {
 
         {/* RIGHT COLUMN: STICKY VISUAL */}
         <div className="hidden lg:block lg:w-1/3">
-          <div className="sticky top-32 aspect-[3/4] overflow-hidden rounded-3xl bg-neutral-200 shadow-2xl">
+          <div className="sticky top-32 aspect-[3/4] overflow-hidden rounded-lg bg-muted notion-shadow-deep border whisper-border">
             <Image
               src="https://framerusercontent.com/images/m7Y04Zn4vrUsc7UeQIVInA2Afv0.jpg?scale-down-to=1024"
               alt="Hosanna"
               fill
               className="object-cover transition-transform duration-[2s] hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
         </div>
       </div>
     </section>
+
   );
 };
 

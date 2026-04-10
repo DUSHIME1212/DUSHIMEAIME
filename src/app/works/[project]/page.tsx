@@ -97,27 +97,19 @@ export default function ProjectPage() {
   const components = {
     types: {
       image: ({ value }: any) => {
-        // Check if the asset exists and has the correct structure
         if (!value?.asset?._ref) {
-          console.warn("Image asset is missing or has invalid structure:", value);
           return (
-            <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
+            <div className="project-img-wrapper relative my-20 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-lg bg-muted whisper-border">
               <div className="flex h-full items-center justify-center">
-                <p className="text-neutral-500">Image not available</p>
+                <p className="text-muted-foreground">Image not available</p>
               </div>
             </div>
           );
         }
-
         try {
-          const imageUrl = urlForImage(value.asset).url();
-          
-          if (!imageUrl) {
-            throw new Error("Could not generate image URL");
-          }
-
+          const imageUrl = urlForImage(value.asset).width(1600).quality(85).url();
           return (
-            <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
+            <div className="project-img-wrapper relative my-20 h-[50vh] md:video-aspect w-full overflow-hidden rounded-xl">
               <Image
                 fill
                 alt={value.alt || "Project Visual"}
@@ -128,79 +120,74 @@ export default function ProjectPage() {
             </div>
           );
         } catch (error) {
-          console.error("Error rendering image:", error);
-          return (
-            <div className="project-img-wrapper relative my-16 h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm bg-neutral-200">
-              <div className="flex h-full items-center justify-center">
-                <p className="text-neutral-500">Failed to load image</p>
-              </div>
-            </div>
-          );
+          return null;
         }
       },
     },
     block: {
       h1: ({ children }: any) => (
-        <h1 className="text-5xl md:text-7xl font-medium tracking-tight mb-12">
+        <h1 className="mt-24 mb-12 text-5xl md:text-8xl font-medium font-instrumentserif italic tracking-tight text-foreground leading-[0.9]">
           {children}
         </h1>
       ),
       h2: ({ children }: any) => (
-        <h2 className="mt-20 text-4xl md:text-6xl font-medium tracking-tight mb-8">
+        <h2 className="mt-20 mb-10 text-4xl md:text-7xl font-medium font-instrumentserif italic tracking-tight text-foreground leading-[1.0]">
           {children}
         </h2>
       ),
       h3: ({ children }: any) => (
-        <h3 className="mt-16 text-3xl md:text-4xl font-medium tracking-tight mb-6">
+        <h3 className="mt-16 mb-8 text-3xl md:text-5xl font-medium font-notion tracking-notion-heading text-foreground">
           {children}
         </h3>
       ),
       h4:( { children }: any) => (
-        <h4 className="mt-12 text-2xl md:text-3xl font-medium tracking-tight mb-4">
+        <h4 className="mt-12 mb-6 text-2xl md:text-3xl font-medium font-notion tracking-notion-subheading text-foreground">
           {children}
         </h4>
       ),
-      p: ({ children }: any) => (
-        <p className="text-lg md:text-xl leading-relaxed text-neutral-700 mb-6">
-          {children}
-        </p>
-      ),
       normal: ({ children }: any) => (
-        <p className="text-xl md:text-2xl leading-relaxed text-neutral-700 mb-6 font-light">
+        <p className="mb-8 text-xl md:text-[22px] leading-[1.6] text-muted-foreground font-medium max-w-4xl">
           {children}
         </p>
       ),
-      li: ({ children }: any) => (
-        <ul className="my-6 ml-6 text-xl md:text-2xl list-disc marker:text-yellow-700">
+      blockquote: ({ children }: any) => (
+        <blockquote className="my-16 pl-8 border-l-2 border-notion-blue italic text-2xl md:text-4xl font-instrumentserif text-foreground bg-notion-blue/5 py-12 px-12 rounded-r-xl">
+           {children}
+        </blockquote>
+      )
+    },
+    list: {
+      bullet: ({ children }: any) => <ul className="my-12 space-y-4">{children}</ul>,
+      number: ({ children }: any) => <ol className="my-12 space-y-4 list-decimal pl-6">{children}</ol>,
+    },
+    listItem: {
+      bullet: ({ children }: any) => (
+        <li className="flex items-start gap-4 text-xl md:text-[22px] text-muted-foreground font-medium">
+          <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-notion-blue" />
           {children}
-        </ul>
+        </li>
       ),
-      ul: ({ children }: any) => (
-        <li className="mb-2 text-xl md:text-2xl">{children}</li>
+      number: ({ children }: any) => (
+        <li className="text-xl md:text-[22px] text-muted-foreground font-medium pl-2">
+          {children}
+        </li>
       ),
     },
   };
 
-  // if (isLoading) return (
-  //   <div className="flex h-screen items-center justify-center bg-black text-white">
-  //     <p className="animate-pulse tracking-widest uppercase text-xs">Loading Project...</p>
-  //   </div>
-  // );
-
   if (!projectData) return null;
 
-  // Check for hero image as well
   const heroImageUrl = projectData.projectImage?.url;
 
   return (
-    <main ref={containerRef} className="bg-[#f5f5f3] selection:bg-black selection:text-white">
+    <main ref={containerRef} className="bg-background font-notion selection:bg-notion-blue/20 selection:text-notion-blue">
       {/* --- HERO SECTION --- */}
-      <section ref={heroRef} className="relative h-screen w-full overflow-hidden bg-black text-white">
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
+      <section ref={heroRef} className="relative h-screen w-full overflow-hidden bg-muted">
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="hero-image absolute inset-0 z-0 h-[120%] w-full">
           {heroImageUrl ? (
             <Image
-              src={heroImageUrl}
+              src={`${heroImageUrl}?w=1920&q=75`}
               alt={projectData.title}
               fill
               priority
@@ -213,7 +200,7 @@ export default function ProjectPage() {
 
         <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-12 lg:p-20">
           <div className="overflow-hidden">
-            <h1 className="reveal-up text-7xl font-medium leading-[0.9] tracking-tighter uppercase">
+            <h1 className="reveal-up text-7xl font-medium leading-[0.9] tracking-notion-display uppercase text-white">
               {projectData.title}
             </h1>
           </div>
@@ -226,7 +213,7 @@ export default function ProjectPage() {
                <Link 
                 href={projectData.link || "#"} 
                 target="_blank" 
-                className="group flex items-center gap-2 text-sm uppercase tracking-widest border-b border-white/20 pb-1 hover:border-white transition-colors"
+                className="group flex items-center gap-2 text-sm uppercase tracking-notion-badge font-medium border-b border-white/20 pb-1 hover:border-notion-blue hover:text-notion-blue transition-colors text-white"
               >
                 Visit Site <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
               </Link>
@@ -242,14 +229,14 @@ export default function ProjectPage() {
           <aside className="lg:col-span-4">
             <div className=" flex flex-col lg:flex-row items-start  w-full top-32 ">
               <div className="w-full p-4">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-black block mb-4">+ Objective</span>
-                <p className="text-lg text-neutral-600 ">
+                <span className="text-[10px] uppercase tracking-notion-badge text-notion-blue block mb-4 font-medium">+ Objective</span>
+                <p className="text-lg text-foreground font-medium">
                   {projectData.description}
                 </p>
               </div>
               <div className="w-full p-4">
-                <span className="text-[10px] uppercase tracking-[0.2em] text-black block mb-4">+ Role</span>
-                <p className="text-sm font-medium uppercase tracking-wider">{projectData.advancedDescription.role}</p>
+                <span className="text-[10px] uppercase tracking-notion-badge text-notion-blue block mb-4 font-medium">+ Role</span>
+                <p className="text-sm font-medium uppercase tracking-notion-badge text-foreground">{projectData.advancedDescription.role}</p>
               </div>
             </div>
           </aside>
@@ -265,10 +252,10 @@ export default function ProjectPage() {
       </section>
 
       {/* --- FOOTER / NEXT PROJECT --- */}
-      <footer className="bg-black py-40 text-center text-white">
-        <Link href="/works" className="group">
-          <p className="text-xs uppercase tracking-[0.3em] opacity-50 group-hover:opacity-100 transition-opacity">Next Project</p>
-          <h2 className="text-5xl md:text-8xl mt-4">Browse All</h2>
+      <footer className="bg-foreground py-40 text-center text-background uppercase">
+        <Link href="/works" className="group flex flex-col items-center">
+          <p className="text-xs uppercase tracking-notion-badge font-medium text-notion-blue group-hover:opacity-100 transition-opacity">Next Project</p>
+          <h2 className="text-5xl md:text-8xl mt-4 font-medium tracking-notion-display group-hover:text-notion-blue transition-colors">Browse All</h2>
         </Link>
       </footer>
     </main>
@@ -279,9 +266,9 @@ export default function ProjectPage() {
 function MetaItem({ label, value, values }: { label: string; value?: string; values?: string[] }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-[10px] uppercase tracking-widest text-white">{label}</span>
-      {value && <p className="text-sm">{value}</p>}
-      {values && values.map((v, i) => <p key={i} className="text-sm">{v}</p>)}
+      <span className="text-[10px] uppercase tracking-notion-badge text-white/80 font-medium">{label}</span>
+      {value && <p className="text-sm font-medium text-white">{value}</p>}
+      {values && values.map((v, i) => <p key={i} className="text-sm font-medium text-white">{v}</p>)}
     </div>
   );
 }

@@ -7,25 +7,27 @@ import { AnimateParagraph } from "~/lib/Animation";
 const Experience = () => {
   
   return (
-    <div className="my-8">
-      <div>
-        <h1 className="mb-4 w-full text-3xl md:text-5xl md:w-1/3 text-sky-700 font-bold">
+    <div className="my-16 font-notion">
+      <div className="mb-12">
+        <h1 className="mb-4 w-full text-[48px] md:text-[64px] font-medium tracking-notion-display leading-[1.0] text-notion-blue">
           I understand designing at scale.
         </h1>
-        <p>My experience</p>
+        <p className="caption tracking-notion-badge uppercase font-medium text-muted-foreground">+ My experience</p>
       </div>
-      <div>
-        {experience.map((experience, i) => (
-          <div key={i} className="group my-4 flex flex-col cursor-pointer gap-4 duration-500">
-            <h4 className="text-4xl text-sky-700 font-medium duration-500">
-              {experience.title}
-            </h4>
-            <h3 className="text-3xl font-medium duration-500">{experience.company}</h3>
-            <div className="mt-2 grid grid-cols-1 md:grid-cols-5 justify-items-start">
-              <AnimateParagraph className="col-span-4 w-2/3 opacity-70 font-normal text-xl line-clamp-6 ">
-                {experience.description}
+      <div className="grid gap-12">
+        {experience.map((exp, i) => (
+          <div key={i} className="group flex flex-col cursor-pointer gap-6 p-8 rounded-lg whisper-border bg-card notion-shadow transition-all duration-500 hover:notion-shadow-deep">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <h4 className="text-[26px] font-medium tracking-notion-subheading text-notion-blue group-hover:translate-x-1 transition-transform">
+                {exp.title}
+              </h4>
+              <p className="caption font-medium bg-notion-blue-badge text-notion-blue-badge-text px-3 py-1 rounded-pill">{exp.dates}</p>
+            </div>
+            <h3 className="text-[22px] font-medium tracking-notion-card-title text-foreground">{exp.company}</h3>
+            <div className="">
+              <AnimateParagraph className="w-full text-[16px] leading-[1.5] text-muted-foreground line-clamp-6">
+                {exp.description}
               </AnimateParagraph>
-              <p className="group-hover:underline">{experience.dates}</p>
             </div>
           </div>
         ))}
@@ -35,37 +37,3 @@ const Experience = () => {
 };
 
 export default Experience;
-
-function AnimateTexxt({
-  children,
-  className,
-}: {
-  children: string;
-  className: string;
-}) {
-  return (
-    <motion.p
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{
-        delay: 1,
-        duration: 1,
-        ease: "easeInOut",
-        staggerChildren: 0.01,
-      }}
-      className={className}
-    >
-      {children.split("").map((l, i) => (
-        <motion.span
-          initial={{ opacity: 0, filter: "blur(5px)" }}
-          animate={{ opacity: 1, filter: "blur(0px)" }}
-          transition={{ delay: 0.002 * i }}
-          className="inline-bloc"
-          key={i}
-        >
-          {l}
-        </motion.span>
-      ))}
-    </motion.p>
-  );
-}
